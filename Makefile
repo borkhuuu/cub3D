@@ -1,46 +1,55 @@
 NAME = cub3D
 
-CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -g
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g
 
 MLX_DIR = mlx
 MLX_FLAGS = -I$(MLX_DIR) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 
-SOURCES = main.cpp
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT_FLAGS = -I$(LIBFT_DIR) -L$(LIBFT_DIR) -lft
 
-HEADERS =
+SOURCES = main.c
+
+HEADERS = 
 
 OBJ_DIR = objects/
-OBJS = $(SOURCES:%.cpp=$(OBJ_DIR)%.o)
+OBJS = $(SOURCES:%.c=$(OBJ_DIR)%.o)
 DEPS = $(OBJS:.o=.d)
 
-all: $(MLX_DIR)/libmlx.a $(NAME)
+all: $(MLX_DIR)/libmlx.a $(LIBFT) $(NAME)
 
 $(MLX_DIR)/libmlx.a:
 	make -C $(MLX_DIR)
 
-$(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) $(MLX_FLAGS) -o $@
+$(LIBFT):
+	make -C $(LIBFT_DIR)
 
-$(OBJ_DIR)%.o: %.cpp $(HEADERS)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $@
+
+$(OBJ_DIR)%.o: %.c $(HEADERS)
 	mkdir -p $(dir $@)
-	$(CXX) $(CXXFLAGS) -I$(MLX_DIR) -MMD -MP -c $< -o $@
+	$(CC) $(CFLAGS) -I$(MLX_DIR) -I$(LIBFT_DIR) -MMD -MP -c $< -o $@
 
 run: all
 	./$(NAME)
 
-runval: CXXFLAGS := -Wall -Wextra -Werror -pedantic -g
+runval: CFLAGS := -Wall -Wextra -Werror -g
 runval: re
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
-runsan: CXXFLAGS := -g -fsanitize=address,leak,undefined,bounds,float-divide-by-zero
+runsan: CFLAGS := -g -fsanitize=address,leak,undefined,bounds,float-divide-by-zero
 runsan: re
 	./$(NAME)
 
 clean:
+	make -C $(LIBFT_DIR) clean
 	@rm -rf $(OBJ_DIR)
 
 fclean: clean
+	make -C $(LIBFT_DIR) fclean
 	make -C $(MLX_DIR) clean
 	@rm -rf $(NAME)
 
