@@ -1,169 +1,78 @@
 #include "game.h"
+#include "libft/libft.h"
 #include "map.h"
 #include "mlx/mlx.h"
-#include "libft/libft.h"
-
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
+#include "cub3D.h"
 #include <errno.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 
-void    strerrorWrapper(const int errnum, char* msg)
+void	strerror_wrapper(const int errnum)
 {
-    printf("%s\n%s\n", strerror(errnum), msg);
+	char	*err;
+
+	err = strerror(errnum);
+	write(2, err, ft_strlen(err));
 }
 
-void    freeFunc(t_map* map, char** arr, char* s)
+void init_map(t_map *map)
 {
-    int i;
-
-    i = 0;
-    while (arr && arr[i])
-        free(arr[i++]);
-    if (arr)
-    {
-        free(arr);
-        arr = NULL;
-    }
-    if (s)
-    {
-        free(s);
-        s = NULL;
-    }
-    if (map)
-    {
-        if (map->line)
-        {
-            free(map->line);
-            map->line = NULL;
-        }
-        if (map->pathNO)
-        {
-            free(map->pathNO);
-            map->pathNO = NULL;
-        }
-        if (map->pathSO)
-        {
-            free(map->pathSO);
-            map->pathSO = NULL;
-        }
-        if (map->pathWE)
-        {
-            free(map->pathWE);
-            map->pathWE = NULL;
-        }
-        if (map->pathEA)
-        {
-            free(map->pathEA);
-            map->pathEA = NULL;
-        }
-        if (map->colorF)
-        {
-            free(map->colorF);
-            map->colorF = NULL;
-        }
-        if (map->colorC)
-        {
-            free(map->colorC);
-            map->colorC = NULL;
-        }
-    }
+	ft_memset(map, 0, sizeof(t_map));
+	map->color_f.r = -1;
+	map->color_f.g = -1;
+	map->color_f.b = -1;
+	map->color_c.r = -1;
+	map->color_c.g = -1;
+	map->color_c.b = -1;
+	map->err_msg = "\n";
 }
 
-void    init_map(t_map* map)
+void	finish_gnl(t_map *map)
 {
-    ft_memset(map, 0,sizeof(t_map));
+	while (map->line)
+	{
+		free(map->line);
+		map->line = get_next_line(map->map_fd);
+	}
+	close(map->map_fd);
+	map->map_fd = -1;
 }
-
-int getArrSize(char** arr)
-{
-    int i;
-
-    i = 0;
-    if (!arr)
-        return (0);
-    while (arr[i])
-        i++;
-    return (i);
-}
-
-void parseLine(t_map* map)
-{
-    char**  arr;
-    int     arrSize;
-
-    map->line = get_next_line(map->mapFd);
-    arr = ft_split(map->line, ' ');
-    arrSize = getArrSize(arr);
-    if (arrSize == 0)
-        return ;
-    else if (arrSize >= 1 && arr[0][0] == '1')
-        return (map->inMap = true, freeFunc(NULL, arr, NULL));
-    else if (arrSize != 2)
-        return (freeFunc(map, arr, NULL));
-    else if (!ft_strcmp(arr[0], "NO"))
-    {
-        if (!map->pathNO)
-            return (map->pathNO = ft_strdup(arr[1]), freeFunc(NULL, arr, map->line));
-    }
-    else if (!ft_strcmp(arr[0], "SO"))
-    {
-        if (!map->pathSO)
-            return (map->pathSO = ft_strdup(arr[1]), freeFunc(NULL, arr, map->line));
-    }
-    else if (!ft_strcmp(arr[0], "WE"))
-    {
-        if (!map->pathWE)
-            return (map->pathWE = ft_strdup(arr[1]), freeFunc(NULL, arr, map->line));
-    }
-    else if (!ft_strcmp(arr[0], "EA"))
-    {
-        if (!map->pathEA)
-            return (map->pathEA = ft_strdup(arr[1]), freeFunc(NULL, arr, map->line));
-    }
-    else if (!ft_strcmp(arr[0], "F"))
-    {
-        if (!map->colorF)
-            return (map->colorF = ft_strdup(arr[1]), freeFunc(NULL, arr, map->line));
-    }
-    else if (!ft_strcmp(arr[0], "C"))
-    {
-        if (!map->colorC)
-            return (map->colorC = ft_strdup(arr[1]), freeFunc(NULL, arr, map->line));
-    }
-    else
-    {
-        map->inMap = true;
-        freeFunc(NULL, arr, NULL);
-    }
-}
-
-bool    missingPath(t_map *map)
-{
-    if (!map->pathNO || !map->pathSO || !map->pathWE
-        || !map->pathEA || !map->colorF || !map->colorC)
-        return (true);
-    return (false);
-}
-
 
 int main(int ac, char **av)
 {
-    t_map   map;
+	t_map map;
 
-    if (ac != 2)
-        return (strerrorWrapper(EINVAL, "./cub3D 'PATH to map with .cub extension'"), 1);
-    init_map(&map);
-    if ((map.mapFd = open(av[1], O_RDONLY)) == -1)
-        return (strerrorWrapper(errno, "PATH to map invalid or lacking permissions"), 1);
-    while (map.line && !map.inMap)
-    {
-        parseLine(&map)
-
-    }
-    if (missingPath(&map))
-        return (freeFunc(&map, NULL), write(1, "PATH missing\n", 13), 1);
+	if (ac != 2)
+		return (write(2, "Arguments not exactly 1\n", 24), 1);
+	init_map(&map);
+	if ((map.map_fd = open(av[1], O_RDONLY)) == -1)
+		return (strerror_wrapper(errno), write(2, map.err_msg, 1), 1);
+	map.line = get_next_line(map.map_fd);
+	while (map.line && !map.in_map)
+	{
+		if (!parse_paths(&map))
+			return (finish_gnl(&map), write(2, map.err_msg, ft_strlen(map.err_msg)), free_func(&map, NULL), 1);
+		else if (map.in_map)
+			break;
+		free(map.line);
+		map.line = get_next_line(map.map_fd);
+	}
+	if (missing_path(&map))
+		return (finish_gnl(&map), write(2, map.err_msg, ft_strlen(map.err_msg)), free_func(&map, NULL), 1);
+	while (map.line)
+	{
+		if (!parse_map(&map))
+			return (finish_gnl(&map), write(2, map.err_msg, ft_strlen(map.err_msg)), free_func(&map, map.map_arr), 1); // DONT FORGET error message
+		free(map.line);
+		map.line = get_next_line(map.map_fd);
+	}
+	if (!validate_map(&map))
+		return (finish_gnl(&map), write(2, map.err_msg, ft_strlen(map.err_msg)), free_func(&map, map.map_arr), 1);
+	close(map.map_fd);
+	free_func(&map, map.map_arr);
+	return (0);
 }
 
 // int main(int ac, char **av)
@@ -174,4 +83,12 @@ int main(int ac, char **av)
 //     mlx = mlx_init();
 //     mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello World\n");
 //     mlx_loop(mlx);
+// }
+
+// int main(void)
+// {
+//     int fd = open("test.cub", O_RDONLY);
+//     for (char*   line = get_next_line(fd); line; line = get_next_line(fd))
+//     free(line);
+//     close(fd);
 // }

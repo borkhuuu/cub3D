@@ -16,5 +16,9 @@ int	main()
 	// printf("arr is %p\narr[0] is %s\narr[1] is %s\n", arr, arr[0], arr[1]);
 	// if (arr[0][0] == '\n')
 	// 	printf("yes");
+//	char	*s = ft_strdup("hello\n");
+//	ft_memset(ft_memchr(s, '\n', ft_strlen(s)), 0, 1);
+//	printf("%s", s);
+	write(1, NULL, 0);
 	return 0;
 }

@@ -10,9 +10,14 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_FLAGS = -I$(LIBFT_DIR) -L$(LIBFT_DIR) -lft
 
-SOURCES = main.c
+SOURCES = main.c \
+		  parsePaths.c \
+		  parseMap.c \
+		  memory.c \
+		  floodFill.c \
+		  helpers.c \
 
-HEADERS = 
+HEADERS = cub3D.h game.h map.h
 
 OBJ_DIR = objects/
 OBJS = $(SOURCES:%.c=$(OBJ_DIR)%.o)
@@ -26,7 +31,7 @@ $(MLX_DIR)/libmlx.a:
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) 
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $@
 
 $(OBJ_DIR)%.o: %.c $(HEADERS)

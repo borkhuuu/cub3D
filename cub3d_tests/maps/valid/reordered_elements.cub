@@ -1,0 +1,10 @@
+F 220,100,0
+NO /home/boenkhja/cub3D/cub3d_tests/maps/textures/no_texture
+C 225,30,0
+EA /home/boenkhja/cub3D/cub3d_tests/maps/textures/ea_texture
+SO /home/boenkhja/cub3D/cub3d_tests/maps/textures/so_texture
+WE /home/boenkhja/cub3D/cub3d_tests/maps/textures/we_texture
+
+111111
+1000S1
+111111
