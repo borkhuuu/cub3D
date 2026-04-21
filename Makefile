@@ -11,10 +11,12 @@ LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_FLAGS = -I$(LIBFT_DIR) -L$(LIBFT_DIR) -lft
 
 SOURCES = main.c \
-		  parsePaths.c \
-		  parseMap.c \
-		  memory.c \
-		  floodFill.c \
+		  parsing/parse.c \
+		  parsing/paths.c \
+		  parsing/color.c \
+		  parsing/map.c \
+		  parsing/helper.c \
+		  parsing/floodFill.c \
 		  helpers.c \
 
 HEADERS = cub3D.h game.h map.h
