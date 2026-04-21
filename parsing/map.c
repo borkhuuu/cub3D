@@ -1,5 +1,5 @@
-#include "libft/libft.h"
-#include "map.h"
+#include "../libft/libft.h"
+#include "../map.h"
 
 int	validateCharacters(t_map *map, const char *s)
 {

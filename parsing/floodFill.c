@@ -1,6 +1,5 @@
-#include "cub3D.h"
-#include "libft/libft.h"
-#include "map.h"
+#include "../libft/libft.h"
+#include "../map.h"
 
 char	**copy_map(t_map *map)
 {
@@ -47,7 +46,7 @@ void	get_player_pos(t_map *m)
 	}
 }
 
-int flood_fill(char **map, int x, int y, int height) 
+int flood_fill(char **map, int x, int y, int height)
 {
 	if (y < 0 || y >= height)
 		return (0);
