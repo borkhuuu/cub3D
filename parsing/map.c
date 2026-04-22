@@ -59,15 +59,15 @@ int	parse_map(t_map *map)
 	char	*s;
 
 	if (!validateCharacters(map, map->line))
-		return (map->err_msg = "Invalid character found somewhere?!\n", 0);
+		return (map->err_msg = "Error\nInvalid character found somewhere?!\n", 0);
 	tmp = ft_realloc(map->map_arr, (map->map_height) * sizeof(char *),(map->map_height + 2) * sizeof(char *));
 	if (!tmp)
-		return (map->err_msg = "reallocation/growing of map_arr failed\n", 0);
+		return (map->err_msg = "Error\nreallocation/growing of map_arr failed\n", 0);
 	map->map_arr = tmp;
 	align_line(&map->line);
 	s = ft_strdup(map->line);
 	if (!s)
-		return (map->err_msg = "ft_strdup in parse_map failed\n", 0);
+		return (map->err_msg = "Error\nft_strdup in parse_map failed\n", 0);
 	map->map_arr[map->map_height] = s;
 	map->map_height++;
 	map->map_arr[map->map_height] = NULL;

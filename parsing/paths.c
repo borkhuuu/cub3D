@@ -23,15 +23,15 @@ int	validate_path(t_map *map, char *path)
 
 	i = 0;
 	if (!path)
-		return (map->err_msg = "Path is non existent\n", 0);
+		return (map->err_msg = "Error\nPath is non existent\n", 0);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return (strerror_wrapper(errno), 0);
+		return (write(2, "Error\n", 6), strerror_wrapper(errno), 0);
 	close(fd);
 	while (path[i])
 	{
 		if (path[i] == '/' && path[i + 1] == '.')
-			return (map->err_msg = "Path is hidden file, nice try BOZO\n", 0);
+			return (map->err_msg = "Error\nPath is hidden file, nice try BOZO\n", 0);
 		i++;
 	}
 	return (1);
@@ -44,17 +44,17 @@ int	handle_path(t_map *map, char **map_path, char *path, char type)
 	if (*map_path)
 	{
 		if (type == 'N')
-			map->err_msg = "Duplicate NO texture path\n";
+			map->err_msg = "Error\nDuplicate NO texture path\n";
 		else if (type == 'S')
-			map->err_msg = "Duplicate SO texture path\n";
+			map->err_msg = "Error\nDuplicate SO texture path\n";
 		else if (type == 'W')
-			map->err_msg = "Duplicate WE texture path\n";
+			map->err_msg = "Error\nDuplicate WE texture path\n";
 		else if (type == 'E')
-			map->err_msg = "Duplicate EA texture path\n";
+			map->err_msg = "Error\nDuplicate EA texture path\n";
 		return (0);
 	}
 	*map_path = ft_strdup(path);
 	if (!(*map_path))
-		return (map->err_msg = "ft_strdup failed in handle_path\n", 0);
+		return (map->err_msg = "Error\nft_strdup failed in handle_path\n", 0);
 	return (1);
 }

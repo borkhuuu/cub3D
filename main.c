@@ -45,10 +45,10 @@ int main(int ac, char **av)
 	t_map map;
 
 	if (ac != 2)
-		return (write(2, "Arguments not exactly 1\n", 24), 1);
+		return (write(2, "Error\nArguments not exactly 1\n", 30), 1);
 	init_map(&map);
 	if ((map.map_fd = open(av[1], O_RDONLY)) == -1)
-		return (strerror_wrapper(errno), write(2, map.err_msg, 1), 1);
+		return (write(2, "Error\n", 6), strerror_wrapper(errno), 1);
 	map.line = get_next_line(map.map_fd);
 	while (map.line && !map.in_map)
 	{
@@ -71,6 +71,8 @@ int main(int ac, char **av)
 	if (!validate_map(&map))
 		return (finish_gnl(&map), write(2, map.err_msg, ft_strlen(map.err_msg)), free_func(&map, map.map_arr), 1);
 	close(map.map_fd);
+	if (!start_game(&map))
+		return (free_func(&map, map.map_arr), 1);
 	free_func(&map, map.map_arr);
 	return (0);
 }

@@ -20,10 +20,10 @@ int	validate_color(t_map *map, t_color *color, char *rgb)
 
 	tmp = ft_split(rgb, ',');
 	if (!tmp)
-		return (map->err_msg = "ft_split returned NULL in validate_color\n", 0);
+		return (map->err_msg = "Error\nft_split returned NULL in validate_color\n", 0);
 	size = get_arr_size(tmp);
 	if (size != 3)
-		return (map->err_msg = "Color values are not exactly 3\n", free_func(NULL, tmp), 0);
+		return (map->err_msg = "Error\nColor values are not exactly 3\n", free_func(NULL, tmp), 0);
 	size = 0;
 	while (tmp[size])
 	{
@@ -34,7 +34,7 @@ int	validate_color(t_map *map, t_color *color, char *rgb)
 			i++;
 		num = ft_atoi(tmp[size]);
 		if (tmp[size][i] || num > 255 || num < 0)
-			return (map->err_msg = "Color value not between 0-255\n", free_func(NULL, tmp), 0);
+			return (map->err_msg = "Error\nColor value not between 0-255\n", free_func(NULL, tmp), 0);
 		size++;
 	}
 	color->values = tmp;
@@ -48,9 +48,9 @@ int	handle_color(t_map *map, t_color *color, char *rgb, char type)
 	if (color->set)
 	{
 		if (type == 'F')
-			map->err_msg = "Duplicate Floor colors\n";
+			map->err_msg = "Error\nDuplicate Floor colors\n";
 		else if (type == 'C')
-			map->err_msg = "Duplicate Ceiling colors\n";
+			map->err_msg = "Error\nDuplicate Ceiling colors\n";
 		return (0);
 	}
 	save_rgb(color);

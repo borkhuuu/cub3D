@@ -11,6 +11,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_FLAGS = -I$(LIBFT_DIR) -L$(LIBFT_DIR) -lft
 
 SOURCES = main.c \
+		  game.c \
+		  init_mlx.c \
 		  parsing/parse.c \
 		  parsing/paths.c \
 		  parsing/color.c \

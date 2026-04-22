@@ -1,20 +1,11 @@
 #ifndef MAP_H
 # define MAP_H
 
-# include "game.h"
-
+# include "vec.h"
+# include "color.h"
 # include <stdbool.h>
 
 #define TEXTURE 't'
-
-typedef	struct s_color
-{
-	char	**values;
-	int		r;
-	int		g;
-	int		b;
-	bool	set;
-}	t_color;
 
 typedef struct s_map
 {

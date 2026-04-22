@@ -54,6 +54,6 @@ bool    missing_path(t_map *map)
 {
 	if (!map->path_no || !map->path_so || !map->path_we
 		|| !map->path_ea || !map->color_f.set || !map->color_c.set)
-		return (map->err_msg = "A path or color is missing/misconfigured or map is not last\n", true);
+		return (map->err_msg = "Error\nA path or color is missing/misconfigured or map is not last\n", true);
 	return (false);
 }

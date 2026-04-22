@@ -9,12 +9,12 @@ char	**copy_map(t_map *map)
 	i = 0;
 	copy = ft_calloc(map->map_height + 1, sizeof(char *));
 	if (!copy)
-		return (map->err_msg = "Allocation of copy of map failed", NULL);
+		return (map->err_msg = "Error\nAllocation of copy of map failed", NULL);
 	while (map->map_arr && map->map_arr[i])
 	{
 		copy[i] = ft_strdup(map->map_arr[i]);
 		if (!copy[i])
-			return (map->err_msg = "ft_strdup in copy_map failed", free_func(NULL, copy), NULL);
+			return (map->err_msg = "Error\nft_strdup in copy_map failed", free_func(NULL, copy), NULL);
 		i++;
 	}
 	return (copy);
@@ -76,21 +76,23 @@ int validate_map(t_map *map)
 
 	y = 0;
 	if (map->player_count != 1)
-		return (map->err_msg = "Player count not exactly 1\n", 0);
+		return (map->err_msg = "Error\nPlayer count not exactly 1\n", 0);
 	copy = copy_map(map);
 	if (!copy)
 		return (0);
 	get_player_pos(map);
 	if (!flood_fill(copy, map->player.x, map->player.y, map->map_height))
-		return (map->err_msg = "Floodfill from player pos failed\n", free_func(NULL, copy), 0);
+		return (map->err_msg = "Error\nFloodfill from player pos failed\n", free_func(NULL, copy), 0);
 	while (copy[y])
 	{
 		x = 0;
 		while (copy[y][x])
 		{
 			if (copy[y][x] == '0')
+			{
 				if (!flood_fill(copy, x, y, map->map_height))
-					return (map->err_msg = "Floodfill in independent room failed\n", free_func(NULL, copy), 0);
+					return (map->err_msg = "Error\nFloodfill in independent room failed\n", free_func(NULL, copy), 0);
+			}
 			x++;
 		}
 		y++;

@@ -1,0 +1,41 @@
+# Cub3D_tester
+
+***The tester is still in progress.*** \
+Currently available: \
+Integration tests on invalid maps.
+
+## Description
+
+These tests are created with certain textures and maps that you can find in the repository. The name of the test explains the test; if you are in need of more specific details, then check the args/map tested in the specific test.
+
+All tests are tested with `valgrind` on leaks, and they check the `stderr` to have `Error\n` as the first thing, since that is what is required by the subject of the project.
+
+## Instructions
+> If you are testing on 42 campus computers, Criterion is already installed there, no need to do anything extra.
+
+First, you need to install the dependencies like `criterion`. Depending on your system:
+- **Ubuntu/Debian**: `sudo apt install libcriterion-dev`
+- **macOS**: `brew install criterion`
+
+You can modify the name of the executable in `tests/tester.h` at `#define PROG "./cub3D"` with the correct path/executable name (in case you want to test the bonus, e.g., `./cub3D_bonus`).
+
+The exit code of your program in case of errors has to be: 
+- not zero(used for success)
+- not 255(currently used by the tester for system related errors)
+- not 42(used to detect valgrind errors)
+
+## Execution
+
+Go to your repository that contains `./cub3D` executable.
+
+Clone this repo and compile the tester by running these commands:
+```
+git clone git@github.com:VestaManuyko/Cub3D_tester.git tester
+cd tester
+make test
+```
+Now once the tester is created, just run:
+```
+./tester
+```
+Good luck with the project!
