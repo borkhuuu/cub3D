@@ -1,14 +1,12 @@
 # Cub3D_tester
 
-***The tester is still in progress.*** \
-Currently available: \
-Integration tests on invalid maps.
-
 ## Description
 
 These tests are created with certain textures and maps that you can find in the repository. The name of the test explains the test; if you are in need of more specific details, then check the args/map tested in the specific test.
 
-All tests are tested with `valgrind` on leaks, and they check the `stderr` to have `Error\n` as the first thing, since that is what is required by the subject of the project.
+All tests are tested with `valgrind`. 
+For invalid maps it checks the `stderr` to have `Error\n` as the first thing, since that is what is required by the subject of the project.
+For valid maps it checks whether the program returned `0`.
 
 ## Instructions
 > If you are testing on 42 campus computers, Criterion is already installed there, no need to do anything extra.

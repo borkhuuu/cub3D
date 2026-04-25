@@ -1,7 +1,8 @@
 OBJ_DIR = obj
 
 TEST_NAME = tester
-TEST_SRC = tests/tester.c tests/exec_program.c
+TEST_SRC = tests/valid_tests.c tests/invalid_tests.c tests/exec_program.c \
+		tests/check_invalid.c tests/run_cub3d.c tests/check_valid.c
 TEST_OBJ = $(TEST_SRC:%.c=$(OBJ_DIR)/%.o)
 TEST_DEP = $(TEST_SRC:%.c=$(OBJ_DIR)/%.d)
 TEST_CFLAGS = -MMD
