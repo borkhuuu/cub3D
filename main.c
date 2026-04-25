@@ -71,7 +71,7 @@ int main(int ac, char **av)
 	if (!validate_map(&map))
 		return (finish_gnl(&map), write(2, map.err_msg, ft_strlen(map.err_msg)), free_func(&map, map.map_arr), 1);
 	close(map.map_fd);
-	if (!start_game(&map))
+	if (!setup_game(&map))
 		return (free_func(&map, map.map_arr), 1);
 	free_func(&map, map.map_arr);
 	return (0);

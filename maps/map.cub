@@ -1,10 +1,10 @@
-NO texture/north_texture.xpm
-WE texture/west_texture.xpm
-EA texture/east_texture.xpm
-SO texture/south_texture.xpm
+NO ./maps/texture/ea_texture
+WE ./maps/texture/no_texture
+EA ./maps/texture/ea_texture
+SO ./maps/texture/so_texture
 
-F 220, 100, 00
-C 225, 30, 0
+F 220,100,00
+C 225,30,0
 
 1111111111111111111111111
 1000000000110000000000001
@@ -20,4 +20,3 @@ C 225, 30, 0
 110000011101010111110111100111
 111101111110101101111010001
 11111111111111111111111111111
-

@@ -3,8 +3,14 @@
 
 typedef struct s_vec
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 }	t_vec;
+
+typedef struct s_vec_fov
+{
+	double	x;
+	double	y;
+}	t_vec_fov;
 
 #endif

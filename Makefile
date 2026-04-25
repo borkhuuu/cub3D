@@ -1,7 +1,7 @@
 NAME = cub3D
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -g
 
 MLX_DIR = mlx
 MLX_FLAGS = -I$(MLX_DIR) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
@@ -13,6 +13,11 @@ LIBFT_FLAGS = -I$(LIBFT_DIR) -L$(LIBFT_DIR) -lft
 SOURCES = main.c \
 		  game.c \
 		  init_mlx.c \
+		  render.c \
+		  dda.c \
+		  dda_helper.c \
+		  movement.c \
+		  movement_helper.c \
 		  parsing/parse.c \
 		  parsing/paths.c \
 		  parsing/color.c \

@@ -9,6 +9,7 @@ int		init_mlx(t_game *game);
 int		key_handler(int keycode, t_game *game);
 int		x_window(void *param);
 void	mlx_cleanup(t_game *game);
+void	ft_pixel_put(t_game *game, int x, int y, int colour);
 
 /*					UTILITY					*/
 int		get_arr_size(char **arr);

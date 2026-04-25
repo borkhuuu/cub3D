@@ -19,6 +19,15 @@ void	mlx_cleanup(t_game *game)
 	free_func(game->map, game->map->map_arr);
 	exit(0);
 }
+#include <stdio.h>
+void	ft_pixel_put(t_game *game, int x, int y, int colour)
+{
+	char	*pixel_to_manipulate;
+
+	pixel_to_manipulate = game->image.ptr_to_pixel + \
+		(y * game->image.line_len + x * (game->image.bpp / 8));
+	*(unsigned int *)pixel_to_manipulate = colour;
+}
 
 int	x_window(void *param)
 {
@@ -41,17 +50,14 @@ int	init_mlx(t_game *game)
 	game->connection = mlx_init();
 	if (!game->connection)
 		return (mlx_cleanup(game), 0); //cleanup
-	game->window = mlx_new_window(game->connection, HEIGHT, WIDTH, "cub3D");
+	game->window = mlx_new_window(game->connection, WIDTH, HEIGHT, "cub3D");
 	if (!game->window)
 		return (mlx_cleanup(game), 0); //cleanup
-	game->image.ptr_to_img = mlx_new_image(game->connection, HEIGHT, WIDTH);
+	game->image.ptr_to_img = mlx_new_image(game->connection, WIDTH, HEIGHT);
 	if (!game->image.ptr_to_img)
 		return (mlx_cleanup(game), 0); //cleanup
 	game->image.ptr_to_pixel = mlx_get_data_addr(game->image.ptr_to_img, &game->image.bpp, &game->image.line_len, &game->image.endian);
 	if (!game->image.ptr_to_pixel)
 		return (mlx_cleanup(game), 0); //cleanup
-	mlx_hook(game->window, 17, 0, x_window, game);
-	mlx_key_hook(game->window, key_handler, game);
-	mlx_loop(game->connection);
 	return (1);
 }
