@@ -1,13 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
 
-#ifndef WIDTH
 # define WIDTH 1600 
-#endif
-#ifndef HEIGHT
 # define HEIGHT 900
-#endif
-# define SPEED	0.1
+# define SPEED 0.1
+# define ROT_ANGLE 0.03
+# define PADDING 0.1
 #include "vec.h"
 #include "cub3D.h"
 #include <stdbool.h>
@@ -35,6 +33,8 @@ typedef struct s_movement
 	bool	a;
 	bool	s;
 	bool	d;
+	bool	left;
+	bool	right;
 }	t_movement;
 
 typedef struct s_raycast
@@ -91,6 +91,7 @@ int		key_release(int keycode, t_game *game);
 void	movement(t_game *game);
 
 /*					movement_helper.c			*/
+void	rotate(t_game *game, int dir);
 void	forward(t_game *game);
 void	backward(t_game *game);
 void	left(t_game *game);
