@@ -23,10 +23,10 @@ void	calculate_wall_height(t_raycast *ray, t_game *game)
 		ray->perp_dist = 0.0001;
 	ray->wall_height = (int)(HEIGHT / ray->perp_dist);
 	if (ray->side == 0)
-		game->wall_hit = game->player.pos.y + ray->perp_dist * ray->ray_dir.y;
+		ray->wall_hit = game->player.pos.y + ray->perp_dist * ray->ray_dir.y;
 	else
-	 	game->wall_hit = game->player.pos.x + ray->perp_dist * ray->ray_dir.x;
-	game->wall_hit -= floor(game->wall_hit);
+	 	ray->wall_hit = game->player.pos.x + ray->perp_dist * ray->ray_dir.x;
+	ray->wall_hit -= floor(ray->wall_hit);
 }
 
 void	init_step_dir(t_raycast *ray, t_vec	ray_dir)

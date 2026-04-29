@@ -1,6 +1,5 @@
 #include "cub3D.h"
 #include "game.h"
-#include "libft/libft.h"
 #include "vec.h"
 #include "map.h"
 #include <math.h>
@@ -39,6 +38,7 @@ void	calculate_delta_dist(t_raycast *ray)
 int	raycaster(t_game *game)
 {
 	t_raycast	ray;
+	t_texture	t;
 	int			x;
 	
 	x = 0;
@@ -60,8 +60,10 @@ int	raycaster(t_game *game)
 				ray.side = 1;
 			}
 		}
+		t = select_texture(game, ray);
 		calculate_wall_height(&ray, game);
-		draw(game, ray.wall_height, x);
+		game->ray = ray;
+		draw(game, t, ray.wall_height, x);
 		x++;
 	}
 	return (1);

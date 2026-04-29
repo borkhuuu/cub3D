@@ -37,21 +37,6 @@ typedef struct s_movement
 	bool	d;
 }	t_movement;
 
-typedef struct s_game
-{
-	t_map		*map;
-	t_texture	textures[4];
-	t_image		image;
-	void		*connection;
-	void		*window;
-	t_player	player;
-	t_movement	movement;
-	t_vec		ray_dir;
-	int			color_f;
-	int			color_c;
-	double		wall_hit;
-}	t_game;
-
 typedef struct s_raycast
 {
 	t_vec	ray_dir;
@@ -66,6 +51,21 @@ typedef struct s_raycast
 	int		map_y;
 	int		wall_height;
 }	t_raycast;
+
+typedef struct s_game
+{
+	t_map		*map;
+	t_texture	textures[4];
+	t_raycast	ray;
+	t_image		image;
+	void		*connection;
+	void		*window;
+	t_player	player;
+	t_movement	movement;
+	t_vec		ray_dir;
+	int			color_f;
+	int			color_c;
+}	t_game;
 
 /*					game.c					*/
 int		start_game(t_game *game);
@@ -84,10 +84,6 @@ void	calculate_wall_height(t_raycast *ray, t_game *game);
 void	init_step_dir(t_raycast *ray, t_vec	ray_dir);
 double	left_up(double ppos, double ratio);
 double	right_down(double ppos, double ratio);
-
-/*					render.c				*/
-int		render_player(t_game *game);
-void	draw(t_game *game, int height, int x);
 
 /*					movement.c					*/
 int		key_press(int keycode, t_game *game);

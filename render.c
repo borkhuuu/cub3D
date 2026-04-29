@@ -1,27 +1,30 @@
 #include "game.h"
 #include "cub3D.h"
-#include <stdio.h>
-void	draw(t_game *game, int height, int x)
-{
-	int	y;
-	int	start;
-	int	end;
 
-	start = HEIGHT / 2 - height / 2;
-	end = HEIGHT / 2 + height / 2;
+void	draw(t_game *game, t_texture t, int height, int x)
+{
+	t_render	r;
+	int	y;
+
+	r.start = HEIGHT / 2 - height / 2;
+	r.end = HEIGHT / 2 + height / 2;
 	y = 0;
-	if (start < 0)
-		start = 0;
-	if (end >= HEIGHT)
-		end = HEIGHT - 1;
-	while (y < start)
+	if (r.start < 0)
+		r.start = 0;
+	if (r.end >= HEIGHT)
+		r.end = HEIGHT - 1;
+	while (y < r.start)
 	{
 		ft_pixel_put(game, x, y, game->color_c);
 		y++;
 	}
-	while (y <= end)
+	calculate_texture_pixel(&game->ray, &r, t);
+	while (y <= r.end)
 	{
-		ft_pixel_put(game, x, y, (int)(game->wall_hit * game->textures[0].width));
+		r.tex_y = (int)r.tex_pos;
+		r.tex_pos += r.step;
+		t.color = get_texture_pixel_color(t, r.tex_x, r.tex_y);
+		ft_pixel_put(game, x, y, t.color);
 		y++;
 	}
 	while (y < HEIGHT)
