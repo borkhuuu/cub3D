@@ -16,10 +16,21 @@ int	validate_line(const char *s)
 	return (1);
 }
 
-int	validate_path(t_map *map, char *path)
+int	check_extension(const char *path, const char *ext)
 {
-	int	i;
-	int	fd;
+	const char	*s;
+
+	s = ft_strrchr(path, '.');
+	if (!ft_strcmp(s, ext))
+		return (1);
+	return (0);
+}
+
+int	validate_path(t_map *map, char *path, char *ext)
+{
+	char	*tmp;
+	int		i;
+	int		fd;
 
 	i = 0;
 	if (!path)
@@ -28,18 +39,19 @@ int	validate_path(t_map *map, char *path)
 	if (fd == -1)
 		return (write(2, "Error\n", 6), strerror_wrapper(errno), 0);
 	close(fd);
-	while (path[i])
-	{
-		if (path[i] == '/' && path[i + 1] == '.')
-			return (map->err_msg = "Error\nPath is hidden file, nice try BOZO\n", 0);
-		i++;
-	}
+	if (!check_extension(path, ext))
+		return (map->err_msg = "Error\nPath has wrong extension\n", 0);
+	tmp = ft_strrchr(path, '.');
+	if (!tmp)
+		return (map->err_msg = "Error\nPath doesnt have extension\n", 0);
+	if (tmp == &path[0] || *(--tmp) == '/')
+		return (map->err_msg = "Error\nThis is a hidden path\n", 0);
 	return (1);
 }
 
 int	handle_path(t_map *map, char **map_path, char *path, char type)
 {
-	if (!validate_path(map, path))
+	if (!validate_path(map, path, ".xpm"))
 		return (0);
 	if (*map_path)
 	{

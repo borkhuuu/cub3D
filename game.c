@@ -83,6 +83,8 @@ int	setup_game(t_map *map)
 		return (0);
 	if (!init_player(&game))
 		return (0);
+	if (!load_textures(&game))
+		return (0);// free_mlx()
 	init_color(&game, map->color_f, map->color_c);
 	start_game(&game);
 	return (1);

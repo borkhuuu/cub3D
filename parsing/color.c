@@ -41,10 +41,32 @@ int	validate_color(t_map *map, t_color *color, char *rgb)
 	return (1);
 }
 
-int	handle_color(t_map *map, t_color *color, char *rgb, char type)
+int	count_comma(const char *line)
 {
-	if (!validate_color(map, color, rgb))
-		return (0);
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (line[i])
+	{
+		if (line[i] == ',')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+int	handle_color(t_map *map, t_color *color, char **rgb, char type)
+{
+	char	*line;
+
+	line = ft_catcat(rgb);
+	if (count_comma(line) != 2)
+		return (free(line), map->err_msg = "Error\nComma count not 2", 0);
+	if (!validate_color(map, color, line))
+		return (free(line), 0);
+	free(line);
 	if (color->set)
 	{
 		if (type == 'F')

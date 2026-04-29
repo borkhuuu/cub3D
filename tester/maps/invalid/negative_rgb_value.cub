@@ -1,0 +1,13 @@
+NO ./textures/Wall2.xpm
+SO ./textures/rainbow.xpm
+WE ./textures/pepe.xpm
+EA ./textures/Wall8.xpm
+
+C -1, 50, 200
+F 100, 100, 100
+
+111111
+100101
+101001
+1100N1
+111111

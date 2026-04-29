@@ -190,14 +190,14 @@ Test(invalid, space_in_colour)
 	printf("Test: space_in_colour passed ✅\n");
 }
 
-Test(invalid, space_in_map)
+Test(invalid, blank_line_in_map)
 {
 	t_result	res;
-	char *args[] = {"maps/invalid/space_in_map.cub", NULL};
+	char *args[] = {"maps/invalid/blank_line_in_map.cub", NULL};
 	res = run_cub3d(args);
 
 	check_invalid(res);
-	printf("Test: space_in_map passed ✅\n");
+	printf("Test: blank_line_in_map passed ✅\n");
 }
 
 Test(invalid, multiple_maps)
@@ -298,4 +298,154 @@ Test(invalid, no_space_after_element_texture)
 
 	check_invalid(res);
 	printf("Test: no_space_after_element_texture passed ✅\n");
+}
+
+Test(invalid, negative_rgb_value)
+{
+	t_result	res;
+	char *args[] = {"maps/invalid/negative_rgb_value.cub", NULL};
+	res = run_cub3d(args);
+
+	check_invalid(res);
+	printf("Test: negative_rgb_value passed ✅\n");
+}
+
+Test(invalid, overflow_rgb_value)
+{
+	t_result	res;
+	char *args[] = {"maps/invalid/overflow_rgb_value.cub", NULL};
+	res = run_cub3d(args);
+
+	check_invalid(res);
+	printf("Test: overflow_rgb_value passed ✅\n");
+}
+
+Test(invalid, no_player)
+{
+	t_result	res;
+	char *args[] = {"maps/invalid/no_player.cub", NULL};
+	res = run_cub3d(args);
+
+	check_invalid(res);
+	printf("Test: no_player passed ✅\n");
+}
+
+Test(invalid, multiple_players)
+{
+	t_result	res;
+	char *args[] = {"maps/invalid/multiple_players.cub", NULL};
+	res = run_cub3d(args);
+
+	check_invalid(res);
+	printf("Test: multiple_players passed ✅\n");
+}
+
+Test(invalid, map_unclosed_on_top)
+{
+	t_result	res;
+	char *args[] = {"maps/invalid/map_unclosed_on_top.cub", NULL};
+	res = run_cub3d(args);
+
+	check_invalid(res);
+	printf("Test: map_unclosed_on_top passed ✅\n");
+}
+
+Test(invalid, map_unclosed_on_bottom)
+{
+	t_result	res;
+	char *args[] = {"maps/invalid/map_unclosed_on_bottom.cub", NULL};
+	res = run_cub3d(args);
+
+	check_invalid(res);
+	printf("Test: map_unclosed_on_bottom passed ✅\n");
+}
+
+Test(invalid, unclosed_map_edge_case)
+{
+	t_result	res;
+	char *args[] = {"maps/invalid/unclosed_map_edge_case.cub", NULL};
+	res = run_cub3d(args);
+
+	check_invalid(res);
+	printf("Test: unclosed_map_edge_case passed ✅\n");
+}
+
+Test(invalid, map_unclosed_left)
+{
+	t_result	res;
+	char *args[] = {"maps/invalid/map_unclosed_left.cub", NULL};
+	res = run_cub3d(args);
+
+	check_invalid(res);
+	printf("Test: map_unclosed_left passed ✅\n");
+}
+
+Test(invalid, map_unclosed_right)
+{
+	t_result	res;
+	char *args[] = {"maps/invalid/map_unclosed_right.cub", NULL};
+	res = run_cub3d(args);
+
+	check_invalid(res);
+	printf("Test: map_unclosed_right passed ✅\n");
+}
+
+Test(invalid, missing_colour)
+{
+	t_result	res;
+	char *args[] = {"maps/invalid/missing_colour.cub", NULL};
+	res = run_cub3d(args);
+
+	check_invalid(res);
+	printf("Test: missing_colour passed ✅\n");
+}
+
+Test(invalid, more_rgb_values_in_colour)
+{
+	t_result	res;
+	char *args[] = {"maps/invalid/more_rgb_values_in_colour.cub", NULL};
+	res = run_cub3d(args);
+
+	check_invalid(res);
+	printf("Test: more_rgb_values_in_colour passed ✅\n");
+}
+
+Test(invalid, less_rgb_values_in_colour)
+{
+	t_result	res;
+	char *args[] = {"maps/invalid/less_rgb_values_in_colour.cub", NULL};
+	res = run_cub3d(args);
+
+	check_invalid(res);
+	printf("Test: less_rgb_values_in_colour passed ✅\n");
+}
+
+Test(invalid, non_numeric_colour_component)
+{
+	t_result	res;
+	char *args[] = {"maps/invalid/non_numeric_colour_component.cub", NULL};
+	res = run_cub3d(args);
+
+	check_invalid(res);
+	printf("Test: non_numeric_colour_component passed ✅\n");
+}
+
+Test(invalid, double_texture)
+{
+	t_result	res;
+	char *args[] = {"maps/invalid/double_texture.cub", NULL};
+	res = run_cub3d(args);
+
+	check_invalid(res);
+	printf("Test: double_texture passed ✅\n");
+}
+
+Test(invalid, unknown_texture_identifier)
+{
+	t_result	res;
+	char *args[] = {"maps/invalid/unknown_texture_identifier.cub", NULL};
+	res = run_cub3d(args);
+
+	check_invalid(res);
+	printf("Test: unknown_texture_identifier passed ✅\n");
 }

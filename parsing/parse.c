@@ -16,10 +16,10 @@ int	handle_id(t_map *map, char **arr)
 		if (!handle_path(map, &map->path_ea, arr[1], 'E'))
 			return (0);
 	if (!ft_strcmp(arr[0], "F"))
-		if (!handle_color(map, &map->color_f, arr[1], 'F'))
+		if (!handle_color(map, &map->color_f, &arr[1], 'F'))
 			return (0);
 	if (!ft_strcmp(arr[0], "C"))
-		if (!handle_color(map, &map->color_c, arr[1], 'C'))
+		if (!handle_color(map, &map->color_c, &arr[1], 'C'))
 			return (0);
 	free_func(NULL, arr);
 	return (1);
@@ -28,6 +28,7 @@ int	handle_id(t_map *map, char **arr)
 int	parse_paths(t_map *map)
 {
 	char	**arr;
+	char	*s;
 
 	if (!validate_line(map->line))
 		return (1);

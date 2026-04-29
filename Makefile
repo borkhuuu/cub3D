@@ -24,6 +24,7 @@ SOURCES = main.c \
 		  parsing/map.c \
 		  parsing/helper.c \
 		  parsing/floodFill.c \
+		  textures.c \
 		  helpers.c \
 
 HEADERS = cub3D.h game.h map.h

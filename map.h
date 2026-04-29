@@ -33,11 +33,11 @@ bool    missing_path(t_map *map);
 
 /*              parsing/paths.c             */
 int		handle_path(t_map *map, char **map_path, char *path, char type);
-int		validate_path(t_map *map, char *path);
+int		validate_path(t_map *map, char *path, char *ext);
 int		validate_line(const char *s);
 
 /*				parsing/color.c				*/
-int		handle_color(t_map *map, t_color *color, char *rgb, char type);
+int		handle_color(t_map *map, t_color *color, char **rgb, char type);
 int		validate_color(t_map *map, t_color *color, char *rgb);
 void	save_rgb(t_color *color);
 

@@ -47,8 +47,9 @@ int main(int ac, char **av)
 	if (ac != 2)
 		return (write(2, "Error\nArguments not exactly 1\n", 30), 1);
 	init_map(&map);
-	if ((map.map_fd = open(av[1], O_RDONLY)) == -1)
-		return (write(2, "Error\n", 6), strerror_wrapper(errno), 1);
+	if (!validate_path(&map, av[1], ".cub"))
+		return (write(2, map.err_msg, ft_strlen(map.err_msg)), 1);
+	map.map_fd = open(av[1], O_RDONLY);
 	map.line = get_next_line(map.map_fd);
 	while (map.line && !map.in_map)
 	{

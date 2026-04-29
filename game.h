@@ -9,9 +9,9 @@
 #endif
 # define SPEED	0.1
 #include "vec.h"
+#include "cub3D.h"
 #include <stdbool.h>
 typedef struct s_map t_map;
-
 typedef struct s_player
 {
 	t_vec	pos;
@@ -40,6 +40,7 @@ typedef struct s_movement
 typedef struct s_game
 {
 	t_map		*map;
+	t_texture	textures[4];
 	t_image		image;
 	void		*connection;
 	void		*window;
@@ -48,6 +49,7 @@ typedef struct s_game
 	t_vec		ray_dir;
 	int			color_f;
 	int			color_c;
+	double		wall_hit;
 }	t_game;
 
 typedef struct s_raycast
@@ -56,6 +58,7 @@ typedef struct s_raycast
 	t_vec	side_dist;
 	t_vec	delta_dist;
 	double	perp_dist;
+	double	wall_hit;
 	int		step_x;
 	int		step_y;
 	int		side;

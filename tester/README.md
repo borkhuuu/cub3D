@@ -30,10 +30,24 @@ Clone this repo and compile the tester by running these commands:
 ```
 git clone git@github.com:VestaManuyko/Cub3D_tester.git tester
 cd tester
-make test
+make
 ```
-Now once the tester is created, just run:
+You can run all tests as:
 ```
 ./tester
 ```
+or as:
+```
+make test
+```
+If you want separated output of valid and invalid tests run \
+for valid:
+```
+make valid
+```
+for invalid:
+```
+make invalid
+```
+
 Good luck with the project!

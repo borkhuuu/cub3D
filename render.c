@@ -21,7 +21,7 @@ void	draw(t_game *game, int height, int x)
 	}
 	while (y <= end)
 	{
-		ft_pixel_put(game, x, y, 800080);
+		ft_pixel_put(game, x, y, (int)(game->wall_hit * game->textures[0].width));
 		y++;
 	}
 	while (y < HEIGHT)

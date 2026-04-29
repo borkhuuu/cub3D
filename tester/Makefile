@@ -11,7 +11,7 @@ TEST_LIBS = -lcriterion
 OBJ = $(SRC:%.c=obj/%.o)
 DEP = $(SRC:%.c=obj/%.d)
 
-all: test
+all: $(TEST_NAME)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -21,9 +21,19 @@ $(OBJ_DIR)/tests/%.o: tests/%.c
 	@$(CC) $(TEST_CFLAGS) -c $< -o $@
 
 $(TEST_NAME): $(TEST_OBJ)
+	@echo "Tester compiled"
 	@$(CC) $(TEST_OBJ) -o $(TEST_NAME) $(TEST_LIBS)
 
+valid: $(TEST_NAME)
+	@echo "Valid tests validation:"
+	@./$(TEST_NAME) --filter "valid/*"
+
+invalid: $(TEST_NAME)
+	@echo "Invalid tests validation:"
+	@./$(TEST_NAME) --filter "invalid/*"
+
 test: $(TEST_NAME)
+	@./$(TEST_NAME)
 
 clean:
 	@rm -f $(TEST_OBJ) $(TEST_DEP)

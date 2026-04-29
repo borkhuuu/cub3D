@@ -36,6 +36,9 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
+
+char	*ft_catcat(char **arr);
+void	ft_free_arr(char **arr);
 void	ft_print_arr(char **arr);
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);

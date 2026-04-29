@@ -72,3 +72,13 @@ void	remove_nl(char **arr)
 		i++;
 	ft_memset(ft_memchr(arr[i], '\n', ft_strlen(arr[i])), 0, 1);
 }
+
+const char	*skip_whitespaces(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] >= 9 && s[i] <= 13)
+		i++;
+	return (&s[i]);
+}

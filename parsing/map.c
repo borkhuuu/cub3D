@@ -58,6 +58,8 @@ int	parse_map(t_map *map)
 	char	**tmp;
 	char	*s;
 
+	if (!validate_line(map->line))
+		return (1);
 	if (!validateCharacters(map, map->line))
 		return (map->err_msg = "Error\nInvalid character found somewhere?!\n", 0);
 	tmp = ft_realloc(map->map_arr, (map->map_height) * sizeof(char *),(map->map_height + 2) * sizeof(char *));
