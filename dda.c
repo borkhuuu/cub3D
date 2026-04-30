@@ -15,18 +15,23 @@ void	calculate_ray_dir(t_raycast *ray, t_player *player, int x)
 
 void	calculate_side_dist(t_raycast *ray, t_player *player)
 {
-	if (ray->ray_dir.x < 0)
-		ray->side_dist.x = left_up(player->pos.x,(ray->ray_dir.y / ray->ray_dir.x));
-	else if (ray->ray_dir.x > 0)
-		ray->side_dist.x = right_down(player->pos.x, (ray->ray_dir.y / ray->ray_dir.x));
-	else if (ray->ray_dir.x == 0)
-		ray->side_dist.x = INFINITY;
-	if (ray->ray_dir.y < 0)
-		ray->side_dist.y = left_up(player->pos.y, (ray->ray_dir.x / ray->ray_dir.y));
-	else if (ray->ray_dir.y > 0)
-		ray->side_dist.y = right_down(player->pos.y, (ray->ray_dir.x / ray->ray_dir.y));
-	else if (ray->ray_dir.y == 0)
-		ray->side_dist.y = INFINITY;
+	double	frac_x;
+	double	frac_y;
+
+	frac_x = player->pos.x - (int)player->pos.x;
+    frac_y = player->pos.y - (int)player->pos.y;
+	if (ray->ray_dir.x == 0)
+		ray->side_dist.x = INFINITY; 
+	else if (ray->ray_dir.x < 0)
+		ray->side_dist.x = frac_x * ray->delta_dist.x;
+	else
+		ray->side_dist.x = (1.0 - frac_x) * ray->delta_dist.x;
+	if (ray->ray_dir.y == 0)
+		ray->ray_dir.y = INFINITY;
+	else if (ray->ray_dir.y < 0)
+		ray->side_dist.y = frac_y * ray->delta_dist.y;
+	else
+		ray->side_dist.y = (1.0 - frac_y) * ray->delta_dist.y;
 }
 
 void	calculate_delta_dist(t_raycast *ray)

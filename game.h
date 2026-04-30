@@ -12,10 +12,10 @@
 typedef struct s_map t_map;
 typedef struct s_player
 {
-	t_vec	pos;
-	t_vec	dir;
+	t_vec		pos;
+	t_vec		dir;
 	t_vec_fov	camera;
-	char	spawn;
+	char		spawn;
 }	t_player;
 
 typedef struct s_image

@@ -13,6 +13,8 @@ void	draw(t_game *game, t_texture t, int height, int x)
 		r.start = 0;
 	if (r.end >= HEIGHT)
 		r.end = HEIGHT - 1;
+	if (r.start >= HEIGHT)
+		printf("hi\n");
 	while (y < r.start)
 	{
 		ft_pixel_put(game, x, y, game->color_c);
@@ -21,7 +23,7 @@ void	draw(t_game *game, t_texture t, int height, int x)
 	calculate_texture_pixel(&game->ray, &r, t);
 	while (y <= r.end)
 	{
-		r.tex_y = (int)r.tex_pos;
+		r.tex_y = (int)r.tex_pos;// % t.height;
 		r.tex_pos += r.step;
 		t.color = get_texture_pixel_color(t, r.tex_x, r.tex_y);
 		ft_pixel_put(game, x, y, t.color);
