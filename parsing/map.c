@@ -37,11 +37,11 @@ void	align_line(char **str)
 	if (!str || !*str)
 		return ;
 	s = *str;
-	while (s[i] && s[i] == '\t')
+	while (s[i])
 	{
 		if (s[i] == '\t')
 		{
-			ft_memset(ft_memchr(s, '\t', ft_strlen(s)), ' ', 1);
+			ft_memset(&s[i], ' ', 1);
 			s = ft_realloc(s, ft_strlen(s), ft_strlen(s) + 4);
 			tmp = ft_strjoin("   ", s);
 			free(s);

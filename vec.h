@@ -7,10 +7,4 @@ typedef struct s_vec
 	double	y;
 }	t_vec;
 
-typedef struct s_vec_fov
-{
-	double	x;
-	double	y;
-}	t_vec_fov;
-
 #endif

@@ -27,7 +27,7 @@ void	calculate_side_dist(t_raycast *ray, t_player *player)
 	else
 		ray->side_dist.x = (1.0 - frac_x) * ray->delta_dist.x;
 	if (ray->ray_dir.y == 0)
-		ray->ray_dir.y = INFINITY;
+		ray->side_dist.y = INFINITY;
 	else if (ray->ray_dir.y < 0)
 		ray->side_dist.y = frac_y * ray->delta_dist.y;
 	else

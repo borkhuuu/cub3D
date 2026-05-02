@@ -16,14 +16,18 @@ int	validate_line(const char *s)
 	return (1);
 }
 
-int	check_extension(const char *path, const char *ext)
+int	check_extension(t_map *map, const char *path, const char *ext)
 {
-	const char	*s;
+	const char	*tmp;
 
-	s = ft_strrchr(path, '.');
-	if (!ft_strcmp(s, ext))
-		return (1);
-	return (0);
+	tmp = ft_strrchr(path, '.');
+	if (!tmp)
+		return (map->err_msg = "Error\nPath doesnt have extension\n", 0);
+	if (ft_strcmp(tmp, ext))
+		return (map->err_msg = "Error\nPath has wrong extension\n", 0);
+	if (tmp == &path[0] || *(--tmp) == '/')
+		return (map->err_msg = "Error\nThis is a hidden path\n", 0);
+	return (1);
 }
 
 int	validate_path(t_map *map, char *path, char *ext)
@@ -39,13 +43,8 @@ int	validate_path(t_map *map, char *path, char *ext)
 	if (fd == -1)
 		return (write(2, "Error\n", 6), strerror_wrapper(errno), 0);
 	close(fd);
-	if (!check_extension(path, ext))
-		return (map->err_msg = "Error\nPath has wrong extension\n", 0);
-	tmp = ft_strrchr(path, '.');
-	if (!tmp)
-		return (map->err_msg = "Error\nPath doesnt have extension\n", 0);
-	if (tmp == &path[0] || *(--tmp) == '/')
-		return (map->err_msg = "Error\nThis is a hidden path\n", 0);
+	if (!check_extension(map, path, ext))
+		return (0);
 	return (1);
 }
 

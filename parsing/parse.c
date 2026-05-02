@@ -3,6 +3,8 @@
 
 int	handle_id(t_map *map, char **arr)
 {
+	if (!arr || !arr[0] || !arr[1])
+		return (map->err_msg = "Path is misconfigured\n", 0);
 	if (!ft_strcmp(arr[0], "NO"))
 		if (!handle_path(map, &map->path_no, arr[1], 'N'))
 			return (0);

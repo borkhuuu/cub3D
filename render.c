@@ -13,8 +13,6 @@ void	draw(t_game *game, t_texture t, int height, int x)
 		r.start = 0;
 	if (r.end >= HEIGHT)
 		r.end = HEIGHT - 1;
-	if (r.start >= HEIGHT)
-		printf("hi\n");
 	while (y < r.start)
 	{
 		ft_pixel_put(game, x, y, game->color_c);

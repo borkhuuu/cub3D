@@ -12,10 +12,10 @@
 typedef struct s_map t_map;
 typedef struct s_player
 {
-	t_vec		pos;
-	t_vec		dir;
-	t_vec_fov	camera;
-	char		spawn;
+	t_vec	pos;
+	t_vec	dir;
+	t_vec	camera;
+	char	spawn;
 }	t_player;
 
 typedef struct s_image
@@ -62,7 +62,6 @@ typedef struct s_game
 	void		*window;
 	t_player	player;
 	t_movement	movement;
-	t_vec		ray_dir;
 	int			color_f;
 	int			color_c;
 }	t_game;

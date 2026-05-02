@@ -6,7 +6,7 @@
 #include "mlx/mlx.h"
 #include <X11/X.h>
 
-void	setup_fov(t_player *player)
+void	setup_player_vectors(t_player *player)
 {
 	if (player->spawn == 'N')
 	{
@@ -45,7 +45,7 @@ int	init_player(t_game *game)
 	game->player.pos.x = game->map->player.x + 0.5;
 	game->player.pos.y = game->map->player.y + 0.5;
 	game->player.spawn = game->map->player_dir;
-	setup_fov(&game->player);
+	setup_player_vectors(&game->player);
 	return (1);	
 }
 
