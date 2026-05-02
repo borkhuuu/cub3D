@@ -1,33 +1,37 @@
 NAME = cub3D
 
 CC = cc
-CFLAGS = -g
+CFLAGS = -g -Wall -Wextra -Werror
 
-MLX_DIR = mlx
+MLX_DIR = libraries/mlx
 MLX_FLAGS = -I$(MLX_DIR) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 
-LIBFT_DIR = libft
+LIBFT_DIR = libraries/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_FLAGS = -I$(LIBFT_DIR) -L$(LIBFT_DIR) -lft
 
-SOURCES = main.c \
-		  game.c \
-		  init_mlx.c \
-		  render.c \
-		  dda.c \
-		  dda_helper.c \
-		  movement.c \
-		  movement_helper.c \
-		  parsing/parse.c \
-		  parsing/paths.c \
-		  parsing/color.c \
-		  parsing/map.c \
-		  parsing/helper.c \
-		  parsing/floodFill.c \
-		  textures.c \
-		  helpers.c \
+SOURCES = src/main.c\
+		  src/game.c\
+		  src/graphics/init_mlx.c\
+		  src/graphics/render.c\
+		  src/graphics/textures.c\
+		  src/raycasting/dda.c\
+		  src/raycasting/dda_helper.c\
+		  src/movement/movement.c\
+		  src/movement/movement_helper.c\
+		  src/parsing/parse.c\
+		  src/parsing/paths.c\
+		  src/parsing/color.c\
+		  src/parsing/map.c\
+		  src/parsing/helper.c\
+		  src/parsing/floodFill.c\
+		  src/utility/helpers.c
 
-HEADERS = cub3D.h game.h map.h
+HEADERS = includes/cub3D.h \
+		  includes/game.h \
+		  includes/map.h \
+		  includes/vec.h \
+		  includes/color.h
 
 OBJ_DIR = objects/
 OBJS = $(SOURCES:%.c=$(OBJ_DIR)%.o)
