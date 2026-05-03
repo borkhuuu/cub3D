@@ -1,5 +1,5 @@
-#include "../../includes/map.h"
-#include "../../libraries/libft/libft.h"
+#include "../../includes/map_bonus.h"
+#include "../../../libraries/libft/libft.h"
 #include <stdlib.h>
 
 void    free_func(t_map *map, char **arr)

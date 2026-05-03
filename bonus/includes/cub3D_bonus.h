@@ -1,6 +1,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+#include <stdbool.h>
+
 typedef struct s_game t_game;
 typedef struct s_raycast t_raycast;
 typedef struct s_texture
@@ -43,9 +45,14 @@ int		load_textures(t_game *game);
 t_texture	select_texture(t_game *game, t_raycast ray);
 void	calculate_texture_pixel(t_raycast *ray, t_render *r, t_texture t);
 int		get_texture_pixel_color(t_texture t, int x, int y);
+
 /*					UTILITY					*/
 int		get_arr_size(char **arr);
 void	strerror_wrapper(int errno);
 void	free_textures(t_game *game, t_texture textures[4]);
 const char	*skip_whitespaces(char *s);
+bool	is_valid(const char c);
+bool	is_player(const char c);
+bool	is_enemy(const char c);
+
 #endif

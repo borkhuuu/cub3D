@@ -1,8 +1,8 @@
 #include "../../includes/cub3D.h"
 #include "../../includes/game.h"
 #include "../../includes/map.h"
-#include "../../libraries/mlx/mlx.h"
-#include "../../libraries/libft/libft.h"
+#include "../../../libraries/mlx/mlx.h"
+#include "../../../libraries/libft/libft.h"
 #include <stdlib.h>
 #include <X11/keysym.h>
 

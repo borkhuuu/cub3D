@@ -1,6 +1,6 @@
 #include "../../includes/game.h"
 #include <math.h>
-#include "../../libraries/libft/libft.h"
+#include "../../../libraries/libft/libft.h"
 
 void	cast_ray(t_raycast *ray, t_game *game, int x)
 {

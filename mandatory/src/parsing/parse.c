@@ -1,5 +1,5 @@
 #include "../../includes/map.h"
-#include "../../libraries/libft/libft.h"
+#include "../../../libraries/libft/libft.h"
 
 int	handle_id(t_map *map, char **arr)
 {

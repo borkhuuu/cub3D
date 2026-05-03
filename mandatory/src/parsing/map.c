@@ -1,5 +1,7 @@
-#include "../../libraries/libft/libft.h"
+#include "../../../libraries/libft/libft.h"
 #include "../../includes/map.h"
+#include "../../includes/cub3D.h"
+#include <stdbool.h>
 
 int	validateCharacters(t_map *map, const char *s)
 {
@@ -12,12 +14,9 @@ int	validateCharacters(t_map *map, const char *s)
 		return (0);
 	while (s[i])
 	{
-		if ((s[i] != '0' && s[i] != '1' && s[i] != 'N' && s[i] != '\n' &&
-			s[i] != 'S' && s[i] != 'E' && s[i] != 'W' && s[i] != ' '))
-		{
+		if (!is_valid(s[i]))
 			return (0);
-		}
-		if (s[i] == 'N' || s[i] == 'W' || s[i] == 'E' || s[i] == 'S')
+		if (is_player(s[i]))
 		{
 			map->player_dir = s[i];
 			map->player_count++;

@@ -1,9 +1,9 @@
-#include "../includes/color.h"
-#include "../includes/map.h"
-#include "../includes/game.h"
-#include "../includes/cub3D.h"
-#include "../libraries/libft/libft.h"
-#include "../libraries/mlx/mlx.h"
+#include "../includes/color_bonus.h"
+#include "../includes/map_bonus.h"
+#include "../includes/game_bonus.h"
+#include "../includes/cub3D_bonus.h"
+#include "../../libraries/libft/libft.h"
+#include "../../libraries/mlx/mlx.h"
 #include <X11/X.h>
 
 void	setup_player_vectors(t_player *player)

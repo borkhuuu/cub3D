@@ -1,7 +1,7 @@
 #include "../../includes/cub3D.h"
-#include "../../libraries/mlx/mlx.h"
+#include "../../../libraries/mlx/mlx.h"
 #include "../../includes/game.h"
-#include "../../libraries/libft/libft.h"
+#include "../../../libraries/libft/libft.h"
 #include <string.h>
 
 void	free_textures(t_game *game, t_texture textures[4])

@@ -1,5 +1,5 @@
 #include "../includes/game.h"
-#include "../libraries/libft/libft.h"
+#include "../../libraries/libft/libft.h"
 #include "../includes/map.h"
 #include <fcntl.h>
 #include <string.h>

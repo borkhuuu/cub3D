@@ -1,7 +1,7 @@
-#include "../../includes/cub3D.h"
-#include "../../includes/game.h"
-#include "../../libraries/mlx/mlx.h"
-#include "../../includes/map.h"
+#include "../../includes/cub3D_bonus.h"
+#include "../../includes/game_bonus.h"
+#include "../../../libraries/mlx/mlx.h"
+#include "../../includes/map_bonus.h"
 
 t_texture	select_texture(t_game *game, t_raycast ray)
 {

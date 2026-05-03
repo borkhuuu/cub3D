@@ -1,6 +1,6 @@
-#include "../../includes/map.h"
-#include "../../libraries/libft/libft.h"
-#include "../../includes/cub3D.h"
+#include "../../includes/map_bonus.h"
+#include "../../../libraries/libft/libft.h"
+#include "../../includes/cub3D_bonus.h"
 #include <errno.h>
 #include <fcntl.h>
 

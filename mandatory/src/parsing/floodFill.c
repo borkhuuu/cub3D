@@ -1,4 +1,4 @@
-#include "../../libraries/libft/libft.h"
+#include "../../../libraries/libft/libft.h"
 #include "../../includes/map.h"
 
 char	**copy_map(t_map *map)

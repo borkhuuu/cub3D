@@ -1,12 +1,12 @@
-NO      maps/textures/no_texture
-SO      maps/textures/so_texture
+NO      maps/textures/no_texture.xpm
+SO      maps/textures/so_texture.xpm
 F 220,100,0
-WE      maps/textures/we_texture
+WE      maps/textures/we_texture.xpm
 C 225,30,0
-EA      maps/textures/ea_texture
+EA      maps/textures/ea_texture.xpm
 
 
 
  1111111
-100N1001
+120N1001
 11111111
