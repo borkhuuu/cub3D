@@ -10,13 +10,13 @@
 #include "cub3D_bonus.h"
 #include <stdbool.h>
 typedef struct s_map t_map;
-typedef struct s_player
+typedef struct s_entity
 {
 	t_vec	pos;
 	t_vec	dir;
 	t_vec	camera;
 	char	spawn;
-}	t_player;
+}	t_entity;
 
 typedef struct s_image
 {
@@ -60,7 +60,8 @@ typedef struct s_game
 	t_image		image;
 	void		*connection;
 	void		*window;
-	t_player	player;
+	t_entity	player;
+	t_entity	enemy;
 	t_movement	movement;
 	int			color_f;
 	int			color_c;
@@ -74,8 +75,8 @@ int		setup_game(t_map *map);
 
 int		raycaster(t_game *game);
 void	calculate_delta_dist(t_raycast *ray);
-void	calculate_side_dist(t_raycast *ray, t_player *player);
-void	calculate_ray_dir(t_raycast *ray, t_player *player, int x);
+void	calculate_side_dist(t_raycast *ray, t_entity *player);
+void	calculate_ray_dir(t_raycast *ray, t_entity *player, int x);
 
 /*					dda_helper.c			*/
 void	cast_ray(t_raycast *ray, t_game *game, int x);

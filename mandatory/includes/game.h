@@ -1,9 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-# define WIDTH 1600 
-# define HEIGHT 900
-# define SPEED 0.1
+# define WIDTH ((size_t)1600U) 
+# define HEIGHT ((size_t)900U)
+# define SPEED 0.1 
 # define ROT_ANGLE 0.03
 # define PADDING 0.1
 #include "vec.h"
@@ -75,10 +75,10 @@ int		setup_game(t_map *map);
 int		raycaster(t_game *game);
 void	calculate_delta_dist(t_raycast *ray);
 void	calculate_side_dist(t_raycast *ray, t_player *player);
-void	calculate_ray_dir(t_raycast *ray, t_player *player, int x);
+void	calculate_ray_dir(t_raycast *ray, t_player *player, size_t x);
 
 /*					dda_helper.c			*/
-void	cast_ray(t_raycast *ray, t_game *game, int x);
+void	cast_ray(t_raycast *ray, t_game *game, size_t x);
 void	calculate_wall_height(t_raycast *ray, t_game *game);
 void	init_step_dir(t_raycast *ray, t_vec	ray_dir);
 double	left_up(double ppos, double ratio);

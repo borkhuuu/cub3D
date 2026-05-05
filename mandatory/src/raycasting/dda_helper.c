@@ -2,7 +2,7 @@
 #include <math.h>
 #include "../../../libraries/libft/libft.h"
 
-void	cast_ray(t_raycast *ray, t_game *game, int x)
+void	cast_ray(t_raycast *ray, t_game *game, size_t x)
 {
 	ft_memset(ray, 0, sizeof(t_raycast));
 	calculate_ray_dir(ray, &game->player, x);

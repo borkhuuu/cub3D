@@ -70,7 +70,9 @@ BONUS_DEPS = $(BONUS_OBJS:.o=.d)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(MLX) $(LIBFT)
+$(NAME): .mandatory_mode
+
+.mandatory_mode: $(OBJS) $(MLX) $(LIBFT)
 	@rm -f .bonus_mode
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $(NAME)
 	@touch .mandatory_mode

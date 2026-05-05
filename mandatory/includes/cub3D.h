@@ -2,7 +2,7 @@
 # define CUB3D_H
 
 #include <stdbool.h>
-
+#include <stddef.h>
 typedef struct s_game t_game;
 typedef struct s_raycast t_raycast;
 typedef struct s_texture
@@ -15,12 +15,15 @@ typedef struct s_texture
 	int		height;
 	int		width;
 	int		color;
+	bool	valid;
 }	t_texture;
 
 typedef struct s_render
 {
-	int		tex_x;
-	int		tex_y;
+	size_t	x;
+	size_t	y;
+	size_t	tex_x;
+	size_t	tex_y;
 	double	tex_pos;
 	double	step;
 	int		start;
@@ -38,7 +41,7 @@ void	ft_pixel_put(t_game *game, int x, int y, int colour);
 
 /*					render.c				*/
 int		render_player(t_game *game);
-void	draw(t_game *game, t_texture t, int height, int x);
+void	draw(t_game *game, t_texture t, int height, size_t x);
 
 /*					textures.c				*/
 int		load_textures(t_game *game);

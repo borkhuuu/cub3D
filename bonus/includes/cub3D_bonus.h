@@ -1,6 +1,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+#include "vec_bonus.h"
+
 #include <stdbool.h>
 
 typedef struct s_game t_game;
@@ -54,5 +56,5 @@ const char	*skip_whitespaces(char *s);
 bool	is_valid(const char c);
 bool	is_player(const char c);
 bool	is_enemy(const char c);
-
+void	vector_setter(t_vec *v, double x, double y);
 #endif

@@ -34,4 +34,10 @@ void	strerror_wrapper(const int errnum)
 	write(2, err, ft_strlen(err));
 }
 
+void	vector_setter(t_vec *v, double x, double y)
+{
+	v->x = x;
+	v->y = y;
+}
+
 

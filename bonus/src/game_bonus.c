@@ -6,47 +6,43 @@
 #include "../../libraries/mlx/mlx.h"
 #include <X11/X.h>
 
-void	setup_player_vectors(t_player *player)
+void	setup_vectors(t_entity *e)
 {
-	if (player->spawn == 'N')
+	if (e->spawn == 'N')
 	{
-		player->dir.x = 0;
-		player->dir.y = -1;
-		player->camera.x = 0.66;
-		player->camera.y = 0;
+		vector_setter(&e->dir, 0, -1);
+		vector_setter(&e->camera, 0.66, 0);
 	}
-	if (player->spawn == 'S')
+	if (e->spawn == 'S')
 	{
-		player->dir.x = 0;
-		player->dir.y = 1;
-		player->camera.x = -0.66;
-		player->camera.y = 0;
+		vector_setter(&e->dir, 0, 1);
+		vector_setter(&e->camera, -0.66, 0);
 	}
-	if (player->spawn == 'W')
+	if (e->spawn == 'W')
 	{
-		player->dir.x = -1;
-		player->dir.y = 0;
-		player->camera.x = 0;
-		player->camera.y = -0.66;
+		vector_setter(&e->dir, -1, 0);
+		vector_setter(&e->camera, 0, -0.66);
 	}
-	if (player->spawn == 'E')
+	if (e->spawn == 'E')
 	{
-		player->dir.x = 1;
-		player->dir.y = 0;
-		player->camera.x = 0;
-		player->camera.y = 0.66;
+		vector_setter(&e->dir, 1, 0);
+		vector_setter(&e->camera, 0, 0.66);
 	}
 }
 
-int	init_player(t_game *game)
+void	init_player(t_game *game)
 {
-	if (!game)
-		return (0);
 	game->player.pos.x = game->map->player.x + 0.5;
 	game->player.pos.y = game->map->player.y + 0.5;
 	game->player.spawn = game->map->player_dir;
-	setup_player_vectors(&game->player);
-	return (1);	
+	setup_vectors(&game->player);
+}
+
+void	init_enemy(t_game *game)
+{
+	game->enemy.pos.x = game->map->enemy.x + 0.5;
+	game->enemy.pos.y = game->map->enemy.y + 0.5;
+	setup_vectors(&game->enemy);
 }
 
 void	init_color(t_game *game, t_color color_f, t_color color_c)
@@ -81,10 +77,10 @@ int	setup_game(t_map *map)
 	game.map = map;
 	if (!init_mlx(&game))
 		return (0);
-	if (!init_player(&game))
-		return (0);
 	if (!load_textures(&game))
-		return (0);// free_mlx()
+		return (0);
+	init_player(&game);
+	init_enemy(&game);
 	init_color(&game, map->color_f, map->color_c);
 	start_game(&game);
 	return (1);

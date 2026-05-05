@@ -4,7 +4,7 @@
 #include "../../includes/map.h"
 #include <math.h>
 
-void	calculate_ray_dir(t_raycast *ray, t_player *player, int x)
+void	calculate_ray_dir(t_raycast *ray, t_player *player, size_t x)
 {
 	double	camera_x;
 	
@@ -44,7 +44,7 @@ int	raycaster(t_game *game)
 {
 	t_raycast	ray;
 	t_texture	t;
-	int			x;
+	size_t		x;
 	
 	x = 0;
 	while (x < WIDTH)
