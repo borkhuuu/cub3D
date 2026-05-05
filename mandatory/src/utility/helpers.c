@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helpers.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/05 18:49:47 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/05 19:00:56 by boenkhja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3D.h"
 #include "../../../libraries/mlx/mlx.h"
 #include "../../includes/game.h"
@@ -34,4 +46,8 @@ void	strerror_wrapper(const int errnum)
 	write(2, err, ft_strlen(err));
 }
 
-
+void	vector_setter(t_vec *v, double x, double y)
+{
+	v->x = x;
+	v->y = y;
+}

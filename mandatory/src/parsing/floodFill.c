@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   floodFill.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/05 17:28:39 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/05 17:30:41 by boenkhja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../libraries/libft/libft.h"
 #include "../../includes/map.h"
 
@@ -14,7 +26,8 @@ char	**copy_map(t_map *map)
 	{
 		copy[i] = ft_strdup(map->map_arr[i]);
 		if (!copy[i])
-			return (map->err_msg = "Error\nft_strdup in copy_map failed", free_func(NULL, copy), NULL);
+			return (map->err_msg = "Error\nft_strdup in copy_map failed",
+				free_func(NULL, copy), NULL);
 		i++;
 	}
 	return (copy);
@@ -46,7 +59,7 @@ void	get_player_pos(t_map *m)
 	}
 }
 
-int flood_fill(char **map, int x, int y, int height)
+int	flood_fill(char **map, int x, int y, int height)
 {
 	if (y < 0 || y >= height)
 		return (0);
@@ -64,25 +77,17 @@ int flood_fill(char **map, int x, int y, int height)
 	if (!flood_fill(map, x + 1, y, height))
 		return (0);
 	if (!flood_fill(map, x - 1, y, height))
-		return (0);	
+		return (0);
 	return (1);
 }
 
-int validate_map(t_map *map)
+int	check_rem_rooms(char **copy, int height)
 {
-	char	**copy;
-	int		x;
-	int		y;
+	size_t	x;
+	size_t	y;
 
 	y = 0;
-	if (map->player_count != 1)
-		return (map->err_msg = "Error\nPlayer count not exactly 1\n", 0);
-	copy = copy_map(map);
-	if (!copy)
-		return (0);
-	get_player_pos(map);
-	if (!flood_fill(copy, map->player.x, map->player.y, map->map_height))
-		return (map->err_msg = "Error\nFloodfill from player pos failed\n", free_func(NULL, copy), 0);
+	x = 0;
 	while (copy[y])
 	{
 		x = 0;
@@ -90,12 +95,31 @@ int validate_map(t_map *map)
 		{
 			if (copy[y][x] == '0')
 			{
-				if (!flood_fill(copy, x, y, map->map_height))
-					return (map->err_msg = "Error\nFloodfill in independent room failed\n", free_func(NULL, copy), 0);
+				if (!flood_fill(copy, x, y, height))
+					return (0);
 			}
 			x++;
 		}
 		y++;
 	}
+	return (1);
+}
+
+int	validate_map(t_map *map)
+{
+	char	**copy;
+
+	if (map->player_count != 1)
+		return (map->err_msg = "Error\nPlayer count not exactly 1\n", 0);
+	copy = copy_map(map);
+	if (!copy)
+		return (0);
+	get_player_pos(map);
+	if (!flood_fill(copy, map->player.x, map->player.y, map->map_height))
+		return (map->err_msg = "Error\nFloodfill from player pos failed\n",
+			free_func(NULL, copy), 0);
+	if (!check_rem_rooms(copy, map->map_height))
+		return (map->err_msg = "Error\nFloodfill in independent room failed\n",
+			free_func(NULL, copy), 0);
 	return (free_func(NULL, copy), 1);
 }

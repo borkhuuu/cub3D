@@ -1,22 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helper.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/05 19:59:32 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/05 19:59:33 by boenkhja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/map.h"
 #include "../../../libraries/libft/libft.h"
 #include <stdlib.h>
 
-void    free_func(t_map *map, char **arr)
+void	free_paths(t_map *map)
 {
-	int i;
+	if (map->path_no)
+	{
+		free(map->path_no);
+		map->path_no = NULL;
+	}
+	if (map->path_so)
+	{
+		free(map->path_so);
+		map->path_so = NULL;
+	}
+	if (map->path_we)
+	{
+		free(map->path_we);
+		map->path_we = NULL;
+	}
+	if (map->path_ea)
+	{
+		free(map->path_ea);
+		map->path_ea = NULL;
+	}
+}
 
-	i = 0;
-	while (arr && arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	if (arr)
-	{
-		free(arr);
-		arr = NULL;
-	}
+void	free_func(t_map *map, char **arr)
+{
+	ft_free_arr(arr);
 	if (map)
 	{
 		if (map->line)
@@ -24,26 +48,7 @@ void    free_func(t_map *map, char **arr)
 			free(map->line);
 			map->line = NULL;
 		}
-		if (map->path_no)
-		{
-			free(map->path_no);
-			map->path_no = NULL;
-		}
-		if (map->path_so)
-		{
-			free(map->path_so);
-			map->path_so = NULL;
-		}
-		if (map->path_we)
-		{
-			free(map->path_we);
-			map->path_we = NULL;
-		}
-		if (map->path_ea)
-		{
-			free(map->path_ea);
-			map->path_ea = NULL;
-		}
+		free_paths(map);
 	}
 }
 
@@ -78,7 +83,7 @@ const char	*skip_whitespaces(const char *s)
 	int	i;
 
 	i = 0;
-	while (s[i] && s[i] >= 9 && s[i] <= 13)
+	while (s[i] && (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13)))
 		i++;
 	return (&s[i]);
 }

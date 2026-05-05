@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/05 18:21:58 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/05 18:21:59 by boenkhja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../libraries/libft/libft.h"
 #include "../../includes/map.h"
 #include "../../includes/cub3D.h"
 #include <stdbool.h>
 
-int	validateCharacters(t_map *map, const char *s)
+int	validate_characters(t_map *map, const char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (s[i] && (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13)))
+	while (s[i] && ft_iswspace(s[i]))
 		i++;
 	if (!s[i])
 		return (0);
@@ -30,7 +42,7 @@ void	align_line(char **str)
 {
 	char	*s;
 	char	*tmp;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	if (!str || !*str)
@@ -59,11 +71,14 @@ int	parse_map(t_map *map)
 
 	if (!validate_line(map->line))
 		return (1);
-	if (!validateCharacters(map, map->line))
-		return (map->err_msg = "Error\nInvalid character found somewhere?!\n", 0);
-	tmp = ft_realloc(map->map_arr, (map->map_height) * sizeof(char *),(map->map_height + 2) * sizeof(char *));
+	if (!validate_characters(map, map->line))
+		return (map->err_msg
+			= "Error\nInvalid character found somewhere?!\n", 0);
+	tmp = ft_realloc(map->map_arr, (map->map_height)
+			* sizeof(char *), (map->map_height + 2) * sizeof(char *));
 	if (!tmp)
-		return (map->err_msg = "Error\nreallocation/growing of map_arr failed\n", 0);
+		return (map->err_msg
+			= "Error\nreallocation/growing of map_arr failed\n", 0);
 	map->map_arr = tmp;
 	align_line(&map->line);
 	s = ft_strdup(map->line);

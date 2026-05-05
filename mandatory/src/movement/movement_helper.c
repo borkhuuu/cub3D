@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement_helper.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/05 16:46:55 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/05 16:49:14 by boenkhja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/game.h"
 #include "../../includes/map.h"
 #include <math.h>
@@ -11,13 +23,17 @@ void	rotate(t_game *game, int dir)
 	if (dir == 0)
 		rot_angle = -ROT_ANGLE;
 	else
-	 	rot_angle = ROT_ANGLE;
+		rot_angle = ROT_ANGLE;
 	old_player_x = game->player.dir.x;
 	old_camera_x = game->player.camera.x;
-	game->player.dir.x = game->player.dir.x * cos(rot_angle) - game->player.dir.y * sin(rot_angle);
-	game->player.dir.y = old_player_x * sin(rot_angle) + game->player.dir.y * cos(rot_angle);
-	game->player.camera.x = game->player.camera.x * cos(rot_angle) - game->player.camera.y * sin(rot_angle);
-	game->player.camera.y = old_camera_x * sin(rot_angle) + game->player.camera.y * cos(rot_angle);
+	game->player.dir.x = game->player.dir.x * cos(rot_angle)
+		- game->player.dir.y * sin(rot_angle);
+	game->player.dir.y = old_player_x * sin(rot_angle)
+		+ game->player.dir.y * cos(rot_angle);
+	game->player.camera.x = game->player.camera.x * cos(rot_angle)
+		- game->player.camera.y * sin(rot_angle);
+	game->player.camera.y = old_camera_x * sin(rot_angle)
+		+ game->player.camera.y * cos(rot_angle);
 }
 
 void	forward(t_game *game)
@@ -87,5 +103,3 @@ void	right(t_game *game)
 			&& map[(int)(new_y - PADDING)][(int)game->player.pos.x] != '1')
 		game->player.pos.y = new_y;
 }
-
-

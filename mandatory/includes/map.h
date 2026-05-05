@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/05 19:47:46 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/05 19:47:47 by boenkhja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MAP_H
 # define MAP_H
 
@@ -5,18 +17,18 @@
 # include "color.h"
 # include <stdbool.h>
 
-#define TEXTURE 't'
+# define TEXTURE 't'
 
 typedef struct s_map
 {
-	t_vec 	player;
+	t_vec	player;
 	char	player_dir;
 	int		player_count;
 	char	**map_arr;
 	char	*line;
 	char	*err_msg;
-	int 	map_fd;
-	int 	map_height;
+	int		map_fd;
+	int		map_height;
 	bool	in_map;
 	char	*path_no;
 	char	*path_so;
@@ -29,7 +41,7 @@ typedef struct s_map
 /*				parsing/parse.c				*/
 int		parse_paths(t_map *map);
 int		handle_id(t_map *map, char **arr);
-bool    missing_path(t_map *map);
+bool	missing_path(t_map *map);
 
 /*              parsing/paths.c             */
 int		handle_path(t_map *map, char **map_path, char *path, char type);
@@ -44,7 +56,7 @@ void	save_rgb(t_color *color);
 /*				parsing/map.c				*/
 int		parse_map(t_map *map);
 void	align_line(char **str);
-int		validateCharacters(t_map *map, const char *s);
+int		validate_characters(t_map *map, const char *s);
 
 /*				parsing/floodFill.c			*/
 int		validate_map(t_map *map);

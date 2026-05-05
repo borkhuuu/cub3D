@@ -28,6 +28,7 @@ SOURCES = mandatory/src/main.c\
 		  mandatory/src/parsing/floodFill.c\
 		  mandatory/src/utility/helpers.c\
 		  mandatory/src/utility/parse_helpers.c\
+		  mandatory/src/utility/setup.c\
 
 HEADERS = mandatory/includes/cub3D.h \
 		  mandatory/includes/game.h \

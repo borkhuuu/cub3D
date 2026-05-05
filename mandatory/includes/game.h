@@ -1,15 +1,30 @@
-#ifndef GAME_H
-#define GAME_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/05 19:49:45 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/05 19:49:46 by boenkhja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-# define WIDTH ((size_t)1600U) 
-# define HEIGHT ((size_t)900U)
+#ifndef GAME_H
+# define GAME_H
+
+# define WIDTH 1600
+# define HEIGHT 900
 # define SPEED 0.1 
 # define ROT_ANGLE 0.03
 # define PADDING 0.1
-#include "vec.h"
-#include "cub3D.h"
-#include <stdbool.h>
-typedef struct s_map t_map;
+# include "vec.h"
+# include "cub3D.h"
+# include "color.h"
+# include <stdbool.h>
+
+typedef struct s_map	t_map;
+
 typedef struct s_player
 {
 	t_vec	pos;
@@ -70,6 +85,10 @@ typedef struct s_game
 int		start_game(t_game *game);
 int		setup_game(t_map *map);
 
+/*					setup.c					*/
+void	setup_player_vectors(t_player *player);
+void	init_player(t_game *game);
+void	init_color(t_game *game, t_color color_f, t_color color_c);
 /*					dda.c					*/
 
 int		raycaster(t_game *game);

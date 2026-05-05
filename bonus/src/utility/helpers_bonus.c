@@ -39,5 +39,3 @@ void	vector_setter(t_vec *v, double x, double y)
 	v->x = x;
 	v->y = y;
 }
-
-

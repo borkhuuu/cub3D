@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   paths.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/05 19:54:38 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/05 19:54:49 by boenkhja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/map.h"
 #include "../../../libraries/libft/libft.h"
 #include "../../includes/cub3D.h"
@@ -12,7 +24,7 @@ int	validate_line(const char *s)
 		return (0);
 	first = first_char(s);
 	if (!first || first == '\n')
-		return (0); //skip if line is empty or only has newline
+		return (0);
 	return (1);
 }
 
@@ -32,10 +44,8 @@ int	check_extension(t_map *map, const char *path, const char *ext)
 
 int	validate_path(t_map *map, char *path, char *ext)
 {
-	int		i;
 	int		fd;
 
-	i = 0;
 	if (!path)
 		return (map->err_msg = "Error\nPath is non existent\n", 0);
 	fd = open(path, O_RDONLY);

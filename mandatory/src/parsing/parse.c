@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/05 18:25:56 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/05 18:36:51 by boenkhja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/map.h"
 #include "../../../libraries/libft/libft.h"
 
@@ -38,8 +50,8 @@ int	parse_paths(t_map *map)
 		return (1);
 	remove_nl(arr);
 	if (!ft_strcmp(arr[0], "NO") || !ft_strcmp(arr[0], "SO")
-			|| !ft_strcmp(arr[0], "WE") || !ft_strcmp(arr[0], "EA")
-			|| !ft_strcmp(arr[0], "F") || !ft_strcmp(arr[0], "C"))
+		|| !ft_strcmp(arr[0], "WE") || !ft_strcmp(arr[0], "EA")
+		|| !ft_strcmp(arr[0], "F") || !ft_strcmp(arr[0], "C"))
 	{
 		if (!handle_id(map, arr))
 			return (free_func(NULL, arr), 0);
@@ -52,10 +64,11 @@ int	parse_paths(t_map *map)
 	return (1);
 }
 
-bool    missing_path(t_map *map)
+bool	missing_path(t_map *map)
 {
 	if (!map->path_no || !map->path_so || !map->path_we
 		|| !map->path_ea || !map->color_f.set || !map->color_c.set)
-		return (map->err_msg = "Error\nA path or color is missing/misconfigured or map is not last\n", true);
+		return (map->err_msg = "Error\nA path or color is missing/misconfigured"
+			" or map is not last\n", true);
 	return (false);
 }

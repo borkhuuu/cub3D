@@ -1,7 +1,7 @@
-NO maps/textures/ea_texture
-WE maps/textures/no_texture
-EA maps/textures/so_texture
-SO maps/textures/we_texture
+NO maps/textures/ea_texture.xpm
+WE maps/textures/no_texture.xpm
+EA maps/textures/so_texture.xpm
+SO maps/textures/we_texture.xpm
 
 F 220,100,0
 C 225,30,0

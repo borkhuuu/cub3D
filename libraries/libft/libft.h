@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:17:07 by boenkhja          #+#    #+#             */
-/*   Updated: 2025/05/05 15:17:52 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/05 17:34:53 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+#include <stdbool.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 99
@@ -49,6 +50,7 @@ int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
+bool	ft_iswspace(char c);
 char	*ft_itoa(int n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
