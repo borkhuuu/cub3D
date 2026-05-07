@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 14:15:31 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/07 14:15:54 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/07 16:00:45 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ void	init_enemy(t_game *game)
 {
 	vector_setter(&game->enemy.pos,
 		game->map->enemy.x + 0.5, game->map->enemy.y + 0.5);
-	game->enemy.spawn = 'N';
-	setup_vectors(&game->enemy);
+	vector_setter(&game->enemy.dir, 0, -1);
 }
 
 void	init_color(t_game *game, t_color color_f, t_color color_c)

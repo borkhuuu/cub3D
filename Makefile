@@ -46,6 +46,7 @@ BONUS_SOURCES = bonus/src/main_bonus.c\
 		  bonus/src/graphics/init_mlx_bonus.c\
 		  bonus/src/graphics/render_bonus.c\
 		  bonus/src/graphics/textures_bonus.c\
+		  bonus/src/graphics/monster_bonus.c\
 		  bonus/src/raycasting/dda_bonus.c\
 		  bonus/src/raycasting/dda_helper_bonus.c\
 		  bonus/src/movement/movement_bonus.c\

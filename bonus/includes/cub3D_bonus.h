@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 13:58:35 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/07 14:15:02 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/07 17:38:40 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 #include "vec_bonus.h"
 #include "color_bonus.h"
 #include <stdbool.h>
+#include <stddef.h>
 
 typedef struct s_game t_game;
 typedef struct s_raycast t_raycast;
+typedef struct s_entity t_entity;
 typedef struct s_texture
 {
 	void	*ptr_to_img;
@@ -34,12 +36,18 @@ typedef struct s_texture
 
 typedef struct s_render
 {
-	int		tex_x;
-	int		tex_y;
+	size_t	tex_x;
+	size_t	tex_y;
+	size_t	m_center;
+	double	ratio;
 	double	tex_pos;
 	double	step;
+	int		s_height;
+	int		s_width;
 	int		start;
 	int		end;
+	int		v_start;
+	int		v_end;
 
 }	t_render;
 
@@ -54,6 +62,10 @@ void	ft_pixel_put(t_game *game, int x, int y, int colour);
 /*					render.c				*/
 int		render_player(t_game *game);
 void	draw(t_game *game, t_texture t, int height, int x);
+
+/*					monster.c				*/
+void	draw_monster(t_game *game, t_texture t);
+t_vec	trans_to_cam_space(t_game *game, t_entity p);
 
 /*					textures.c				*/
 int		load_textures(t_game *game);

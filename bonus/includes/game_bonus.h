@@ -9,6 +9,7 @@
 #include "vec_bonus.h"
 #include "cub3D_bonus.h"
 #include <stdbool.h>
+#include <stddef.h>
 typedef struct s_map t_map;
 typedef struct s_entity
 {
@@ -17,6 +18,13 @@ typedef struct s_entity
 	t_vec	camera;
 	char	spawn;
 }	t_entity;
+
+typedef struct s_enemy
+{
+	t_vec	pos;
+	t_vec	dir;
+	t_vec	camera;
+}	t_enemy;
 
 typedef struct s_image
 {
@@ -61,7 +69,8 @@ typedef struct s_game
 	void		*connection;
 	void		*window;
 	t_entity	player;
-	t_entity	enemy;
+	t_enemy		enemy;
+	double		pdist_buffer[WIDTH];
 	t_movement	movement;
 	int			color_f;
 	int			color_c;
@@ -76,10 +85,10 @@ int		setup_game(t_map *map);
 int		raycaster(t_game *game);
 void	calculate_delta_dist(t_raycast *ray);
 void	calculate_side_dist(t_raycast *ray, t_entity *player);
-void	calculate_ray_dir(t_raycast *ray, t_entity *player, int x);
+void	calculate_ray_dir(t_raycast *ray, t_entity *player, size_t x);
 
 /*					dda_helper.c			*/
-void	cast_ray(t_raycast *ray, t_game *game, int x);
+void	cast_ray(t_raycast *ray, t_game *game, size_t x);
 void	calculate_wall_height(t_raycast *ray, t_game *game);
 void	init_step_dir(t_raycast *ray, t_vec	ray_dir);
 double	left_up(double ppos, double ratio);
