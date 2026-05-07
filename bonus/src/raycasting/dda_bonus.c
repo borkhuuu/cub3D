@@ -4,7 +4,7 @@
 #include "../../includes/map_bonus.h"
 #include <math.h>
 
-void	calculate_ray_dir(t_raycast *ray, t_player *player, int x)
+void	calculate_ray_dir(t_raycast *ray, t_entity *player, int x)
 {
 	double	camera_x;
 	
@@ -13,7 +13,7 @@ void	calculate_ray_dir(t_raycast *ray, t_player *player, int x)
 	ray->ray_dir.y = player->dir.y + player->camera.y * camera_x;
 }
 
-void	calculate_side_dist(t_raycast *ray, t_player *player)
+void	calculate_side_dist(t_raycast *ray, t_entity *player)
 {
 	double	frac_x;
 	double	frac_y;
