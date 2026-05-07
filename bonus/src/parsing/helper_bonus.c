@@ -44,6 +44,11 @@ void    free_func(t_map *map, char **arr)
 			free(map->path_ea);
 			map->path_ea = NULL;
 		}
+		if (map->path_m)
+		{
+			free(map->path_m);
+			map->path_m = NULL;
+		}
 	}
 }
 

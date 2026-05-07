@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/07 13:58:35 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/07 14:15:02 by boenkhja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
 #include "vec_bonus.h"
-
+#include "color_bonus.h"
 #include <stdbool.h>
 
 typedef struct s_game t_game;
@@ -17,6 +29,7 @@ typedef struct s_texture
 	int		height;
 	int		width;
 	int		color;
+	bool	valid;
 }	t_texture;
 
 typedef struct s_render
@@ -57,4 +70,7 @@ bool	is_valid(const char c);
 bool	is_player(const char c);
 bool	is_enemy(const char c);
 void	vector_setter(t_vec *v, double x, double y);
+void	init_player(t_game *game);
+void	init_enemy(t_game *game);
+void	init_color(t_game *game, t_color color_f, t_color color_c);
 #endif

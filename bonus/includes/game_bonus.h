@@ -55,7 +55,7 @@ typedef struct s_raycast
 typedef struct s_game
 {
 	t_map		*map;
-	t_texture	textures[4];
+	t_texture	textures[5];
 	t_raycast	ray;
 	t_image		image;
 	void		*connection;

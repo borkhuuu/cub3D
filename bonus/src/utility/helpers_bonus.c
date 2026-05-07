@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helpers_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/07 14:02:43 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/07 14:02:43 by boenkhja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3D_bonus.h"
 #include "../../../libraries/mlx/mlx.h"
 #include "../../includes/game_bonus.h"
@@ -14,6 +26,8 @@ void	free_textures(t_game *game, t_texture textures[4])
 		mlx_destroy_image(game->connection, textures[2].ptr_to_img);
 	if (textures[3].ptr_to_img)
 		mlx_destroy_image(game->connection, textures[3].ptr_to_img);
+	if (textures[4].ptr_to_img)
+		mlx_destroy_image(game->connection, textures[4].ptr_to_img);
 }
 
 int	get_arr_size(char **arr)

@@ -12,7 +12,7 @@ int	validate_line(const char *s)
 		return (0);
 	first = first_char(s);
 	if (!first || first == '\n')
-		return (0); //skip if line is empty or only has newline
+		return (0);
 	return (1);
 }
 
@@ -49,6 +49,8 @@ int	validate_path(t_map *map, char *path, char *ext)
 
 int	handle_path(t_map *map, char **map_path, char *path, char type)
 {
+	if (!map_path)
+		return (0);
 	if (!validate_path(map, path, ".xpm"))
 		return (0);
 	if (*map_path)
@@ -61,6 +63,8 @@ int	handle_path(t_map *map, char **map_path, char *path, char type)
 			map->err_msg = "Error\nDuplicate WE texture path\n";
 		else if (type == 'E')
 			map->err_msg = "Error\nDuplicate EA texture path\n";
+		else if (type == 'M')
+			map->err_msg = "Error\nDuplicate M texture path\n";
 		return (0);
 	}
 	*map_path = ft_strdup(path);

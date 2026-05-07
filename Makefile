@@ -58,6 +58,7 @@ BONUS_SOURCES = bonus/src/main_bonus.c\
 		  bonus/src/parsing/floodFill_bonus.c\
 		  bonus/src/utility/helpers_bonus.c\
 		  bonus/src/utility/parse_helpers_bonus.c\
+		  bonus/src/utility/setup_bonus.c\
 
 HEADERS = bonus/includes/cub3D_bonus.h \
 		  bonus/includes/game_bonus.h \

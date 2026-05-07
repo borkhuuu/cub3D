@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_bonus.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/07 13:24:23 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/07 13:51:14 by boenkhja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/map_bonus.h"
 #include "../../../libraries/libft/libft.h"
 
@@ -16,6 +28,9 @@ int	handle_id(t_map *map, char **arr)
 			return (0);
 	if (!ft_strcmp(arr[0], "EA"))
 		if (!handle_path(map, &map->path_ea, arr[1], 'E'))
+			return (0);
+	if (!ft_strcmp(arr[0], "M"))
+		if (!handle_path(map, &map->path_m, arr[1], 'M'))
 			return (0);
 	if (!ft_strcmp(arr[0], "F"))
 		if (!handle_color(map, &map->color_f, &arr[1], 'F'))
@@ -38,8 +53,9 @@ int	parse_paths(t_map *map)
 		return (1);
 	remove_nl(arr);
 	if (!ft_strcmp(arr[0], "NO") || !ft_strcmp(arr[0], "SO")
-			|| !ft_strcmp(arr[0], "WE") || !ft_strcmp(arr[0], "EA")
-			|| !ft_strcmp(arr[0], "F") || !ft_strcmp(arr[0], "C"))
+		|| !ft_strcmp(arr[0], "WE") || !ft_strcmp(arr[0], "EA")
+		|| !ft_strcmp(arr[0], "F") || !ft_strcmp(arr[0], "C")
+		|| !ft_strcmp(arr[0], "M"))
 	{
 		if (!handle_id(map, arr))
 			return (free_func(NULL, arr), 0);
@@ -52,10 +68,11 @@ int	parse_paths(t_map *map)
 	return (1);
 }
 
-bool    missing_path(t_map *map)
+bool	missing_path(t_map *map)
 {
-	if (!map->path_no || !map->path_so || !map->path_we
-		|| !map->path_ea || !map->color_f.set || !map->color_c.set)
-		return (map->err_msg = "Error\nA path or color is missing/misconfigured or map is not last\n", true);
+	if (!map->path_no || !map->path_so || !map->path_we || !map->path_ea
+		|| !map->color_f.set || !map->color_c.set || !map->path_m)
+		return (map->err_msg = "Error\nA path or color is missing/"
+			"misconfigured or map is not last\n", true);
 	return (false);
 }
