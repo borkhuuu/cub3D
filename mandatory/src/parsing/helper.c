@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:59:32 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/05 19:59:33 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/11 23:59:36 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ void	free_func(t_map *map, char **arr)
 	ft_free_arr(arr);
 	if (map)
 	{
+		if (map->map_fd != -1)
+		{
+			close(map->map_fd);
+			map->map_fd = -1;
+		}
 		if (map->line)
 		{
 			free(map->line);

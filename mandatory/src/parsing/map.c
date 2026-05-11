@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 18:21:58 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/05 18:21:59 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/11 18:38:25 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,43 @@ int	validate_characters(t_map *map, const char *s)
 	return (1);
 }
 
-void	align_line(char **str)
+char	*replace_tabs(char *line)
 {
-	char	*s;
 	char	*tmp;
 	size_t	i;
 
 	i = 0;
-	if (!str || !*str)
-		return ;
-	s = *str;
-	while (s[i])
+	while (line[i])
 	{
-		if (s[i] == '\t')
+		if (line[i] == '\t')
 		{
-			ft_memset(&s[i], ' ', 1);
-			s = ft_realloc(s, ft_strlen(s), ft_strlen(s) + 4);
-			tmp = ft_strjoin("   ", s);
-			free(s);
-			s = tmp;
+			line[i] = ' ';
+			line = ft_realloc(line, ft_strlen(line), ft_strlen(line) + 4);
+			if (!line)
+				return (NULL);
+			tmp = ft_strjoin("   ", line);
+			if (!tmp)
+				return (line);
+			free(line);
+			line = tmp;
 			i += 3;
 		}
 		i++;
 	}
-	*str = s;
+	return (line);
+}
+
+int	align_line(char **line)
+{
+	char	*res;
+
+	if (!line || !*line)
+		return (0);
+	res = replace_tabs(*line);
+	if (!res)
+		return (0);
+	*line = res;
+	return (1);
 }
 
 int	parse_map(t_map *map)
@@ -70,7 +83,7 @@ int	parse_map(t_map *map)
 	char	*s;
 
 	if (!validate_line(map->line))
-		return (1);
+		return (map->err_msg = "Error\nEmpty line in map\n", 0);
 	if (!validate_characters(map, map->line))
 		return (map->err_msg
 			= "Error\nInvalid character found somewhere?!\n", 0);
@@ -80,7 +93,8 @@ int	parse_map(t_map *map)
 		return (map->err_msg
 			= "Error\nreallocation/growing of map_arr failed\n", 0);
 	map->map_arr = tmp;
-	align_line(&map->line);
+	if (!align_line(&map->line))
+		return (map->err_msg = "Error\nalign_line failed\n", 0);
 	s = ft_strdup(map->line);
 	if (!s)
 		return (map->err_msg = "Error\nft_strdup in parse_map failed\n", 0);

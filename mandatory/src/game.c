@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:53:54 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/05 19:53:54 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/11 23:59:06 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int	setup_game(t_map *map)
 
 	ft_memset(&game, 0, sizeof(t_game));
 	game.map = map;
-	if (!init_mlx(&game))
-		return (0);
+	init_mlx(&game);
 	if (!load_textures(&game))
 		return (0);
 	init_player(&game);

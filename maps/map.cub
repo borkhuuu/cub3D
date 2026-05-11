@@ -1,7 +1,7 @@
-NO ./maps/texture/ea_texture
-WE ./maps/texture/no_texture
-EA ./maps/texture/ea_texture
-SO ./maps/texture/so_texture
+NO ./maps/texture/ea_texture.xpm
+WE ./maps/texture/no_texture.xpm
+EA ./maps/texture/ea_texture.xpm
+SO ./maps/texture/so_texture.xpm
 
 F 220,100,00
 C 225,30,0

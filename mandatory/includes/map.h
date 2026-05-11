@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:47:46 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/05 19:47:47 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/11 18:58:21 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_map
 	char	*line;
 	char	*err_msg;
 	int		map_fd;
+	int		invalid_fd;
 	int		map_height;
 	bool	in_map;
 	char	*path_no;
@@ -55,7 +56,7 @@ void	save_rgb(t_color *color);
 
 /*				parsing/map.c				*/
 int		parse_map(t_map *map);
-void	align_line(char **str);
+int		align_line(char **str);
 int		validate_characters(t_map *map, const char *s);
 
 /*				parsing/floodFill.c			*/

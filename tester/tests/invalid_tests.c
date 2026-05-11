@@ -240,16 +240,6 @@ Test(invalid, multiple_map_args_in_one_arg)
 	printf("Test: multiple_map_args_in_one_arg passed ✅\n");
 }
 
-Test(invalid, spaces_in_xpm_file)
-{
-	t_result	res;
-	char *args[] = {"maps/invalid/spaces_in_xpm_file.cub", NULL};
-	res = run_cub3d(args);
-
-	check_invalid(res);
-	printf("Test: spaces_in_xpm_file passed ✅\n");
-}
-
 Test(invalid, extra_commas_in_colour)
 {
 	t_result	res;

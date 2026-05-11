@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 17:19:32 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/05 17:35:18 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/11 17:11:51 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	process_color(char *color)
 	i = 0;
 	if (!color)
 		return (0);
-	while (color[i] && ft_iswspace(color[i]))
+	while ((color[i] && ft_iswspace(color[i])) || (color[i] && ft_isdigit(color[i])))
 		i++;
 	while (color[i] && ft_isdigit(color[i]))
 		i++;
@@ -87,8 +87,10 @@ int	count_comma(const char *line)
 int	handle_color(t_map *map, t_color *color, char **rgb, char type)
 {
 	char	*line;
-
+	
 	line = ft_catcat(rgb);
+	if (!line)
+    	return (map->err_msg = "Error\nMalloc failed in ft_catcat\n", 0);
 	if (count_comma(line) != 2)
 		return (free(line), map->err_msg = "Error\nComma count not 2", 0);
 	if (!validate_color(map, color, line))

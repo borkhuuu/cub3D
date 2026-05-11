@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 12:59:12 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/05 14:00:35 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/12 00:00:29 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,24 +67,31 @@ int	key_handler(int keycode, t_game *game)
 	return (0);
 }
 
-int	init_mlx(t_game *game)
+void	init_mlx(t_game *game)
 {
 	game->connection = mlx_init();
 	if (!game->connection)
-		return (game->map->err_msg = "Error\nmlx_init has failed\n",
-			mlx_cleanup(game), 0);
+	{
+		game->map->err_msg = "Error\nmlx_init has failed\n";
+		mlx_cleanup(game);
+	}
 	game->window = mlx_new_window(game->connection, WIDTH, HEIGHT, "cub3D");
 	if (!game->window)
-		return (game->map->err_msg = "Error\nmlx_new_window has failed\n",
-			mlx_cleanup(game), 0);
+	{
+		game->map->err_msg = "Error\nmlx_new_window has failed\n";
+		mlx_cleanup(game);
+	}
 	game->image.ptr_to_img = mlx_new_image(game->connection, WIDTH, HEIGHT);
 	if (!game->image.ptr_to_img)
-		return (game->map->err_msg = "Error\nmlx_new_image has failed\n",
-			mlx_cleanup(game), 0);
+	{
+		game->map->err_msg = "Error\nmlx_new_image has failed\n";
+		mlx_cleanup(game);
+	}
 	game->image.ptr_to_pixel = mlx_get_data_addr(game->image.ptr_to_img,
 			&game->image.bpp, &game->image.line_len, &game->image.endian);
 	if (!game->image.ptr_to_pixel)
-		return (game->map->err_msg = "Error\nmlx_get_data_addr has failed\n",
-			mlx_cleanup(game), 0);
-	return (1);
+	{
+		game->map->err_msg = "Error\nmlx_get_data_addr has failed\n";
+		mlx_cleanup(game);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 02:59:33 by boenkhja          #+#    #+#             */
-/*   Updated: 2025/05/28 12:32:02 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/11 23:31:43 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	read_line(char **store, char *buffer, int fd)
 	return (0);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int *fd)
 {
 	static char	*store;
 	char		*new_line;
@@ -78,51 +78,43 @@ char	*get_next_line(int fd)
 	int			ret;
 
 	buffer = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (*fd < 0 || BUFFER_SIZE <= 0)
 		return (free(store), NULL);
-	ret = read_line(&store, buffer, fd);
+	ret = read_line(&store, buffer, *fd);
 	if (store == NULL || ret == -1)
-		return (free(store), store = NULL, NULL);
+		return (free(store), store = NULL, close(*fd), *fd = -1, NULL);
 	new_line = fetch_line(store);
 	if (new_line == NULL)
 		return (NULL);
 	else if (store[0] == '\0' && new_line[0] == '\0')
-		return (free(store), free(new_line), store = NULL, NULL);
+		return (free(store), free(new_line), store = NULL, close(*fd), *fd = -1, NULL);
 	else
 		store = fetch_rest(store);
 	if (ret == 2)
 	{
 		free(store);
-		store = NULL;
+		close(*fd);
+		*fd = -1;
 	}
 	return (new_line);
 }
-
-// #include <fcntl.h>
-// #include <unistd.h>
-// #include <stdio.h>
-// #include <stdlib.h>
-
-// int main(void)
-// {
-//     int fd = open("get_next_line.h", O_RDONLY);
-//     char    *newl = "";
-//     int i = 0;
-//     // newl = get_next_line(fd);
-//     // printf("line is: %s\n", newl);
-//     // free(newl);
-//     // newl = get_next_line(fd);
-//     // printf("%s\n", newl);
-//   //  free(newl);
-//     while (newl != NULL)
-//     {
-//         newl = get_next_line(fd);
-//         printf("line is: %s\n", newl);
-//         free(newl);
-//         if (i == 4)
-//             fd = 42;
-//         i++;
-//     }
-//     close(fd);
-//     return 0;
-// }
+ //
+ // #include <fcntl.h>
+ // #include <unistd.h>
+ // #include <stdio.h>
+ // #include <stdlib.h>
+ //
+ // int main(void)
+ // {
+ //     int fd = open("Makefile", O_RDONLY);
+ //     char	*line;
+ //  while ((line = get_next_line(&fd)) != NULL)
+ //  {
+ // 	 printf("%s\n", line);
+ // 	 free(line);
+ //  }
+ //  int	invalid = -1;
+ //  get_next_line(&invalid);
+ //  close(fd);
+ //     return 0;
+ // }

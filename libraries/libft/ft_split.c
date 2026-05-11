@@ -6,45 +6,12 @@
 /*   By: boenkhja <boenkhja@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:38:39 by boenkhja          #+#    #+#             */
-/*   Updated: 2025/05/06 19:34:36 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/11 17:11:16 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-/*
-static int	my_strlen(char const *str)
-{
-	int	i;
 
-	i = 0;
-	while (str[i] != 0)
-		i++;
-	return (i);
-}
-
-static void	*my_calloc(size_t nmemb, size_t size)
-{
-	void	*res;
-	size_t	i;
-
-	i = 0;
-	res = NULL;
-	if (nmemb == 0 || size == 0)
-	{
-		res = (void *)malloc(0);
-		return (res);
-	}
-	res = (void *)malloc(nmemb * size);
-	if (res == NULL)
-		return (NULL);
-	while (i < nmemb * size)
-	{
-		((char *)res)[i] = 0;
-		i++;
-	}
-	return (res);
-}
-*/
 static char	*my_strdup(char const *str, char c)
 {
 	int		i;
@@ -109,7 +76,10 @@ static char	**helper(char **res, const char *s, char c)
 	while (s[i] == c)
 		i++;
 	if (s[i] != '\0')
-		res[j++] = my_strdup(&s[i], c);
+		res[j] = my_strdup(&s[i], c);
+	if (!res[j])
+		return (freefunc(res, j), NULL);
+	j++;
 	while (s[i] != 0)
 	{
 		if (s[i] == c && s[i + 1] != c && s[i + 1] != 0)
@@ -143,22 +113,3 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	return (res);
 }
-/*
-#include <string.h>
-int	main(void)
-{
-	char	**s1;
-	int	i = 0;
-	//char	*l = NULL;
-	if (!(s1 = ft_split("", ' ')))
-		printf("fuck");
-	else
-		while (s1[i] != NULL)
-		{
-			printf("%s", s1[i]);
-			printf("\n");
-			i++;
-		}
-	//printf("%s\n", l);
-	return 0;
-}*/

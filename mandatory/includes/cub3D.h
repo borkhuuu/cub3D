@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:51:46 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/05 19:51:47 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/11 23:57:39 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_render
 
 /*					init_mlx.c				*/
 
-int			init_mlx(t_game *game);
+void		init_mlx(t_game *game);
 int			key_handler(int keycode, t_game *game);
 int			x_window(void *param);
 void		mlx_cleanup(t_game *game);

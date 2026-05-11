@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:17:07 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/05 17:34:53 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/11 18:55:45 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-char	*get_next_line(int fd);
+char	*get_next_line(int *fd);
 size_t	newl_strlen(char *store);
 int		newl_check(char *buffer);
 char	*fetch_rest(char *store);

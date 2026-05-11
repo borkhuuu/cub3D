@@ -129,3 +129,33 @@ Test(valid, rectangular_map)
 	check_valid(res);
 	printf("Test: rectangular_map passed ✅\n");
 }
+
+Test(valid, space_in_filename)
+{
+	t_result	res;
+	char *args[] = {"maps/valid/space in filename.cub", NULL};
+	res = run_cub3d(args);
+
+	check_valid(res);
+	printf("Test: space_in_filename passed ✅\n");
+}
+
+Test(valid, space_in_texture)
+{
+	t_result	res;
+	char *args[] = {"maps/valid/space_in_texture.cub", NULL};
+	res = run_cub3d(args);
+
+	check_valid(res);
+	printf("Test: space_in_texture passed ✅\n");
+}
+
+Test(valid, diagonal_wall_edge)
+{
+	t_result	res;
+	char *args[] = {"maps/valid/diagonal_wall_edge.cub", NULL};
+	res = run_cub3d(args);
+
+	check_valid(res);
+	printf("Test: diagonal_wall_edge passed ✅\n");
+}

@@ -50,4 +50,7 @@ for invalid:
 make invalid
 ```
 
+> Note: The tester assumes that hidden file with valid ".cub" extension are valid and that filename with spaces are allowed. \
+> Since the subject doesnt specify they are up to you to handle, but make sure you can defend your desicion during the evaluation of the project.
+
 Good luck with the project!

@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:54:38 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/05 19:54:49 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/12 00:21:00 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int	validate_line(const char *s)
 {
 	char	first;
-
+	
 	if (!s)
 		return (0);
 	first = first_char(s);
@@ -45,7 +45,7 @@ int	check_extension(t_map *map, const char *path, const char *ext)
 int	validate_path(t_map *map, char *path, char *ext)
 {
 	int		fd;
-
+	
 	if (!path)
 		return (map->err_msg = "Error\nPath is non existent\n", 0);
 	fd = open(path, O_RDONLY);
