@@ -24,11 +24,13 @@ SOURCES = mandatory/src/main.c\
 		  mandatory/src/parsing/paths.c\
 		  mandatory/src/parsing/color.c\
 		  mandatory/src/parsing/map.c\
-		  mandatory/src/parsing/helper.c\
 		  mandatory/src/parsing/floodFill.c\
 		  mandatory/src/utility/helpers.c\
 		  mandatory/src/utility/parse_helpers.c\
 		  mandatory/src/utility/setup.c\
+		  mandatory/src/utility/memory.c\
+		  mandatory/src/utility/checks.c\
+		  mandatory/src/utility/whitespaces.c\
 
 HEADERS = mandatory/includes/cub3D.h \
 		  mandatory/includes/game.h \

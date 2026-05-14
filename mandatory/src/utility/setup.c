@@ -6,11 +6,12 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:05:58 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/05 19:05:58 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/13 15:10:34 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/game.h"
+#include "../../includes/cub3D.h"
 #include "../../includes/map.h"
 
 void	setup_player_vectors(t_player *player)
@@ -35,6 +36,12 @@ void	setup_player_vectors(t_player *player)
 		vector_setter(&player->dir, 1, 0);
 		vector_setter(&player->camera, 0, 0.66);
 	}
+}
+
+void	vector_setter(t_vec *v, double x, double y)
+{
+	v->x = x;
+	v->y = y;
 }
 
 void	init_player(t_game *game)

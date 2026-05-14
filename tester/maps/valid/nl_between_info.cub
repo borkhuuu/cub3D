@@ -1,25 +1,33 @@
-SO         ./textures/Wall7.xpm   
+SO         /home/boenkhja/cub3D/tester/textures/Wall7.xpm      
 
 
-WE ./textures/Wall4.xpm
+WE /home/boenkhja/cub3D/tester/textures/Wall4.xpm   	
 
 
-NO ./textures/Wall2.xpm
+NO		  /home/boenkhja/cub3D/tester/textures/Wall2.xpm	
 
 
 
 
-EA ./textures/Wall8.xpm
+EA /home/boenkhja/cub3D/tester/textures/Wall8.xpm
 
 C                                   0,0,0          
 
 
-
+	 	
 
 F 220,100,0        
 
-11111111111111
-10000000000001
+  	
+		
+
+111
+101
+111
+
+11111111111111		  	
+		1111111111111  	  	
+1111111100001		 	
 10000000000001
 10000000000001
 10000000000001

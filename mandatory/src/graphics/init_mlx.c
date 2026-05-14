@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 12:59:12 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/12 00:00:29 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/14 18:43:23 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,7 @@
 #include "../../includes/game.h"
 #include "../../includes/map.h"
 #include "../../../libraries/mlx/mlx.h"
-#include "../../../libraries/libft/libft.h"
-#include <stdlib.h>
 #include <X11/keysym.h>
-
-void	mlx_cleanup(t_game *game)
-{
-	int	code;
-
-	code = 0;
-	free_textures(game, game->textures);
-	if (game->image.ptr_to_img)
-		mlx_destroy_image(game->connection, game->image.ptr_to_img);
-	if (game->window)
-		mlx_destroy_window(game->connection, game->window);
-	if (game->connection)
-	{
-		mlx_destroy_display(game->connection);
-		free(game->connection);
-	}
-	if (ft_strcmp(game->map->err_msg, "\n"))
-	{
-		write(2, game->map->err_msg, ft_strlen(game->map->err_msg));
-		code = 1;
-	}
-	free_func(game->map, game->map->map_arr);
-	exit (code);
-}
-
-void	ft_pixel_put(t_game *game, int x, int y, int colour)
-{
-	char	*pixel_to_manipulate;
-
-	pixel_to_manipulate = game->image.ptr_to_pixel
-		+ (y * game->image.line_len + x * (game->image.bpp / 8));
-	*(unsigned int *)pixel_to_manipulate = colour;
-}
 
 int	x_window(void *param)
 {
@@ -69,7 +34,7 @@ int	key_handler(int keycode, t_game *game)
 
 void	init_mlx(t_game *game)
 {
-	game->connection = mlx_init();
+	game->connection = NULL;//mlx_init();
 	if (!game->connection)
 	{
 		game->map->err_msg = "Error\nmlx_init has failed\n";

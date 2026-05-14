@@ -6,32 +6,13 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 17:28:39 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/05 17:30:41 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/14 18:41:38 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../libraries/libft/libft.h"
 #include "../../includes/map.h"
-
-char	**copy_map(t_map *map)
-{
-	char	**copy;
-	int		i;
-
-	i = 0;
-	copy = ft_calloc(map->map_height + 1, sizeof(char *));
-	if (!copy)
-		return (map->err_msg = "Error\nAllocation of copy of map failed", NULL);
-	while (map->map_arr && map->map_arr[i])
-	{
-		copy[i] = ft_strdup(map->map_arr[i]);
-		if (!copy[i])
-			return (map->err_msg = "Error\nft_strdup in copy_map failed",
-				free_func(NULL, copy), NULL);
-		i++;
-	}
-	return (copy);
-}
+#include "../../includes/cub3D.h"
 
 void	get_player_pos(t_map *m)
 {
@@ -111,9 +92,9 @@ int	validate_map(t_map *map)
 
 	if (map->player_count != 1)
 		return (map->err_msg = "Error\nPlayer count not exactly 1\n", 0);
-	copy = copy_map(map);
+	copy = ft_copy_arr((const char **)map->map_arr);
 	if (!copy)
-		return (0);
+		return (map->err_msg = "Error\nCopying the map failed\n", 0);
 	get_player_pos(map);
 	if (!flood_fill(copy, map->player.x, map->player.y, map->map_height))
 		return (map->err_msg = "Error\nFloodfill from player pos failed\n",

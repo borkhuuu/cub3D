@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:49:45 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/05 19:49:46 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/13 21:04:02 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,7 @@ typedef struct s_game
 int		start_game(t_game *game);
 int		setup_game(t_map *map);
 
-/*					setup.c					*/
-void	setup_player_vectors(t_player *player);
-void	init_player(t_game *game);
-void	init_color(t_game *game, t_color color_f, t_color color_c);
 /*					dda.c					*/
-
 int		raycaster(t_game *game);
 void	calculate_delta_dist(t_raycast *ray);
 void	calculate_side_dist(t_raycast *ray, t_player *player);
@@ -100,8 +95,6 @@ void	calculate_ray_dir(t_raycast *ray, t_player *player, size_t x);
 void	cast_ray(t_raycast *ray, t_game *game, size_t x);
 void	calculate_wall_height(t_raycast *ray, t_game *game);
 void	init_step_dir(t_raycast *ray, t_vec	ray_dir);
-double	left_up(double ppos, double ratio);
-double	right_down(double ppos, double ratio);
 
 /*					movement.c					*/
 int		key_press(int keycode, t_game *game);

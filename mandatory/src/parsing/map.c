@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 18:21:58 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/11 18:38:25 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/13 22:59:18 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	validate_characters(t_map *map, const char *s)
 	i = 0;
 	while (s[i] && ft_iswspace(s[i]))
 		i++;
-	if (!s[i])
-		return (0);
 	while (s[i])
 	{
 		if (!is_valid(s[i]))
@@ -44,7 +42,7 @@ char	*replace_tabs(char *line)
 	size_t	i;
 
 	i = 0;
-	while (line[i])
+	while (line[i] && ft_iswspace(line[i]))
 	{
 		if (line[i] == '\t')
 		{
@@ -82,8 +80,6 @@ int	parse_map(t_map *map)
 	char	**tmp;
 	char	*s;
 
-	if (!validate_line(map->line))
-		return (map->err_msg = "Error\nEmpty line in map\n", 0);
 	if (!validate_characters(map, map->line))
 		return (map->err_msg
 			= "Error\nInvalid character found somewhere?!\n", 0);
@@ -98,9 +94,9 @@ int	parse_map(t_map *map)
 	s = ft_strdup(map->line);
 	if (!s)
 		return (map->err_msg = "Error\nft_strdup in parse_map failed\n", 0);
+	trim_ws_back(s);
 	map->map_arr[map->map_height] = s;
 	map->map_height++;
 	map->map_arr[map->map_height] = NULL;
-	remove_nl(map->map_arr);
 	return (1);
 }

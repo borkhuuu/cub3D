@@ -7,8 +7,8 @@
 t_result	run_cub3d(char *args[])
 {
 	t_result	res;
-	char		*argv[] = {"valgrind", "--quiet", "--leak-check=full", "--error-exitcode=42",
-						"--errors-for-leak-kinds=all", "--trace-children=yes", PROG, NULL, NULL, NULL, NULL};
+	char		*argv[] = {"funcheck", "-abc", PROG,
+						 NULL, NULL, NULL, NULL};
 	int			i = 0;
 
 	bzero(&res, sizeof(t_result));

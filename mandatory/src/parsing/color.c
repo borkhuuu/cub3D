@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 17:19:32 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/11 17:11:51 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/14 18:42:06 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	process_color(char *color)
 	i = 0;
 	if (!color)
 		return (0);
-	while ((color[i] && ft_iswspace(color[i])) || (color[i] && ft_isdigit(color[i])))
+	while ((color[i] && ft_iswspace(color[i]))
+		|| (color[i] && ft_isdigit(color[i])))
 		i++;
 	while (color[i] && ft_isdigit(color[i]))
 		i++;
@@ -59,6 +60,9 @@ int	validate_color(t_map *map, t_color *color, char *rgb)
 	size = 0;
 	while (tmp[size])
 	{
+		if (!check_format(tmp[size]))
+			return (map->err_msg = "Error\nColor has wrong format\n",
+				free_func(NULL, tmp), 0);
 		if (!process_color(tmp[size]))
 			return (map->err_msg = "Error\nColor value not between 0-255\n",
 				free_func(NULL, tmp), 0);
@@ -68,34 +72,12 @@ int	validate_color(t_map *map, t_color *color, char *rgb)
 	return (1);
 }
 
-int	count_comma(const char *line)
+int	handle_color(t_map *map, t_color *color, char *line, char type)
 {
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (line[i])
-	{
-		if (line[i] == ',')
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-int	handle_color(t_map *map, t_color *color, char **rgb, char type)
-{
-	char	*line;
-	
-	line = ft_catcat(rgb);
-	if (!line)
-    	return (map->err_msg = "Error\nMalloc failed in ft_catcat\n", 0);
-	if (count_comma(line) != 2)
-		return (free(line), map->err_msg = "Error\nComma count not 2", 0);
+	if (check_comma(line) != 2)
+		return (map->err_msg = "Error\nComma count not 2\n", 0);
 	if (!validate_color(map, color, line))
-		return (free(line), 0);
-	free(line);
+		return (0);
 	if (color->set)
 	{
 		if (type == 'F')

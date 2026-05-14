@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:17:07 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/11 18:55:45 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/14 18:06:10 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ typedef struct s_list
 }				t_list;
 
 
+char	**ft_copy_arr(const char **arr);
 char	*ft_catcat(char **arr);
+char	**ft_custom_split(const char *s, size_t n);
 void	ft_free_arr(char **arr);
 void	ft_print_arr(char **arr);
 int		ft_atoi(const char *nptr);

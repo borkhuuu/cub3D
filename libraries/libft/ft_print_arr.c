@@ -9,6 +9,7 @@ void	ft_print_arr(char **arr)
 		return ;
 	while (arr[i])
 	{
+		write(1, "s: ", 3);
 		write(1, arr[i], ft_strlen(arr[i]));
 		write(1, "\n", 1);
 		i++;

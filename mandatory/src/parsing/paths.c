@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:54:38 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/12 00:21:00 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/14 18:40:39 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,40 +18,28 @@
 
 int	validate_line(const char *s)
 {
-	char	first;
-	
+	size_t	first;
+
 	if (!s)
 		return (0);
 	first = first_char(s);
-	if (!first || first == '\n')
+	if (!s[first] || s[first] == '\n')
 		return (0);
-	return (1);
-}
-
-int	check_extension(t_map *map, const char *path, const char *ext)
-{
-	const char	*tmp;
-
-	tmp = ft_strrchr(path, '.');
-	if (!tmp)
-		return (map->err_msg = "Error\nPath doesnt have extension\n", 0);
-	if (ft_strcmp(tmp, ext))
-		return (map->err_msg = "Error\nPath has wrong extension\n", 0);
-	if (tmp == &path[0] || *(--tmp) == '/')
-		return (map->err_msg = "Error\nThis is a hidden path\n", 0);
 	return (1);
 }
 
 int	validate_path(t_map *map, char *path, char *ext)
 {
 	int		fd;
-	
+
 	if (!path)
 		return (map->err_msg = "Error\nPath is non existent\n", 0);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (write(2, "Error\n", 6), strerror_wrapper(errno), 0);
 	close(fd);
+	if (!check_hidden_file(map, path))
+		return (0);
 	if (!check_extension(map, path, ext))
 		return (0);
 	return (1);

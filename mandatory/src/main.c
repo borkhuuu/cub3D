@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:44:16 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/12 00:12:27 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/13 20:55:57 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	parse_until_map(t_map *map)
 	}
 	if (map->map_fd == -1)
 		return (map->err_msg = "Error\nGNL failed\n", 0);
-	if (missing_path(map))
+	if (check_missing_path(map))
 		return (0);
 	return (1);
 }
