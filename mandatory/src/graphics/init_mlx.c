@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 12:59:12 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/14 18:43:23 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/14 23:07:25 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	key_handler(int keycode, t_game *game)
 
 void	init_mlx(t_game *game)
 {
-	game->connection = NULL;//mlx_init();
+	game->connection = mlx_init();
 	if (!game->connection)
 	{
 		game->map->err_msg = "Error\nmlx_init has failed\n";
