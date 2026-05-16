@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monster_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/16 16:33:41 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/16 16:33:43 by boenkhja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/game_bonus.h"
 #include "../../../libraries/libft/libft.h"
 
@@ -12,9 +24,9 @@ t_vec	trans_to_cam_space(t_game *game, t_entity p)
 	relative_y = game->enemy.pos.y - p.pos.y;
 	inv_det = 1.0 / (p.camera.x * p.dir.y - p.dir.x * p.camera.y);
 	camera.x = inv_det * (p.dir.y * relative_x
-		- p.dir.x * relative_y);
+			- p.dir.x * relative_y);
 	camera.y = inv_det * (-p.camera.y * relative_x
-		+ p.camera.x * relative_y);
+			+ p.camera.x * relative_y);
 	return (camera);
 }
 

@@ -14,16 +14,6 @@
 #include "../../includes/cub3D.h"
 #include <string.h>
 
-size_t	get_arr_size(char **arr)
-{
-	size_t	i;
-
-	i = 0;
-	while (arr[i])
-		i++;
-	return (i);
-}
-
 void	strerror_wrapper(const int errnum)
 {
 	char	*err;

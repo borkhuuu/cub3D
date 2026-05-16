@@ -1,55 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers_bonus.c                                    :+:      :+:    :+:   */
+/*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/07 14:02:43 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/07 14:02:43 by boenkhja         ###   ########.fr       */
+/*   Created: 2026/05/05 18:49:47 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/13 20:59:44 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D_bonus.h"
-#include "../../../libraries/mlx/mlx.h"
 #include "../../includes/game_bonus.h"
-#include "../../../libraries/libft/libft.h"
-#include <string.h>
 
-void	free_textures(t_game *game, t_texture textures[4])
+int	get_texture_pixel_color(t_texture t, int x, int y)
 {
-	if (textures[0].ptr_to_img)
-		mlx_destroy_image(game->connection, textures[0].ptr_to_img);
-	if (textures[1].ptr_to_img)
-		mlx_destroy_image(game->connection, textures[1].ptr_to_img);
-	if (textures[2].ptr_to_img)
-		mlx_destroy_image(game->connection, textures[2].ptr_to_img);
-	if (textures[3].ptr_to_img)
-		mlx_destroy_image(game->connection, textures[3].ptr_to_img);
-	if (textures[4].ptr_to_img)
-		mlx_destroy_image(game->connection, textures[4].ptr_to_img);
+	return (*(int *)(t.ptr_to_pixel + (y * t.line_len + x * (t.bpp / 8))));
 }
 
-int	get_arr_size(char **arr)
+void	ft_pixel_put(t_game *game, int x, int y, int colour)
 {
-	int	i;
+	char	*pixel_to_manipulate;
 
-	i = 0;
-	while (arr[i])
-		i++;
-	return (i);
-}
-
-void	strerror_wrapper(const int errnum)
-{
-	char	*err;
-
-	err = strerror(errnum);
-	write(2, err, ft_strlen(err));
-}
-
-void	vector_setter(t_vec *v, double x, double y)
-{
-	v->x = x;
-	v->y = y;
+	pixel_to_manipulate = game->image.ptr_to_pixel
+		+ (y * game->image.line_len + x * (game->image.bpp / 8));
+	*(unsigned int *)pixel_to_manipulate = colour;
 }

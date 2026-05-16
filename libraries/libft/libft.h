@@ -37,7 +37,7 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
-
+size_t	ft_arr_size(const char **arr);
 char	**ft_copy_arr(const char **arr);
 char	*ft_catcat(char **arr);
 char	**ft_custom_split(const char *s, size_t n);

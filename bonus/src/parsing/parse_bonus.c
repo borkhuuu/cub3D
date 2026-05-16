@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/07 13:24:23 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/07 13:51:14 by boenkhja         ###   ########.fr       */
+/*   Created: 2026/05/05 18:25:56 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/16 22:38:37 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/cub3D_bonus.h"
 #include "../../includes/map_bonus.h"
 #include "../../../libraries/libft/libft.h"
 
@@ -33,10 +34,10 @@ int	handle_id(t_map *map, char **arr)
 		if (!handle_path(map, &map->path_m, arr[1], 'M'))
 			return (0);
 	if (!ft_strcmp(arr[0], "F"))
-		if (!handle_color(map, &map->color_f, &arr[1], 'F'))
+		if (!handle_color(map, &map->color_f, arr[1], 'F'))
 			return (0);
 	if (!ft_strcmp(arr[0], "C"))
-		if (!handle_color(map, &map->color_c, &arr[1], 'C'))
+		if (!handle_color(map, &map->color_c, arr[1], 'C'))
 			return (0);
 	free_func(NULL, arr);
 	return (1);
@@ -45,17 +46,19 @@ int	handle_id(t_map *map, char **arr)
 int	parse_paths(t_map *map)
 {
 	char	**arr;
+	char	**tmp_ptr;
 
 	if (!validate_line(map->line))
 		return (1);
-	arr = ft_split(map->line, ' ');
+	arr = ft_custom_split(map->line, 2);
 	if (!arr)
 		return (1);
-	remove_nl(arr);
-	if (!ft_strcmp(arr[0], "NO") || !ft_strcmp(arr[0], "SO")
-		|| !ft_strcmp(arr[0], "WE") || !ft_strcmp(arr[0], "EA")
-		|| !ft_strcmp(arr[0], "F") || !ft_strcmp(arr[0], "C")
-		|| !ft_strcmp(arr[0], "M"))
+	tmp_ptr = arr;
+	tmp_ptr = trim_ws_loop(tmp_ptr);
+	if (!tmp_ptr)
+		return (free_func(NULL, arr), 0);
+	arr = tmp_ptr;
+	if (is_path(arr[0]))
 	{
 		if (!handle_id(map, arr))
 			return (free_func(NULL, arr), 0);
@@ -66,13 +69,4 @@ int	parse_paths(t_map *map)
 		free_func(NULL, arr);
 	}
 	return (1);
-}
-
-bool	missing_path(t_map *map)
-{
-	if (!map->path_no || !map->path_so || !map->path_we || !map->path_ea
-		|| !map->color_f.set || !map->color_c.set || !map->path_m)
-		return (map->err_msg = "Error\nA path or color is missing/"
-			"misconfigured or map is not last\n", true);
-	return (false);
 }

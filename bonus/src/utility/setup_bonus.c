@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup_bonus.c                                      :+:      :+:    :+:   */
+/*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/07 14:15:31 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/07 16:00:45 by boenkhja         ###   ########.fr       */
+/*   Created: 2026/05/05 19:05:58 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/05/13 15:10:34 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,26 @@ void	setup_vectors(t_entity *e)
 	}
 }
 
+void	vector_setter(t_vec *v, double x, double y)
+{
+	v->x = x;
+	v->y = y;
+}
+
 void	init_player(t_game *game)
 {
 	vector_setter(&game->player.pos,
-		game->map->player.x + 0.5, game->map->player.y + 0.5);
-	game->player.spawn = game->map->player_dir;
+		game->map->player.pos.x + 0.5, game->map->player.pos.y + 0.5);
+	game->player.spawn = game->map->player.spawn;
 	setup_vectors(&game->player);
 }
 
 void	init_enemy(t_game *game)
 {
 	vector_setter(&game->enemy.pos,
-		game->map->enemy.x + 0.5, game->map->enemy.y + 0.5);
-	vector_setter(&game->enemy.dir, 0, -1);
+		game->map->enemy.pos.x + 0.5, game->map->enemy.pos.y + 0.5);
+	game->enemy.spawn = 'N';
+	setup_vectors(&game->enemy);
 }
 
 void	init_color(t_game *game, t_color color_f, t_color color_c)

@@ -53,7 +53,7 @@ int	validate_color(t_map *map, t_color *color, char *rgb)
 	if (!tmp)
 		return (map->err_msg
 			= "Error\nft_split returned NULL in validate_color\n", 0);
-	size = get_arr_size(tmp);
+	size = ft_arr_size((const char **)tmp);
 	if (size != 3)
 		return (map->err_msg = "Error\nColor values are not exactly 3\n",
 			free_func(NULL, tmp), 0);

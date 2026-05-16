@@ -48,11 +48,6 @@ void	calculate_texture_pixel(t_raycast *ray, t_render *r, t_texture t)
 			+ ray->wall_height / 2.0) * r->step;
 }
 
-int	get_texture_pixel_color(t_texture t, int x, int y)
-{
-	return (*(int *)(t.ptr_to_pixel + (y * t.line_len + x * (t.bpp / 8))));
-}
-
 t_texture	texture_loader(void *mlx, char *path)
 {
 	t_texture	t;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:44:16 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/14 23:01:50 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/16 16:25:12 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	parse_until_map(t_map *map)
 	}
 	if (map->map_fd == -1)
 		return (map->err_msg = "Error\nGNL failed\n", 0);
-	if (missing_path(map))
+	if (check_missing_path(map))
 		return (0);
 	return (1);
 }
