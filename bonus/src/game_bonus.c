@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 14:16:10 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/16 16:24:41 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/18 13:59:27 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 #include "../../libraries/libft/libft.h"
 #include "../../libraries/mlx/mlx.h"
 #include <X11/X.h>
+#include "../includes/minimap_bonus.h"
 
 int	game_loop(t_game *game)
 {
 	movement(game);
 	raycaster(game);
+	minimap(game);
 	mlx_put_image_to_window(game->connection, game->window,
 		game->image.ptr_to_img, 0, 0);
 	return (0);
