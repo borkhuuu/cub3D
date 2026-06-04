@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 16:23:59 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/16 16:23:59 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/06/04 13:33:30 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 
 # define WIDTH 1600 
 # define HEIGHT 900
-# define SPEED 0.1
-# define ROT_ANGLE 0.03
-# define PADDING 0.1
+# define SPEED 4.5
+# define MONSTER_SPEED 4.5
+# define ROT_ANGLE 2.7
+# define PADDING 0.12
+# define BFS_THRESHOLD 0.5
+# define MOVE_INTERVAL 1.0
+# define KILL_DISTANCE 0.7
 # include "vec_bonus.h"
 # include "cub3D_bonus.h"
 # include <stdbool.h>
@@ -30,6 +34,13 @@ typedef struct s_entity
 	t_vec	pos;
 	t_vec	dir;
 	t_vec	camera;
+	t_vec	target_pos;
+	t_vec	last_bfs_player_pos;
+	bool	has_target;
+	char	*bfs_path;
+	size_t	bfs_path_len;
+	size_t	path_index;
+	double	move_accumulation;
 	size_t	count;
 	char	spawn;
 	bool	set;
@@ -69,25 +80,33 @@ typedef struct s_raycast
 	int		wall_height;
 }	t_raycast;
 
+typedef struct s_bfs
+{
+	t_map		*map;
+	t_vec_int	*queue;
+	char		*came_from;
+}	t_bfs;
+
 typedef struct s_game
 {
+	void		*connection;
+	void		*window;
 	t_map		*map;
 	t_texture	textures[5];
 	t_raycast	ray;
 	t_image		image;
-	void		*connection;
-	void		*window;
 	t_entity	player;
 	t_entity	enemy;
-	double		pdist_buffer[WIDTH];
 	t_movement	movement;
+	double		pdist_buffer[WIDTH];
+	double		last_time;
 	int			color_f;
 	int			color_c;
 }	t_game;
 
-/*					game_bonus.c					*/
+/*					game_bonus.c				*/
 int		start_game(t_game *game);
-int		setup_game(t_map *map);
+void	setup_game(t_map *map);
 
 /*					dda_bonus.c					*/
 int		raycaster(t_game *game);
@@ -100,16 +119,26 @@ void	cast_ray(t_raycast *ray, t_game *game, size_t x);
 void	calculate_wall_height(t_raycast *ray, t_game *game);
 void	init_step_dir(t_raycast *ray, t_vec	ray_dir);
 
-/*					movement_bonus.c					*/
+/*					bfs.c						*/
+char	*bfs(t_game *game);
+int		rerun_bfs(t_game *game);
+int		setup_bfs(t_bfs *bfs, t_game *game);
+char	*reconstruct_path(t_game *game, t_bfs *bfs);
+
+/*					movement_bonus.c			*/
+void	rotate(t_game *game, int dir, double delta_time);
+void	player_move(t_game *game,
+			double move_x,
+			double move_y,
+			double delta_time);
+int		enemy_move(t_game *game, double delta_time);
+void	move_one_step(t_game *game);
+
+/*					movement_helper_bonus.c		*/
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
-void	movement(t_game *game);
-
-/*					movement_helper_bonus.c			*/
-void	rotate(t_game *game, int dir);
-void	forward(t_game *game);
-void	backward(t_game *game);
-void	left(t_game *game);
-void	right(t_game *game);
+void	movement(t_game *game, double delta_time);
+bool	boundary_check_x(t_map *map, double new_x, double pos_y);
+bool	boundary_check_y(t_map *map, double new_y, double pos_x);
 
 #endif

@@ -45,6 +45,7 @@ DEPS = $(OBJS:.o=.d)
 
 BONUS_SOURCES = bonus/src/main_bonus.c\
 		  bonus/src/game_bonus.c\
+		  bonus/src/bfs/bfs.c\
 		  bonus/src/graphics/init_mlx_bonus.c\
 		  bonus/src/graphics/render_bonus.c\
 		  bonus/src/graphics/textures_bonus.c\

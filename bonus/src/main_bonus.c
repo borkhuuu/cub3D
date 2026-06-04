@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:44:16 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/16 16:25:12 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/06/01 14:30:46 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,6 @@ int	main(int ac, char **av)
 		return (finish_gnl(&map), write(2, map.err_msg,
 				ft_strlen(map.err_msg)), free_func(&map, map.map_arr), 1);
 	close(map.map_fd);
-	if (!setup_game(&map))
-		return (free_func(&map, map.map_arr), 1);
-	free_func(&map, map.map_arr);
+	setup_game(&map);
 	return (0);
 }

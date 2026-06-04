@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 16:22:18 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/16 16:22:19 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/06/01 14:36:11 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ typedef struct s_map
 	char		*line;
 	char		*err_msg;
 	int			map_fd;
-	int			map_height;
+	size_t		*strlen_arr;
+	size_t		map_height;
+	size_t		map_max_width;
 	bool		in_map;
 	char		*path_no;
 	char		*path_so;

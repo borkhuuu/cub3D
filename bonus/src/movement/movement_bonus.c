@@ -5,63 +5,127 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/16 16:34:10 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/16 16:34:11 by boenkhja         ###   ########.fr       */
+/*   Created: 2026/05/16 16:35:28 by boenkhja          #+#    #+#             */
+/*   Updated: 2026/06/01 18:19:58 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/game_bonus.h"
-#include "../../includes/cub3D_bonus.h"
-#include <X11/keysym.h>
+#include "../../includes/map_bonus.h"
+#include "../../../libraries/libft/libft.h"
+#include <math.h>
+#include <stddef.h>
+#include <stdlib.h>
 
-int	key_press(int keycode, t_game *game)
+void	rotate(t_game *game, int dir, double delta_time)
 {
-	if (keycode == XK_w)
-		game->movement.w = true;
-	if (keycode == XK_a)
-		game->movement.a = true;
-	if (keycode == XK_s)
-		game->movement.s = true;
-	if (keycode == XK_d)
-		game->movement.d = true;
-	if (keycode == XK_Left)
-		game->movement.left = true;
-	if (keycode == XK_Right)
-		game->movement.right = true;
-	if (keycode == XK_Escape)
-		mlx_cleanup(game);
-	return (0);
+	double	rot_angle;
+	double	old_player_x;
+	double	old_camera_x;
+	
+	if (dir == 0)
+		rot_angle = -ROT_ANGLE * delta_time;
+	else
+		rot_angle = ROT_ANGLE * delta_time;	
+	old_player_x = game->player.dir.x;
+	old_camera_x = game->player.camera.x;
+	game->player.dir.x = game->player.dir.x * cos(rot_angle)
+		- game->player.dir.y * sin(rot_angle);
+	game->player.dir.y = old_player_x * sin(rot_angle)
+		+ game->player.dir.y * cos(rot_angle);
+	game->player.camera.x = game->player.camera.x * cos(rot_angle)
+		- game->player.camera.y * sin(rot_angle);
+	game->player.camera.y = old_camera_x * sin(rot_angle)
+		+ game->player.camera.y * cos(rot_angle);
 }
 
-int	key_release(int keycode, t_game *game)
+void	player_move(t_game *game,
+		double move_x,
+		double move_y,
+		double delta_time)
 {
-	if (keycode == XK_w)
-		game->movement.w = false;
-	if (keycode == XK_a)
-		game->movement.a = false;
-	if (keycode == XK_s)
-		game->movement.s = false;
-	if (keycode == XK_d)
-		game->movement.d = false;
-	if (keycode == XK_Left)
-		game->movement.left = false;
-	if (keycode == XK_Right)
-		game->movement.right = false;
-	return (0);
+	char	**map;
+	double	len;
+	double	new_x;
+	double	new_y;
+	
+	map = game->map->map_arr;
+	len = sqrt(move_x * move_x + move_y * move_y);
+	if (len > 0)
+	{
+		move_x = (move_x / len) * SPEED * delta_time;
+		move_y = (move_y / len) * SPEED * delta_time;
+	}
+	new_x = game->player.pos.x + move_x;
+	new_y = game->player.pos.y + move_y;
+	if (boundary_check_x(game->map, new_x, game->player.pos.y))
+		game->player.pos.x = new_x;
+	if (boundary_check_y(game->map, new_y, game->player.pos.x))
+		game->player.pos.y = new_y;
 }
 
-void	movement(t_game *game)
+void	set_target_pos(t_game *game)
 {
-	if (game->movement.w)
-		forward(game);
-	if (game->movement.a)
-		left(game);
-	if (game->movement.s)
-		backward(game);
-	if (game->movement.d)
-		right(game);
-	if (game->movement.left)
-		rotate(game, 0);
-	if (game->movement.right)
-		rotate(game, 1);
+	size_t	i;
+
+	i = game->enemy.path_index;
+	if (!game->enemy.bfs_path || i >= game->enemy.bfs_path_len)
+		return ;
+	if (game->enemy.bfs_path[i] == 'N')
+	{
+		game->enemy.target_pos = (t_vec){game->enemy.pos.x, game->enemy.pos.y - 1};
+		game->enemy.has_target = true;
+		i++;
+	}
+	else if (game->enemy.bfs_path[i] == 'S')
+	{
+		game->enemy.target_pos = (t_vec){game->enemy.pos.x, game->enemy.pos.y + 1};
+		game->enemy.has_target = true;
+		i++;
+	}
+	else if (game->enemy.bfs_path[i] == 'W')
+	{
+		game->enemy.target_pos = (t_vec){game->enemy.pos.x - 1, game->enemy.pos.y};
+		game->enemy.has_target = true;
+		i++;
+	}
+	else if (game->enemy.bfs_path[i] == 'E')
+	{
+		game->enemy.target_pos = (t_vec){game->enemy.pos.x + 1, game->enemy.pos.y};
+		game->enemy.has_target = true;
+		i++;
+	}
+	game->enemy.path_index = i;
+}
+
+int	enemy_move(t_game *game, double delta_time)
+{
+	double	dx;
+	double	dy;
+	double	step;
+	double	dist;
+	double	dist_sq;
+	
+	if (!rerun_bfs(game))
+		return (game->map->err_msg = "Error\nBFS failed\n", 0);
+	if (!game->enemy.has_target)
+		set_target_pos(game);
+	if (!game->enemy.has_target)
+		return (1);
+	dx = game->enemy.target_pos.x - game->enemy.pos.x;
+	dy = game->enemy.target_pos.y - game->enemy.pos.y;
+	dist_sq = dx * dx + dy * dy;
+	step = MONSTER_SPEED * delta_time;
+	if (dist_sq < step * step)
+	{
+		game->enemy.pos = game->enemy.target_pos;
+		game->enemy.has_target = false;
+	}
+	else
+	{
+		dist = sqrt(dist_sq);
+		game->enemy.pos.x += (dx / dist) * step;
+		game->enemy.pos.y += (dy / dist) * step;
+	}
+	return (1);
 }

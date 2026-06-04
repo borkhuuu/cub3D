@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 13:58:35 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/16 16:30:41 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/06/01 12:48:01 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ typedef struct s_texture
 	int		endian;
 	int		height;
 	int		width;
-	int		color;
+	unsigned int	color;
 	bool	valid;
 }	t_texture;
 
 typedef struct s_render
 {
-	size_t	tex_x;
-	size_t	tex_y;
 	size_t	x;
 	size_t	y;
-	size_t	m_center;
+	int		tex_x;
+	int		tex_y;
+	double	m_center;
 	double	ratio;
 	double	tex_pos;
 	double	step;
@@ -50,13 +50,14 @@ typedef struct s_render
 	int		start;
 	int		end;
 	int		v_start;
+	int		v_start_unclamped;
 	int		v_end;
 
 }	t_render;
 
 /*					init_mlx.c				*/
 
-int			init_mlx(t_game *game);
+void		init_mlx(t_game *game);
 int			key_handler(int keycode, t_game *game);
 int			x_window(void *param);
 void		mlx_cleanup(t_game *game);
@@ -73,15 +74,16 @@ void		draw_middle(t_game *game, t_texture t, t_render *r);
 void		draw_floor(t_game *game, t_render *r);
 
 /*					textures.c				*/
-int			load_textures(t_game *game);
+void		load_textures(t_game *game);
 t_texture	select_texture(t_game *game, t_raycast ray);
 void		calculate_texture_pixel(t_raycast *ray, t_render *r, t_texture t);
 
 /*					UTILITY					*/
 //		general
+int			init_strlen_arr(t_map *map);
 int			get_texture_pixel_color(t_texture t, int x, int y);
 void		ft_pixel_put(t_game *game, int x, int y, int colour);
-
+double		get_time();
 //		parsing
 void		strerror_wrapper(const int errnum);
 bool		is_valid(const char c);

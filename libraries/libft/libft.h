@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:17:07 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/14 18:06:10 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/05/30 15:23:10 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
+char	*ft_strrev(const char *s);
+int		ft_clamp_int(int n, int min, int max);
+double	ft_clamp_double(double n, double min, double max);
 size_t	ft_arr_size(const char **arr);
 char	**ft_copy_arr(const char **arr);
 char	*ft_catcat(char **arr);

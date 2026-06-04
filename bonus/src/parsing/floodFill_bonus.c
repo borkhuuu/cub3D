@@ -6,13 +6,32 @@
 /*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 17:28:39 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/16 16:36:54 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/06/01 14:31:33 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../libraries/libft/libft.h"
 #include "../../includes/map_bonus.h"
 #include "../../includes/cub3D_bonus.h"
+#include <stddef.h>
+
+void	calculate_max_width(t_map *m, char **copy)
+{
+	size_t	i;
+	size_t	width;
+
+	i = 0;
+	width = 0;
+	if (!copy)
+		return ;
+	while (copy[i])
+	{
+		width = ft_strlen(copy[i]);
+		if (width > m->map_max_width)
+			m->map_max_width = width;
+		i++;
+	}
+}
 
 void	get_pos(t_map *m)
 {
@@ -45,9 +64,9 @@ void	get_pos(t_map *m)
 
 int	flood_fill(t_map *m, char **map, int x, int y)
 {
-	if (y < 0 || y >= m->map_height)
+	if (y < 0 || y >= (int)m->map_height)
 		return (0);
-	if (x < 0 || x >= (int)ft_strlen(map[y]))
+	if (x < 0 || x >= (int)m->strlen_arr[y])
 		return (0);
 	if (map[y][x] == '1' || map[y][x] == 'V')
 		return (1);
@@ -97,6 +116,8 @@ int	validate_map(t_map *map)
 
 	if (map->player.count != 1 || map->enemy.count != 1)
 		return (map->err_msg = "Error\nPlayer/Enemy count not exactly 1\n", 0);
+	if (!init_strlen_arr(map))
+		return (map->err_msg = "Error\nAllocating strlen_arr has failed\n", 0);
 	copy = ft_copy_arr((const char **)map->map_arr);
 	if (!copy)
 		return (map->err_msg = "Error\nCopying the map failed\n", 0);
@@ -110,5 +131,6 @@ int	validate_map(t_map *map)
 	if (!check_rem_rooms(map, copy))
 		return (map->err_msg = "Error\nFloodfill in independent room failed\n",
 			free_func(NULL, copy), 0);
+	calculate_max_width(map, copy);
 	return (free_func(NULL, copy), 1);
 }

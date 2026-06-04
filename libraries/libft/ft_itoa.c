@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 00:08:20 by boenkhja          #+#    #+#             */
-/*   Updated: 2025/05/08 14:24:52 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/06/01 09:47:35 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strrev(char *str, int sign)
+static char	*ft_strrev_itoa(char *str, int sign)
 {
 	size_t	i;
 	int		j;
 	char	*dup;
-
+	
 	dup = NULL;
 	i = 0;
 	j = ft_strlen(str);
@@ -69,10 +69,10 @@ char	*ft_itoa(int n)
 	if (l == 0)
 	{
 		res[i] = '0';
-		return (ft_strrev(res, i));
+		return (ft_strrev_itoa(res, i));
 	}
 	res = whynot(l, res, i);
-	res = ft_strrev(res, sign);
+	res = ft_strrev_itoa(res, sign);
 	return (res);
 }
 /*

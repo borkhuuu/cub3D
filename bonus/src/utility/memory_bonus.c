@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 18:42:17 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/16 16:38:12 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/06/01 15:37:27 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ void	free_func(t_map *map, char **arr)
 	ft_free_arr(arr);
 	if (map)
 	{
+		if (map->strlen_arr)
+		{
+			free(map->strlen_arr);
+			map->strlen_arr = NULL;
+		}
 		if (map->map_fd != -1)
 		{
 			close(map->map_fd);
@@ -81,9 +86,14 @@ void	free_textures(t_game *game, t_texture textures[4])
 void	mlx_cleanup(t_game *game)
 {
 	int	code;
-
+	
 	code = 0;
 	free_textures(game, game->textures);
+	if (game->enemy.bfs_path)
+	{
+		free(game->enemy.bfs_path);
+		game->enemy.bfs_path = NULL;
+	}
 	if (game->image.ptr_to_img)
 		mlx_destroy_image(game->connection, game->image.ptr_to_img);
 	if (game->window)
