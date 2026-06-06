@@ -6,13 +6,12 @@
 /*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 16:35:28 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/01 18:19:58 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/06/06 11:57:31 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/game_bonus.h"
 #include "../../includes/map_bonus.h"
-#include "../../../libraries/libft/libft.h"
 #include <math.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -63,35 +62,36 @@ void	player_move(t_game *game,
 	if (boundary_check_y(game->map, new_y, game->player.pos.x))
 		game->player.pos.y = new_y;
 }
-
+#include <stdio.h>
 void	set_target_pos(t_game *game)
 {
 	size_t	i;
-
+	
 	i = game->enemy.path_index;
 	if (!game->enemy.bfs_path || i >= game->enemy.bfs_path_len)
 		return ;
+	game->enemy.pos = (t_vec){(int)game->enemy.pos.x + 0.5, (int)game->enemy.pos.y + 0.5};
 	if (game->enemy.bfs_path[i] == 'N')
 	{
-		game->enemy.target_pos = (t_vec){game->enemy.pos.x, game->enemy.pos.y - 1};
+		game->enemy.target_pos = (t_vec){(int)game->enemy.pos.x + 0.5, (int)game->enemy.pos.y - 1 + 0.5};
 		game->enemy.has_target = true;
 		i++;
 	}
 	else if (game->enemy.bfs_path[i] == 'S')
 	{
-		game->enemy.target_pos = (t_vec){game->enemy.pos.x, game->enemy.pos.y + 1};
+		game->enemy.target_pos = (t_vec){(int)game->enemy.pos.x + 0.5, (int)game->enemy.pos.y + 1 + 0.5};
 		game->enemy.has_target = true;
 		i++;
 	}
 	else if (game->enemy.bfs_path[i] == 'W')
 	{
-		game->enemy.target_pos = (t_vec){game->enemy.pos.x - 1, game->enemy.pos.y};
+		game->enemy.target_pos = (t_vec){(int)game->enemy.pos.x - 1 + 0.5, (int)game->enemy.pos.y + 0.5};
 		game->enemy.has_target = true;
 		i++;
 	}
 	else if (game->enemy.bfs_path[i] == 'E')
 	{
-		game->enemy.target_pos = (t_vec){game->enemy.pos.x + 1, game->enemy.pos.y};
+		game->enemy.target_pos = (t_vec){(int)game->enemy.pos.x + 1 + 0.5, (int)game->enemy.pos.y + 0.5};
 		game->enemy.has_target = true;
 		i++;
 	}

@@ -39,12 +39,12 @@ int	setup_bfs(t_bfs *bfs, t_game *game)
 	if (game->enemy.has_target)
 	{
 		bfs->queue[0] = (t_vec_int){(int)game->enemy.target_pos.x, (int)game->enemy.target_pos.y};
-		bfs->came_from[(int)(game->enemy.target_pos.y * bfs->map->map_max_width + game->enemy.target_pos.x)] = 'V';
+		bfs->came_from[(int)game->enemy.target_pos.y * bfs->map->map_max_width + (int)game->enemy.target_pos.x] = 'V';
 	}
 	else
 	{
 		bfs->queue[0] = (t_vec_int){(int)game->enemy.pos.x, (int)game->enemy.pos.y};
-		bfs->came_from[(int)(game->enemy.pos.y * bfs->map->map_max_width + game->enemy.pos.x)] = 'V';
+		bfs->came_from[(int)game->enemy.pos.y * bfs->map->map_max_width + (int)game->enemy.pos.x] = 'V';
 	}
 	return (1);
 }
@@ -85,6 +85,8 @@ char	*reconstruct_path(t_game *game, t_bfs *bfs)
 			path[path_len] = 'W';
 			curr.x += 1;
 		}
+		else
+			break ;
 		path_len++;
 	}
 	rev_path = ft_strrev(path);
@@ -107,29 +109,29 @@ char	*bfs(t_game *game)
 	while (head != tail)
 	{
 		curr = bfs.queue[head++];
-		if ((curr.x >= 0 && curr.y >= 0 && curr.x < (int)bfs.map->map_max_width && curr.y < (int)bfs.map->map_height))
+		if ((curr.x >= 0 && curr.y >= 0 && curr.y < (int)bfs.map->map_height))
 		{
 			if (curr.x == (int)game->player.pos.x && curr.y == (int)game->player.pos.y)
 				break ;
-			if (curr.y + 1 < (int)bfs.map->map_height && bfs.map->map_arr[curr.y + 1][curr.x] && bfs.map->map_arr[curr.y + 1][curr.x] != '1'
+			if (curr.y + 1 < (int)bfs.map->map_height && curr.x < (int)bfs.map->strlen_arr[curr.y + 1] && bfs.map->map_arr[curr.y + 1][curr.x] != '1'
 				&& bfs.came_from[(curr.y + 1) * bfs.map->map_max_width + curr.x] == 0)
 			{
 				bfs.came_from[(curr.y + 1) * bfs.map->map_max_width + curr.x] = 'N';
 				bfs.queue[tail++] = (t_vec_int){curr.x, curr.y + 1};
 			}
-			if (curr.y - 1 >= 0 && bfs.map->map_arr[curr.y - 1][curr.x] && bfs.map->map_arr[curr.y - 1][curr.x] != '1'
+			if (curr.y - 1 >= 0 && curr.x < (int)bfs.map->strlen_arr[curr.y - 1] && bfs.map->map_arr[curr.y - 1][curr.x] != '1'
 				&& bfs.came_from[(curr.y - 1) * bfs.map->map_max_width + curr.x] == 0)
 			{
 				bfs.came_from[(curr.y - 1) * bfs.map->map_max_width + curr.x] = 'S';
 				bfs.queue[tail++] = (t_vec_int){curr.x, curr.y - 1};
 			}
-			if (curr.x + 1 < (int)ft_strlen(bfs.map->map_arr[curr.y]) && bfs.map->map_arr[curr.y][curr.x + 1] && bfs.map->map_arr[curr.y][curr.x + 1] != '1'
+			if (curr.x + 1 < (int)bfs.map->strlen_arr[curr.y] && bfs.map->map_arr[curr.y][curr.x + 1] != '1'
 				&& bfs.came_from[curr.y * bfs.map->map_max_width + curr.x + 1] == 0)
 			{
 				bfs.came_from[curr.y * bfs.map->map_max_width + curr.x + 1] = 'W';
 				bfs.queue[tail++] = (t_vec_int){curr.x + 1, curr.y};
 			}
-			if (curr.x - 1 >= 0 && bfs.map->map_arr[curr.y][curr.x - 1] && bfs.map->map_arr[curr.y][curr.x - 1] != '1'
+			if (curr.x - 1 >= 0 && curr.x - 1 < (int)bfs.map->strlen_arr[curr.y] && bfs.map->map_arr[curr.y][curr.x - 1] != '1'
 				&& bfs.came_from[curr.y * bfs.map->map_max_width + curr.x - 1] == 0)
 			{
 				bfs.came_from[curr.y * bfs.map->map_max_width + curr.x - 1] = 'E';
