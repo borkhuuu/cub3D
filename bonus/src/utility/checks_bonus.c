@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 18:42:40 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/16 16:38:02 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/06/08 21:18:59 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	check_extension(t_map *map, const char *path, const char *ext)
 bool	check_missing_path(t_map *map)
 {
 	if (!map->path_no || !map->path_so || !map->path_we || !map->path_ea
-		|| !map->path_m || !map->color_f.set || !map->color_c.set)
+		|| !map->color_f.set || !map->color_c.set) // || !map->path_m 
 		return (map->err_msg = "Error\nA path or color is missing/misconfigured"
 			" or map is not last\n", true);
 	return (false);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 16:23:59 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/04 13:33:30 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/06/08 21:15:27 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,14 @@ int		raycaster(t_game *game);
 void	calculate_delta_dist(t_raycast *ray);
 void	calculate_side_dist(t_raycast *ray, t_entity *player);
 void	calculate_ray_dir(t_raycast *ray, t_entity *player, size_t x);
+void	move_ray(t_raycast *ray);
 
 /*					dda_helper_bonus.c			*/
 void	cast_ray(t_raycast *ray, t_game *game, size_t x);
 void	calculate_wall_height(t_raycast *ray, t_game *game);
 void	init_step_dir(t_raycast *ray, t_vec	ray_dir);
+bool	is_player_near_door(t_game *game, int door_x, int door_y);
+void	run_dda(t_raycast *ray, t_game *game);
 
 /*					bfs.c						*/
 char	*bfs(t_game *game);
