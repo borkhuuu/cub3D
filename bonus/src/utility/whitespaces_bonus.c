@@ -40,7 +40,7 @@ size_t	last_char(const char *s)
 	if (i > 0)
 		i--;
 	n = i;
-	while (i >= 0 && ft_iswspace(s[i]))
+	while (ft_iswspace(s[i]))
 	{
 		n = i;
 		i--;
@@ -72,10 +72,8 @@ char	**trim_ws_loop(char **arr)
 
 void	trim_ws_back(char *s)
 {
-	size_t	i;
 	size_t	last;
 
-	i = 0;
 	if (!s)
 		return ;
 	last = last_char(s);

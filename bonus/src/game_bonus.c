@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 14:16:10 by boenkhja          #+#    #+#             */
 /*   Updated: 2026/06/01 16:56:42 by boenkhja         ###   ########.fr       */
@@ -13,6 +13,7 @@
 #include "../includes/map_bonus.h"
 #include "../includes/game_bonus.h"
 #include "../includes/cub3D_bonus.h"
+#include "../includes/minimap_bonus.h"
 #include "../../libraries/libft/libft.h"
 #include "../../libraries/mlx/mlx.h"
 #include <X11/X.h>
@@ -50,6 +51,7 @@ int	game_loop(t_game *game)
 		mlx_cleanup(game);
 	}
 	raycaster(game);
+	minimap(game);
 	mlx_put_image_to_window(game->connection, game->window,
 		game->image.ptr_to_img, 0, 0);
 	return (0);

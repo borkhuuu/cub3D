@@ -65,12 +65,15 @@ BONUS_SOURCES = bonus/src/main_bonus.c\
 		  bonus/src/utility/checks_bonus.c\
 		  bonus/src/utility/memory_bonus.c\
 		  bonus/src/utility/whitespaces_bonus.c\
+		  bonus/src/minimap/minimap_bonus.c\
+		  bonus/src/minimap/minimap_helpers_bonus.c\
 
 HEADERS = bonus/includes/cub3D_bonus.h \
 		  bonus/includes/game_bonus.h \
 		  bonus/includes/map_bonus.h \
 		  bonus/includes/vec_bonus.h \
-		  bonus/includes/color_bonus.h
+		  bonus/includes/color_bonus.h \
+		  bonus/includes/minimap_bonus.h
 
 BONUS_OBJ_DIR = bonus_objects/
 BONUS_OBJS = $(BONUS_SOURCES:%.c=$(BONUS_OBJ_DIR)%.o)

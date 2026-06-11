@@ -43,12 +43,10 @@ void	player_move(t_game *game,
 		double move_y,
 		double delta_time)
 {
-	char	**map;
 	double	len;
 	double	new_x;
 	double	new_y;
 	
-	map = game->map->map_arr;
 	len = sqrt(move_x * move_x + move_y * move_y);
 	if (len > 0)
 	{
@@ -62,7 +60,7 @@ void	player_move(t_game *game,
 	if (boundary_check_y(game->map, new_y, game->player.pos.x))
 		game->player.pos.y = new_y;
 }
-#include <stdio.h>
+
 void	set_target_pos(t_game *game)
 {
 	size_t	i;
