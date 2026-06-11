@@ -90,9 +90,9 @@ void	load_textures(t_game *game)
 		mlx_cleanup(game);
 	}
 	game->textures[4] = texture_loader(game->connection, game->map->path_m);
-	// if (!game->textures[4].valid)
-	// {
-	// 	game->map->err_msg = "Error\nLoading M texture failed\n";
-	// 	mlx_cleanup(game);
-	// }
+	if (!game->textures[4].valid)
+	{
+		game->map->err_msg = "Error\nLoading M texture failed\n";
+		mlx_cleanup(game);
+	}
 }

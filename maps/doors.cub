@@ -2,15 +2,17 @@ NO maps/textures/N.xpm
 WE maps/textures/W.xpm
 EA maps/textures/E.xpm
 SO maps/textures/S.xpm
-
+M maps/textures/horror/monster.xpm
 F 220,100,00
 C 225,30,0
 
     
-1111111
-1000001
-1000001
-101D101
-1000001
-100N001
-1111111
+111111111
+1N0100001
+101011001
+1D1000001
+101011001
+100000D01
+111010101
+100000M01
+111111111

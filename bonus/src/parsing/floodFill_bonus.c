@@ -114,8 +114,8 @@ int	validate_map(t_map *map)
 {
 	char	**copy;
 
-	// if (map->player.count != 1 || map->enemy.count != 1)
-	// 	return (map->err_msg = "Error\nPlayer/Enemy count not exactly 1\n", 0);
+	if (map->player.count != 1 || map->enemy.count != 1)
+		return (map->err_msg = "Error\nPlayer/Enemy count not exactly 1\n", 0);
 	if (!init_strlen_arr(map))
 		return (map->err_msg = "Error\nAllocating strlen_arr has failed\n", 0);
 	copy = ft_copy_arr((const char **)map->map_arr);
@@ -125,9 +125,9 @@ int	validate_map(t_map *map)
 	if (!flood_fill(map, copy, map->enemy.pos.x, map->enemy.pos.y))
 		return (map->err_msg = "Error\nFloodfill from enemy pos failed\n",
 			free_func(NULL, copy), 0);
-	// if (!map->player_hit)
-	// 	return (map->err_msg = "Error\nEnemy doesn't have access to player\n",
-			// free_func(NULL, copy), 0);
+	if (!map->player_hit)
+		return (map->err_msg = "Error\nEnemy doesn't have access to player\n",
+			free_func(NULL, copy), 0);
 	if (!check_rem_rooms(map, copy))
 		return (map->err_msg = "Error\nFloodfill in independent room failed\n",
 			free_func(NULL, copy), 0);

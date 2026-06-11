@@ -71,7 +71,7 @@ int	check_extension(t_map *map, const char *path, const char *ext)
 bool	check_missing_path(t_map *map)
 {
 	if (!map->path_no || !map->path_so || !map->path_we || !map->path_ea
-		|| !map->color_f.set || !map->color_c.set) // || !map->path_m 
+		|| !map->color_f.set || !map->color_c.set || !map->path_m)
 		return (map->err_msg = "Error\nA path or color is missing/misconfigured"
 			" or map is not last\n", true);
 	return (false);
