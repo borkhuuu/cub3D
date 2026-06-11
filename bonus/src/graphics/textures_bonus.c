@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 16:07:20 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/01 14:35:36 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/06/08 12:55:37 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ void	load_textures(t_game *game)
 		mlx_cleanup(game);
 	}
 	game->textures[4] = texture_loader(game->connection, game->map->path_m);
-	if (!game->textures[4].valid)
-	{
-		game->map->err_msg = "Error\nLoading M texture failed\n";
-		mlx_cleanup(game);
-	}
+	// if (!game->textures[4].valid)
+	// {
+	// 	game->map->err_msg = "Error\nLoading M texture failed\n";
+	// 	mlx_cleanup(game);
+	// }
 }

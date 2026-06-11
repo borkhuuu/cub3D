@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 18:40:03 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/07 17:39:07 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/06/08 21:14:27 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ int	raycaster(t_game *game)
 	while (x < WIDTH)
 	{
 		cast_ray(&ray, game, x);
-		while (game->map->map_arr[ray.map_y][ray.map_x] != '1')
-			move_ray(&ray);
+		run_dda(&ray, game);
 		t = select_texture(game, ray);
 		calculate_wall_height(&ray, game);
 		game->pdist_buffer[x] = ray.perp_dist;

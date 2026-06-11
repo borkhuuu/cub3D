@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_helpers.c                                    :+:      :+:    :+:   */
+/*   parse_helpers_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:59:32 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/14 18:09:00 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/06/08 13:53:51 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	strerror_wrapper(const int errnum)
 
 bool	is_valid(const char c)
 {
-	if (!ft_iswspace(c) && c != '0' && c != '1' && c != 'M'
+	if (!ft_iswspace(c) && c != '0' && c != '1' && c != 'M' && c != 'D'
 		&& c != 'N' && c != 'S' && c != 'W' && c != 'E')
 		return (false);
 	return (true);
