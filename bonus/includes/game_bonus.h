@@ -6,7 +6,7 @@
 /*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 16:23:59 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/08 21:15:27 by rheidary         ###   ########.fr       */
+/*   Updated: 2026/06/14 13:19:39 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	move_ray(t_raycast *ray);
 void	cast_ray(t_raycast *ray, t_game *game, size_t x);
 void	calculate_wall_height(t_raycast *ray, t_game *game);
 void	init_step_dir(t_raycast *ray, t_vec	ray_dir);
-bool	is_player_near_door(t_game *game, int door_x, int door_y);
+bool	is_entity_near_door(t_game *game, int door_x, int door_y);
 void	run_dda(t_raycast *ray, t_game *game);
 
 /*					bfs.c						*/
