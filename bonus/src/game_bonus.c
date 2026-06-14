@@ -6,7 +6,7 @@
 /*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 14:16:10 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/01 16:56:42 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/06/14 14:15:10 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "../../libraries/mlx/mlx.h"
 #include <X11/X.h>
 #include <stdbool.h>
+#include <math.h>
 
 bool	enemy_caught_player(t_game *game)
 {
@@ -57,14 +58,47 @@ int	game_loop(t_game *game)
 	return (0);
 }
 
+int mouse_hook(int x, int y, t_game *game)
+{
+    int         delta_x;
+    double      rot_speed;
+    double      old_dir_x;
+    double      old_camera_x;
+
+    (void)y;
+    delta_x = x - (WIDTH / 2);
+    if (delta_x == 0)
+        return (0);
+    rot_speed = 0.002;
+    old_dir_x = game->player.dir.x;
+    game->player.dir.x = old_dir_x * cos(delta_x * rot_speed)
+                       - game->player.dir.y * sin(delta_x * rot_speed);
+    game->player.dir.y = old_dir_x * sin(delta_x * rot_speed)
+                       + game->player.dir.y * cos(delta_x * rot_speed);
+    old_camera_x = game->player.camera.x;
+    game->player.camera.x = old_camera_x * cos(delta_x * rot_speed)
+                          - game->player.camera.y * sin(delta_x * rot_speed);
+    game->player.camera.y = old_camera_x * sin(delta_x * rot_speed)
+                          + game->player.camera.y * cos(delta_x * rot_speed);
+    mlx_mouse_move(game->connection, game->window, WIDTH / 2, HEIGHT / 2);
+    return (0);
+}
+
 int	start_game(t_game *game)
 {
 	mlx_hook(game->window, 17, 0, x_window, game);
 	mlx_hook(game->window, 2, 1L << 0, key_press, game);
 	mlx_hook(game->window, 3, 1L << 1, key_release, game);
+	mlx_hook(game->window, MotionNotify, PointerMotionMask, mouse_hook, game);
 	mlx_loop_hook(game->connection, game_loop, game);
 	mlx_loop(game->connection);
 	return (0);
+}
+
+void	init_mouse(t_game *game)
+{
+	mlx_mouse_hide(game->connection, game->window);
+	mlx_mouse_move(game->connection, game->window, WIDTH / 2, HEIGHT / 2);
 }
 
 void	setup_game(t_map *map)
@@ -74,6 +108,7 @@ void	setup_game(t_map *map)
 	ft_memset(&game, 0, sizeof(t_game));
 	game.map = map;
 	init_mlx(&game);
+	init_mouse(&game);
 	load_textures(&game);
 	init_player(&game);
 	init_enemy(&game);
