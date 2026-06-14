@@ -6,7 +6,7 @@
 /*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 12:06:49 by rheidary          #+#    #+#             */
-/*   Updated: 2026/05/23 16:32:33 by rheidary         ###   ########.fr       */
+/*   Updated: 2026/06/14 13:09:23 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,47 @@ void	draw_player(t_game *game)
 	}
 }
 
+bool	get_enemy_pos(t_game *game, int *m_x, int *m_y, int tile_count)
+{
+	int	mm_x;
+	int	mm_y;
+
+	mm_x = (int)game->player.pos.x - tile_count / 2;
+	mm_y = (int)game->player.pos.y - tile_count / 2;
+	if (game->enemy.pos.x < mm_x
+		|| game->enemy.pos.x >= mm_x + tile_count
+		|| game->enemy.pos.y < mm_y
+		|| game->enemy.pos.y >= mm_y + tile_count)
+		return (false);
+	*m_x = MINIMAP_OFFSET + MINIMAP_TILE_SIZE
+		+ (int)(game->enemy.pos.x - mm_x) * MINIMAP_TILE_SIZE;
+	*m_y = MINIMAP_OFFSET + MINIMAP_TILE_SIZE
+		+ (int)(game->enemy.pos.y - mm_y) * MINIMAP_TILE_SIZE;
+	return (true);
+}
+
+void	draw_enemy(t_game *game, int tile_count)
+{
+	int	enemy_x;
+	int	enemy_y;
+	int	x;
+	int	y;
+
+	if (!get_enemy_pos(game, &enemy_x, &enemy_y, tile_count))
+		return;
+	y = enemy_y;
+	while (y < enemy_y + MINIMAP_TILE_SIZE)
+	{
+		x = enemy_x;
+		while (x < enemy_x + MINIMAP_TILE_SIZE)
+		{
+			ft_pixel_put(game, x, y, 0xFF0000);
+			x++;
+		}
+		y++;
+	}
+}
+
 // ---
 
 void	minimap(t_game *game)
@@ -115,5 +156,6 @@ void	minimap(t_game *game)
 	tile_count = (MINIMAP_SIZE / MINIMAP_TILE_SIZE) - 2;
 	draw_background(game);
 	draw_slice(game, tile_count);
+	draw_enemy(game, tile_count);
 	draw_player(game);
 }
