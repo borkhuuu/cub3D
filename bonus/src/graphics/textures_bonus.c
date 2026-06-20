@@ -63,36 +63,55 @@ t_texture	texture_loader(void *mlx, char *path)
 	return (t.valid = true, t);
 }
 
+void	load_monster_textures(t_game *game)
+{
+	game->monster_textures[0] = texture_loader(game->connection, game->map->path_M_one);
+	if (!game->monster_textures[0].valid)
+		return (game->map->err_msg = "Error\nLoading texture '1' failed\n",
+			mlx_cleanup(game));
+	game->monster_textures[1] = texture_loader(game->connection, game->map->path_M_two);
+	if (!game->monster_textures[1].valid)
+		return (game->map->err_msg = "Error\nLoading texture '2' failed\n",
+			mlx_cleanup(game));
+	game->monster_textures[2] = texture_loader(game->connection, game->map->path_M_three);
+	if (!game->monster_textures[2].valid)
+		return (game->map->err_msg = "Error\nLoading texture '3' failed\n",
+			mlx_cleanup(game));
+	game->monster_textures[3] = texture_loader(game->connection, game->map->path_M_four);
+	if (!game->monster_textures[3].valid)
+		return (game->map->err_msg = "Error\nLoading texture '4' failed\n",
+			mlx_cleanup(game));
+	game->monster_textures[4] = texture_loader(game->connection, game->map->path_M_five);
+	if (!game->monster_textures[4].valid)
+		return (game->map->err_msg = "Error\nLoading texture '5' failed\n",
+			mlx_cleanup(game));
+	game->monster_textures[5] = texture_loader(game->connection, game->map->path_M_six);
+	if (!game->monster_textures[5].valid)
+		return (game->map->err_msg = "Error\nLoading texture '6' failed\n",
+			mlx_cleanup(game));
+}
+
 void	load_textures(t_game *game)
 {
 	game->textures[0] = texture_loader(game->connection, game->map->path_no);
 	if (!game->textures[0].valid)
-	{
-		game->map->err_msg = "Error\nLoading NO texture failed\n";
-		mlx_cleanup(game);
-	}
+		return (game->map->err_msg = "Error\nLoading NO texture failed\n",
+			mlx_cleanup(game));
 	game->textures[1] = texture_loader(game->connection, game->map->path_so);
 	if (!game->textures[1].valid)
-	{
-		game->map->err_msg = "Error\nLoading SO texture failed\n";
-		mlx_cleanup(game);
-	}
+		return (game->map->err_msg = "Error\nLoading SO texture failed\n",
+			mlx_cleanup(game));
 	game->textures[2] = texture_loader(game->connection, game->map->path_we);
 	if (!game->textures[2].valid)
-	{
-		game->map->err_msg = "Error\nLoading WE texture failed\n";
-		mlx_cleanup(game);
-	}
+		return (game->map->err_msg = "Error\nLoading WE texture failed\n",
+			mlx_cleanup(game));
 	game->textures[3] = texture_loader(game->connection, game->map->path_ea);
 	if (!game->textures[3].valid)
-	{
-		game->map->err_msg = "Error\nLoading EA texture failed\n";
-		mlx_cleanup(game);
-	}
+		return (game->map->err_msg = "Error\nLoading EA texture failed\n",
+			mlx_cleanup(game));
 	game->textures[4] = texture_loader(game->connection, game->map->path_m);
 	if (!game->textures[4].valid)
-	{
-		game->map->err_msg = "Error\nLoading M texture failed\n";
-		mlx_cleanup(game);
-	}
+		return (game->map->err_msg = "Error\nLoading M texture failed\n",
+			mlx_cleanup(game));
+	load_monster_textures(game);
 }

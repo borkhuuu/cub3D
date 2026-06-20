@@ -16,7 +16,7 @@
 # define WIDTH 1600 
 # define HEIGHT 900
 # define SPEED 4.5
-# define MONSTER_SPEED 0.5
+# define MONSTER_SPEED 3.0
 # define ROT_ANGLE 2.7
 # define PADDING 0.12
 # define BFS_THRESHOLD 0.5
@@ -93,12 +93,15 @@ typedef struct s_game
 	void		*window;
 	t_map		*map;
 	t_texture	textures[5];
+	t_texture	monster_textures[6];
 	t_raycast	ray;
 	t_image		image;
 	t_entity	player;
 	t_entity	enemy;
 	t_movement	movement;
 	double		pdist_buffer[WIDTH];
+	double		anim_timer;
+	int			anim_frame;
 	double		last_time;
 	int			color_f;
 	int			color_c;

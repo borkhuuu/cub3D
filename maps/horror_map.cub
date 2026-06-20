@@ -4,11 +4,16 @@ EA maps/textures/horror/red3.xpm
 SO maps/textures/horror/red4.xpm  
 
 
-M maps/textures/horror/monster.xpm  		 	 	 		
+M maps/textures/horror/frame_1.xpm  		 	 	 		
 
 F 	  	  	255,0,0        
 C 0,0,0	
-
+1  		maps/textures/horror/frame_1.xpm
+2  		maps/textures/horror/frame_2.xpm
+3  		maps/textures/horror/frame_3.xpm
+4  		maps/textures/horror/frame_4.xpm
+5  		maps/textures/horror/frame_5.xpm
+6  		maps/textures/horror/frame_6.xpm
 
 11111111111111111111111111111111
 1M000000001000000000100000000001

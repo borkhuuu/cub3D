@@ -16,6 +16,44 @@
 #include "../../includes/game_bonus.h"
 #include <stdlib.h>
 
+void	free_m_paths_helper(t_map *map)
+{
+	if (map->path_M_five)
+	{
+		free(map->path_M_five);
+		map->path_M_five = NULL;
+	}
+	if (map->path_M_six)
+	{
+		free(map->path_M_six);
+		map->path_M_six = NULL;
+	}
+}
+
+void	free_m_paths(t_map *map)
+{
+	if (map->path_M_one)
+	{
+		free(map->path_M_one);
+		map->path_M_one = NULL;
+	}
+	if (map->path_M_two)
+	{
+		free(map->path_M_two);
+		map->path_M_two = NULL;
+	}
+	if (map->path_M_three)
+	{
+		free(map->path_M_three);
+		map->path_M_three = NULL;
+	}
+	if (map->path_M_four)
+	{
+		free(map->path_M_four);
+		map->path_M_four = NULL;
+	}
+}
+
 void	free_paths(t_map *map)
 {
 	if (map->path_no)
@@ -66,6 +104,8 @@ void	free_func(t_map *map, char **arr)
 			map->line = NULL;
 		}
 		free_paths(map);
+		free_m_paths(map);
+		free_m_paths_helper(map);
 	}
 }
 

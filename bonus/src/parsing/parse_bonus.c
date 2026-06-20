@@ -14,6 +14,32 @@
 #include "../../includes/map_bonus.h"
 #include "../../../libraries/libft/libft.h"
 
+int	handle_id_helper(t_map *map, char **arr)
+{
+	if (!arr || !arr[0] || !arr[1])
+		return (map->err_msg = "Path is misconfigured\n", 0);
+	if (!ft_strcmp(arr[0], "1"))
+		if (!handle_path(map, &map->path_M_one, arr[1], '1'))
+			return (0);
+	if (!ft_strcmp(arr[0], "2"))
+		if (!handle_path(map, &map->path_M_two, arr[1], '2'))
+			return (0);
+	if (!ft_strcmp(arr[0], "3"))
+		if (!handle_path(map, &map->path_M_three, arr[1], '3'))
+			return (0);
+	if (!ft_strcmp(arr[0], "4"))
+		if (!handle_path(map, &map->path_M_four, arr[1], '4'))
+			return (0);
+	if (!ft_strcmp(arr[0], "5"))
+		if (!handle_path(map, &map->path_M_five, arr[1], '5'))
+			return (0);
+	if (!ft_strcmp(arr[0], "6"))
+		if (!handle_path(map, &map->path_M_six, arr[1], '6'))
+			return (0);
+	free_func(NULL, arr);
+	return (1);
+}
+
 int	handle_id(t_map *map, char **arr)
 {
 	if (!arr || !arr[0] || !arr[1])
@@ -39,7 +65,6 @@ int	handle_id(t_map *map, char **arr)
 	if (!ft_strcmp(arr[0], "C"))
 		if (!handle_color(map, &map->color_c, arr[1], 'C'))
 			return (0);
-	free_func(NULL, arr);
 	return (1);
 }
 
@@ -60,7 +85,7 @@ int	parse_paths(t_map *map)
 	arr = tmp_ptr;
 	if (is_path(arr[0]))
 	{
-		if (!handle_id(map, arr))
+		if (!handle_id(map, arr) || !handle_id_helper(map, arr))
 			return (free_func(NULL, arr), 0);
 	}
 	else

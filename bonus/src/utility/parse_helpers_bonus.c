@@ -50,7 +50,10 @@ bool	is_path(const char *s)
 	if (!ft_strcmp(s, "NO") || !ft_strcmp(s, "SO")
 		|| !ft_strcmp(s, "WE") || !ft_strcmp(s, "EA")
 		|| !ft_strcmp(s, "M")
-		|| !ft_strcmp(s, "F") || !ft_strcmp(s, "C"))
+		|| !ft_strcmp(s, "F") || !ft_strcmp(s, "C")
+		|| !ft_strcmp(s, "1") || !ft_strcmp(s, "2")
+		|| !ft_strcmp(s, "3") || !ft_strcmp(s, "4")
+		|| !ft_strcmp(s, "5") || !ft_strcmp(s, "6"))
 		return (true);
 	return (false);
 }

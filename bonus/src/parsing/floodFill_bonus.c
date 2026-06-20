@@ -124,6 +124,7 @@ int	validate_map(t_map *map)
 	if (!copy)
 		return (map->err_msg = "Error\nCopying the map failed\n", 0);
 	get_pos(map);
+	ft_print_arr(copy);
 	if (!flood_fill(map, copy, map->enemy.pos.x, map->enemy.pos.y))
 		return (map->err_msg = "Error\nFloodfill from enemy pos failed\n",
 			free_func(NULL, copy), 0);

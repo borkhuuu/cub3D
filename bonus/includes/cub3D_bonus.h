@@ -32,6 +32,9 @@ typedef struct s_texture
 	int		height;
 	int		width;
 	unsigned int	color;
+	int		r_val;
+	int		g_val;
+	int		b_val;
 	bool	valid;
 }	t_texture;
 

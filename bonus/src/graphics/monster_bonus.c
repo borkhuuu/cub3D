@@ -44,8 +44,11 @@ void	draw_vert_line(t_game *game, t_render *r, t_texture t, int stripe)
 		r->tex_y = ft_clamp_int(r->tex_y, 0, t.height - 1);
 		r->tex_pos += r->step;
 		t.color = get_texture_pixel_color(t, r->tex_x, r->tex_y);
-		if ((t.color & 0x00FFFFFF) != 0)
-			ft_pixel_put(game, stripe, y, t.color);
+		t.r_val = (t.color >> 16) & 0xFF;
+		t.g_val = (t.color >> 8) & 0xFF;
+		t.b_val = t.color & 0xFF;
+		if (t.r_val > 10 || t.g_val > 10 || t.b_val > 10)
+    		ft_pixel_put(game, stripe, y, t.color);
 		y++;
 	}
 }

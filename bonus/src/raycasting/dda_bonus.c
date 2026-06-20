@@ -86,6 +86,6 @@ int	raycaster(t_game *game)
 		draw(game, t, ray.wall_height, x);
 		x++;
 	}
-	draw_monster(game, game->textures[4]);
+	draw_monster(game, game->monster_textures[game->anim_frame]);
 	return (1);
 }

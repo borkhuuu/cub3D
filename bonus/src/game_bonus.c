@@ -75,6 +75,12 @@ int	game_loop(t_game *game)
 		write(1, "GAME OVER!\n", 12);
 		mlx_cleanup(game);
 	}
+	game->anim_timer += delta_time;
+	if (game->anim_timer >= 0.35)
+	{
+		game->anim_timer = 0;
+		game->anim_frame = (game->anim_frame + 1) % 6;
+	}
 	raycaster(game);
 	minimap(game);
 	mlx_put_image_to_window(game->connection, game->window,

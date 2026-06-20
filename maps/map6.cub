@@ -2,10 +2,15 @@ NO maps/textures/N.xpm
 WE maps/textures/W.xpm
 EA maps/textures/E.xpm
 SO maps/textures/S.xpm
-M  		maps/textures/S.xpm
+M  		maps/textures/horror/frame_1.xpm
 C 225,30,0
 F 220,100,00
-
+1  		maps/textures/horror/frame_1.xpm
+2  		maps/textures/horror/frame_2.xpm
+3  		maps/textures/horror/frame_3.xpm
+4  		maps/textures/horror/frame_4.xpm
+5  		maps/textures/horror/frame_5.xpm
+6  		maps/textures/horror/frame_6.xpm
 
 1111111
 1000111
@@ -14,7 +19,7 @@ F 220,100,00
 11
  			1111
 		11111110111
-	  11000000011
+	  11M00000011
     1100000000001
     10001111111111
  11110011        1
@@ -22,9 +27,9 @@ F 220,100,00
 110010001111111111
 1100100000000001
 11001000001000001
-110010000MW10001  111
+1100100000W10001  111
 1100100000100001  101
-11001000000000001  111
+1100100000000X001  111
  111100011110001
     100001 100001
     100001 100001

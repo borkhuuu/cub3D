@@ -41,6 +41,12 @@ typedef struct s_map
 	char		*path_we;
 	char		*path_ea;
 	char		*path_m;
+	char		*path_M_one;
+	char		*path_M_two;
+	char		*path_M_three;
+	char		*path_M_four;
+	char		*path_M_five;
+	char		*path_M_six;
 	t_color		color_f;
 	t_color		color_c;
 	char		exit;
