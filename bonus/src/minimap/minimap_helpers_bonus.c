@@ -6,7 +6,7 @@
 /*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 16:28:19 by rheidary          #+#    #+#             */
-/*   Updated: 2026/05/23 16:33:28 by rheidary         ###   ########.fr       */
+/*   Updated: 2026/06/14 13:04:30 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ void	get_color(int *color, char tile)
 {
 	if (tile == '1')
 		*color = 0x40E0D0;
-	else if (tile == '0'
+	else if (tile == '0' || tile == 'M'
 		|| tile == 'N' || tile == 'S'
 		|| tile == 'E' || tile == 'W')
 		*color = 0x808080;
+	else if (tile == 'D')
+		*color = 0x40FFF1;
 	else
 		*color = 0xFF0000;
 }
