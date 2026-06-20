@@ -15,7 +15,6 @@
 #include "../../includes/map_bonus.h"
 #include "../../../libraries/libft/libft.h"
 #include <X11/keysym.h>
-#include <math.h>
 #include <stdbool.h>
 
 int	key_press(int keycode, t_game *game)

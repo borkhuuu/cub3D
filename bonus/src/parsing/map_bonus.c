@@ -26,6 +26,8 @@ int	validate_characters(t_map *map, const char *s)
 	{
 		if (!is_valid(s[i]))
 			return (0);
+		if (s[i] == 'X')
+			map->exit = s[i];
 		if (is_player(s[i]))
 		{
 			map->player.spawn = s[i];

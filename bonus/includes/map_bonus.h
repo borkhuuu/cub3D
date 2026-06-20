@@ -43,6 +43,7 @@ typedef struct s_map
 	char		*path_m;
 	t_color		color_f;
 	t_color		color_c;
+	char		exit;
 }	t_map;
 
 /*				parsing/parse_bonus.c				*/

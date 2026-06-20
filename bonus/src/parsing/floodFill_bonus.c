@@ -116,6 +116,8 @@ int	validate_map(t_map *map)
 
 	if (map->player.count != 1 || map->enemy.count != 1)
 		return (map->err_msg = "Error\nPlayer/Enemy count not exactly 1\n", 0);
+	if (!map->exit)
+		return (map->err_msg = "Error\nMap doesn't have an exit\n", 0);
 	if (!init_strlen_arr(map))
 		return (map->err_msg = "Error\nAllocating strlen_arr has failed\n", 0);
 	copy = ft_copy_arr((const char **)map->map_arr);

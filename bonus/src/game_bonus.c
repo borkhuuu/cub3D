@@ -18,6 +18,7 @@
 #include "../../libraries/mlx/mlx.h"
 #include <X11/X.h>
 #include <stdbool.h>
+#include <stddef.h>
 
 bool	enemy_caught_player(t_game *game)
 {
@@ -32,6 +33,25 @@ bool	enemy_caught_player(t_game *game)
 		return (false);
 }
 
+bool	player_found_exit(t_game *game)
+{
+	size_t	x;
+	size_t	y;
+
+	if (game->player.pos.x < 0 || game->player.pos.y < 0)
+		return (false);
+	x = (size_t)game->player.pos.x;
+	y = (size_t)game->player.pos.y;
+	if (y >= game->map->map_height)
+		return (false);
+	if (x > game->map->strlen_arr[y])
+		return (false);
+	if (game->map->map_arr[y][x] == 'X')
+		return (true);
+	else
+	 	return (false);
+}
+
 int	game_loop(t_game *game)
 {
 	double	now;
@@ -42,6 +62,11 @@ int	game_loop(t_game *game)
 	game->last_time = now;
 	if (delta_time > 0.05)
 		delta_time = 0.05;
+	if (player_found_exit(game))
+	{
+		write(1, "Congratulations, you won!\n", 27);
+		mlx_cleanup(game);
+	}
 	movement(game, delta_time);
 	if (!enemy_move(game, delta_time))
 		return (game->map->err_msg = "Error\nBFS failed\n", 0);

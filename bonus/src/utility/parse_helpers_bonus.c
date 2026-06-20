@@ -26,7 +26,7 @@ void	strerror_wrapper(const int errnum)
 bool	is_valid(const char c)
 {
 	if (!ft_iswspace(c) && c != '0' && c != '1' && c != 'M' && c != 'D'
-		&& c != 'N' && c != 'S' && c != 'W' && c != 'E')
+		&& c != 'N' && c != 'S' && c != 'W' && c != 'E' && c != 'X')
 		return (false);
 	return (true);
 }
