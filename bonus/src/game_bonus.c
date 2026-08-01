@@ -6,7 +6,7 @@
 /*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 14:16:10 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/14 14:15:10 by rheidary         ###   ########.fr       */
+/*   Updated: 2026/08/01 19:35:00 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,69 +49,36 @@ bool	player_found_exit(t_game *game)
 	if (game->map->map_arr[y][x] == 'X')
 		return (true);
 	else
-	 	return (false);
+		return (false);
 }
 
 int	game_loop(t_game *game)
 {
 	double	now;
 	double	delta_time;
-	
+
 	now = get_time();
 	delta_time = now - game->last_time;
 	game->last_time = now;
 	if (delta_time > 0.05)
 		delta_time = 0.05;
 	if (player_found_exit(game))
-	{
-		write(1, "Congratulations, you won!\n", 27);
-		mlx_cleanup(game);
-	}
+		end_game(game, true);
 	movement(game, delta_time);
 	if (!enemy_move(game, delta_time))
 		return (game->map->err_msg = "Error\nBFS failed\n", 0);
 	if (enemy_caught_player(game))
-	{
-		write(1, "GAME OVER!\n", 12);
-		mlx_cleanup(game);
-	}
+		end_game(game, false);
 	game->anim_timer += delta_time;
 	if (game->anim_timer >= 0.35)
 	{
 		game->anim_timer = 0;
 		game->anim_frame = (game->anim_frame + 1) % 6;
 	}
-	raycaster(game);
-	minimap(game);
+	(raycaster(game), minimap(game));
 	mlx_put_image_to_window(game->connection, game->window,
 		game->image.ptr_to_img, 0, 0);
 	return (0);
-}
-
-int mouse_hook(int x, int y, t_game *game)
-{
-    int         delta_x;
-    double      rot_speed;
-    double      old_dir_x;
-    double      old_camera_x;
-
-    (void)y;
-    delta_x = x - (WIDTH / 2);
-    if (delta_x == 0)
-        return (0);
-    rot_speed = 0.002;
-    old_dir_x = game->player.dir.x;
-    game->player.dir.x = old_dir_x * cos(delta_x * rot_speed)
-                       - game->player.dir.y * sin(delta_x * rot_speed);
-    game->player.dir.y = old_dir_x * sin(delta_x * rot_speed)
-                       + game->player.dir.y * cos(delta_x * rot_speed);
-    old_camera_x = game->player.camera.x;
-    game->player.camera.x = old_camera_x * cos(delta_x * rot_speed)
-                          - game->player.camera.y * sin(delta_x * rot_speed);
-    game->player.camera.y = old_camera_x * sin(delta_x * rot_speed)
-                          + game->player.camera.y * cos(delta_x * rot_speed);
-    mlx_mouse_move(game->connection, game->window, WIDTH / 2, HEIGHT / 2);
-    return (0);
 }
 
 int	start_game(t_game *game)
@@ -125,16 +92,10 @@ int	start_game(t_game *game)
 	return (0);
 }
 
-void	init_mouse(t_game *game)
-{
-	mlx_mouse_hide(game->connection, game->window);
-	mlx_mouse_move(game->connection, game->window, WIDTH / 2, HEIGHT / 2);
-}
-
 void	setup_game(t_map *map)
 {
 	t_game	game;
-	
+
 	ft_memset(&game, 0, sizeof(t_game));
 	game.map = map;
 	init_mlx(&game);

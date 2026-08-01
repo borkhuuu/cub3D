@@ -6,7 +6,7 @@
 /*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 18:49:20 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/14 13:21:33 by rheidary         ###   ########.fr       */
+/*   Updated: 2026/08/01 18:02:28 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ bool	is_entity_near_door(t_game *game, int door_x, int door_y)
 {
 	float	dist_player;
 	float	dist_enemy;
-	
-	dist_player = sqrt(pow(game->player.pos.x - (door_x + 0.5), 2) +
-				pow(game->player.pos.y - (door_y + 0.5), 2));
+
+	dist_player = sqrt(pow(game->player.pos.x - (door_x + 0.5), 2)
+			+ pow(game->player.pos.y - (door_y + 0.5), 2));
 	if (dist_player < 1.5)
 		return (true);
-	dist_enemy = sqrt(pow(game->enemy.pos.x - (door_x + 0.5), 2) +
-				pow(game->enemy.pos.y - (door_y + 0.5), 2));
+	dist_enemy = sqrt(pow(game->enemy.pos.x - (door_x + 0.5), 2)
+			+ pow(game->enemy.pos.y - (door_y + 0.5), 2));
 	if (dist_enemy < 1.5)
 		return (true);
 	return (false);
@@ -80,9 +80,9 @@ void	run_dda(t_raycast *ray, t_game *game)
 	{
 		cell = game->map->map_arr[ray->map_y][ray->map_x];
 		if (cell == '1')
-			break;
+			break ;
 		if (cell == 'D' && !is_entity_near_door(game, ray->map_x, ray->map_y))
-			break;
+			break ;
 		move_ray(ray);
 	}
 }

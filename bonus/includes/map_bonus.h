@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 16:22:18 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/01 14:36:11 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/08/01 17:51:57 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ typedef struct s_map
 	char		*path_we;
 	char		*path_ea;
 	char		*path_m;
-	char		*path_M_one;
-	char		*path_M_two;
-	char		*path_M_three;
-	char		*path_M_four;
-	char		*path_M_five;
-	char		*path_M_six;
+	char		*path_m_one;
+	char		*path_m_two;
+	char		*path_m_three;
+	char		*path_m_four;
+	char		*path_m_five;
+	char		*path_m_six;
 	t_color		color_f;
 	t_color		color_c;
 	char		exit;

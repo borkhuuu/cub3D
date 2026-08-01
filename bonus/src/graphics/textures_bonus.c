@@ -6,7 +6,7 @@
 /*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 16:07:20 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/08 12:55:37 by rheidary         ###   ########.fr       */
+/*   Updated: 2026/08/01 19:39:12 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,34 +61,6 @@ t_texture	texture_loader(void *mlx, char *path)
 	if (!t.ptr_to_pixel)
 		return (t.valid = false, t);
 	return (t.valid = true, t);
-}
-
-void	load_monster_textures(t_game *game)
-{
-	game->monster_textures[0] = texture_loader(game->connection, game->map->path_M_one);
-	if (!game->monster_textures[0].valid)
-		return (game->map->err_msg = "Error\nLoading texture '1' failed\n",
-			mlx_cleanup(game));
-	game->monster_textures[1] = texture_loader(game->connection, game->map->path_M_two);
-	if (!game->monster_textures[1].valid)
-		return (game->map->err_msg = "Error\nLoading texture '2' failed\n",
-			mlx_cleanup(game));
-	game->monster_textures[2] = texture_loader(game->connection, game->map->path_M_three);
-	if (!game->monster_textures[2].valid)
-		return (game->map->err_msg = "Error\nLoading texture '3' failed\n",
-			mlx_cleanup(game));
-	game->monster_textures[3] = texture_loader(game->connection, game->map->path_M_four);
-	if (!game->monster_textures[3].valid)
-		return (game->map->err_msg = "Error\nLoading texture '4' failed\n",
-			mlx_cleanup(game));
-	game->monster_textures[4] = texture_loader(game->connection, game->map->path_M_five);
-	if (!game->monster_textures[4].valid)
-		return (game->map->err_msg = "Error\nLoading texture '5' failed\n",
-			mlx_cleanup(game));
-	game->monster_textures[5] = texture_loader(game->connection, game->map->path_M_six);
-	if (!game->monster_textures[5].valid)
-		return (game->map->err_msg = "Error\nLoading texture '6' failed\n",
-			mlx_cleanup(game));
 }
 
 void	load_textures(t_game *game)

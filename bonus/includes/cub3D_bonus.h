@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 13:58:35 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/01 12:48:01 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/08/01 19:41:49 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@ typedef struct s_map		t_map;
 typedef struct s_entity		t_entity;
 typedef struct s_texture
 {
-	void	*ptr_to_img;
-	char	*ptr_to_pixel;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		height;
-	int		width;
+	void			*ptr_to_img;
+	char			*ptr_to_pixel;
+	int				bpp;
+	int				line_len;
+	int				endian;
+	int				height;
+	int				width;
 	unsigned int	color;
-	int		r_val;
-	int		g_val;
-	int		b_val;
-	bool	valid;
+	int				r_val;
+	int				g_val;
+	int				b_val;
+	bool			valid;
 }	t_texture;
 
 typedef struct s_render
@@ -77,16 +77,22 @@ void		draw_middle(t_game *game, t_texture t, t_render *r);
 void		draw_floor(t_game *game, t_render *r);
 
 /*					textures.c				*/
+t_texture	texture_loader(void *mlx, char *path);
 void		load_textures(t_game *game);
 t_texture	select_texture(t_game *game, t_raycast ray);
 void		calculate_texture_pixel(t_raycast *ray, t_render *r, t_texture t);
+
+/*					textures2.c				*/
+void		load_monster_textures(t_game *game);
+void		load_monster_textures2(t_game *game);
 
 /*					UTILITY					*/
 //		general
 int			init_strlen_arr(t_map *map);
 int			get_texture_pixel_color(t_texture t, int x, int y);
 void		ft_pixel_put(t_game *game, int x, int y, int colour);
-double		get_time();
+double		get_time(void);
+void		end_game(t_game *game, bool flag);
 //		parsing
 void		strerror_wrapper(const int errnum);
 bool		is_valid(const char c);
@@ -98,6 +104,10 @@ void		free_paths(t_map *map);
 void		free_func(t_map *map, char **arr);
 void		free_textures(t_game *game, t_texture textures[4]);
 void		mlx_cleanup(t_game *game);
+
+//		memory_m_bonus.c
+void		free_m_paths_helper(t_map *map);
+void		free_m_paths(t_map *map);
 
 //		checks
 size_t		check_comma(const char *s);

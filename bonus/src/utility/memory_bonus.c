@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 18:42:17 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/01 15:37:27 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/08/01 18:42:30 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,6 @@
 #include "../../includes/map_bonus.h"
 #include "../../includes/game_bonus.h"
 #include <stdlib.h>
-
-void	free_m_paths_helper(t_map *map)
-{
-	if (map->path_M_five)
-	{
-		free(map->path_M_five);
-		map->path_M_five = NULL;
-	}
-	if (map->path_M_six)
-	{
-		free(map->path_M_six);
-		map->path_M_six = NULL;
-	}
-}
-
-void	free_m_paths(t_map *map)
-{
-	if (map->path_M_one)
-	{
-		free(map->path_M_one);
-		map->path_M_one = NULL;
-	}
-	if (map->path_M_two)
-	{
-		free(map->path_M_two);
-		map->path_M_two = NULL;
-	}
-	if (map->path_M_three)
-	{
-		free(map->path_M_three);
-		map->path_M_three = NULL;
-	}
-	if (map->path_M_four)
-	{
-		free(map->path_M_four);
-		map->path_M_four = NULL;
-	}
-}
 
 void	free_paths(t_map *map)
 {
@@ -126,7 +88,7 @@ void	free_textures(t_game *game, t_texture textures[4])
 void	mlx_cleanup(t_game *game)
 {
 	int	code;
-	
+
 	code = 0;
 	free_textures(game, game->textures);
 	if (game->enemy.bfs_path)

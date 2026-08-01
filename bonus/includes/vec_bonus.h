@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 16:20:33 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/30 14:50:14 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/08/01 19:57:57 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,14 @@ typedef struct s_vec_int
 	int	x;
 	int	y;
 }	t_vec_int;
+
+typedef struct s_doubles
+{
+	double	dx;
+	double	dy;
+	double	step;
+	double	dist;
+	double	dist_sq;
+}	t_doubles;
 
 #endif

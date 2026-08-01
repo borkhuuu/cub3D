@@ -6,7 +6,7 @@
 /*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 17:28:39 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/08 12:54:59 by rheidary         ###   ########.fr       */
+/*   Updated: 2026/08/01 19:24:15 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ int	validate_map(t_map *map)
 	if (!copy)
 		return (map->err_msg = "Error\nCopying the map failed\n", 0);
 	get_pos(map);
-	ft_print_arr(copy);
 	if (!flood_fill(map, copy, map->enemy.pos.x, map->enemy.pos.y))
 		return (map->err_msg = "Error\nFloodfill from enemy pos failed\n",
 			free_func(NULL, copy), 0);

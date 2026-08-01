@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 18:25:56 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/16 22:38:37 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/08/01 17:52:25 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ int	handle_id_helper(t_map *map, char **arr)
 	if (!arr || !arr[0] || !arr[1])
 		return (map->err_msg = "Path is misconfigured\n", 0);
 	if (!ft_strcmp(arr[0], "1"))
-		if (!handle_path(map, &map->path_M_one, arr[1], '1'))
+		if (!handle_path(map, &map->path_m_one, arr[1], '1'))
 			return (0);
 	if (!ft_strcmp(arr[0], "2"))
-		if (!handle_path(map, &map->path_M_two, arr[1], '2'))
+		if (!handle_path(map, &map->path_m_two, arr[1], '2'))
 			return (0);
 	if (!ft_strcmp(arr[0], "3"))
-		if (!handle_path(map, &map->path_M_three, arr[1], '3'))
+		if (!handle_path(map, &map->path_m_three, arr[1], '3'))
 			return (0);
 	if (!ft_strcmp(arr[0], "4"))
-		if (!handle_path(map, &map->path_M_four, arr[1], '4'))
+		if (!handle_path(map, &map->path_m_four, arr[1], '4'))
 			return (0);
 	if (!ft_strcmp(arr[0], "5"))
-		if (!handle_path(map, &map->path_M_five, arr[1], '5'))
+		if (!handle_path(map, &map->path_m_five, arr[1], '5'))
 			return (0);
 	if (!ft_strcmp(arr[0], "6"))
-		if (!handle_path(map, &map->path_M_six, arr[1], '6'))
+		if (!handle_path(map, &map->path_m_six, arr[1], '6'))
 			return (0);
 	free_func(NULL, arr);
 	return (1);

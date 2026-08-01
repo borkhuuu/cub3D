@@ -6,7 +6,7 @@
 /*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 16:23:59 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/14 13:19:39 by rheidary         ###   ########.fr       */
+/*   Updated: 2026/08/01 20:41:38 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_bfs
 {
 	t_map		*map;
 	t_vec_int	*queue;
+	size_t		tail;
 	char		*came_from;
 }	t_bfs;
 
@@ -130,6 +131,11 @@ char	*bfs(t_game *game);
 int		rerun_bfs(t_game *game);
 int		setup_bfs(t_bfs *bfs, t_game *game);
 char	*reconstruct_path(t_game *game, t_bfs *bfs);
+void	check_one(t_vec_int curr, t_bfs *bfs2);
+void	check_two(t_vec_int curr, t_bfs *bfs2);
+void	check_three(t_vec_int curr, t_bfs *bfs2);
+void	check_four(t_vec_int curr, t_bfs *bfs2);
+int		check_dir(char *path, size_t path_len, char dir, t_vec_int *curr);
 
 /*					movement_bonus.c			*/
 void	rotate(t_game *game, int dir, double delta_time);
@@ -146,5 +152,14 @@ int		key_release(int keycode, t_game *game);
 void	movement(t_game *game, double delta_time);
 bool	boundary_check_x(t_map *map, double new_x, double pos_y);
 bool	boundary_check_y(t_map *map, double new_y, double pos_x);
+
+/*					movement_helper2_bonus.c	*/
+void	movement2(t_game *game, double delta_time);
+void	set_target_pos(t_game *game);
+void	set_target_pos2(t_game *game, size_t i);
+
+/*					mlx_mouse_bonus.c			*/
+int		mouse_hook(int x, int y, t_game *game);
+void	init_mouse(t_game *game);
 
 #endif

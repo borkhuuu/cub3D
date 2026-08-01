@@ -46,14 +46,17 @@ DEPS = $(OBJS:.o=.d)
 BONUS_SOURCES = bonus/src/main_bonus.c\
 		  bonus/src/game_bonus.c\
 		  bonus/src/bfs/bfs.c\
+		  bonus/src/bfs/bfs_helper.c\
 		  bonus/src/graphics/init_mlx_bonus.c\
 		  bonus/src/graphics/render_bonus.c\
 		  bonus/src/graphics/textures_bonus.c\
+		  bonus/src/graphics/textures2_bonus.c\
 		  bonus/src/graphics/monster_bonus.c\
 		  bonus/src/raycasting/dda_bonus.c\
 		  bonus/src/raycasting/dda_helper_bonus.c\
 		  bonus/src/movement/movement_bonus.c\
 		  bonus/src/movement/movement_helper_bonus.c\
+		  bonus/src/movement/movement_helper2_bonus.c\
 		  bonus/src/parsing/parse_bonus.c\
 		  bonus/src/parsing/paths_bonus.c\
 		  bonus/src/parsing/color_bonus.c\
@@ -64,9 +67,12 @@ BONUS_SOURCES = bonus/src/main_bonus.c\
 		  bonus/src/utility/setup_bonus.c\
 		  bonus/src/utility/checks_bonus.c\
 		  bonus/src/utility/memory_bonus.c\
+		  bonus/src/utility/memory_m_bonus.c\
+		  bonus/src/utility/mlx_mouse_bonus.c\
 		  bonus/src/utility/whitespaces_bonus.c\
 		  bonus/src/minimap/minimap_bonus.c\
 		  bonus/src/minimap/minimap_helpers_bonus.c\
+		  bonus/src/minimap/minimap_helpers2_bonus.c\
 
 HEADERS = bonus/includes/cub3D_bonus.h \
 		  bonus/includes/game_bonus.h \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_helper_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 16:34:10 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/01 15:41:15 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/08/01 19:02:26 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	key_release(int keycode, t_game *game)
 void	movement(t_game *game, double delta_time)
 {
 	t_vec	move;
-	
+
 	ft_memset(&move, 0, sizeof(t_vec));
 	if (game->movement.w)
 	{
@@ -78,10 +78,7 @@ void	movement(t_game *game, double delta_time)
 		move.x -= game->player.dir.y;
 		move.y += game->player.dir.x;
 	}
-	if (game->movement.left)
-		rotate(game, 0, delta_time);
-	if (game->movement.right)
-		rotate(game, 1, delta_time);
+	movement2(game, delta_time);
 	player_move(game, move.x, move.y, delta_time);
 }
 
@@ -92,7 +89,7 @@ bool	boundary_check_x(t_map *map, double new_x, double pos_y)
 	int		x2;
 	int		y1;
 	int		y2;
-	
+
 	x1 = (int)(new_x - PADDING);
 	x2 = (int)(new_x + PADDING);
 	y1 = (int)(pos_y - PADDING);
@@ -131,7 +128,7 @@ bool	boundary_check_y(t_map *map, double new_y, double pos_x)
 		|| y2 >= (int)map->map_height)
 		return (false);
 	if (x1 < 0 || x2 < 0
-		|| x2 >= (int)map->strlen_arr[y1] 
+		|| x2 >= (int)map->strlen_arr[y1]
 		|| x2 >= (int)map->strlen_arr[y2]
 		|| x1 >= (int)map->strlen_arr[y1]
 		|| x1 >= (int)map->strlen_arr[y2])

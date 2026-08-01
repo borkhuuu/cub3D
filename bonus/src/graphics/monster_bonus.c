@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monster_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 16:33:41 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/01 16:55:51 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/08/01 19:36:49 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_vec	trans_to_cam_space(t_game *game, t_entity p)
 	double	inv_det;
 	double	relative_x;
 	double	relative_y;
-	
+
 	relative_x = game->enemy.pos.x - p.pos.x;
 	relative_y = game->enemy.pos.y - p.pos.y;
 	inv_det = 1.0 / (p.camera.x * p.dir.y - p.dir.x * p.camera.y);
@@ -48,12 +48,13 @@ void	draw_vert_line(t_game *game, t_render *r, t_texture t, int stripe)
 		t.g_val = (t.color >> 8) & 0xFF;
 		t.b_val = t.color & 0xFF;
 		if (t.r_val > 10 || t.g_val > 10 || t.b_val > 10)
-    		ft_pixel_put(game, stripe, y, t.color);
+			ft_pixel_put(game, stripe, y, t.color);
 		y++;
 	}
 }
 
-void	calculate_render_values(t_game *game, t_render *r, t_texture t, double cam_y)
+void	calculate_render_values(t_game *game,
+		t_render *r, t_texture t, double cam_y)
 {
 	r->s_height = (int)fabs(((double)HEIGHT / cam_y));
 	r->ratio = (double)t.width / (double)t.height;
@@ -70,7 +71,7 @@ void	calculate_render_values(t_game *game, t_render *r, t_texture t, double cam_
 	r->v_end = r->s_height / 2 + HEIGHT / 2;
 	r->v_start = ft_clamp_int(r->v_start, 0, HEIGHT - 1);
 	r->v_end = ft_clamp_int(r->v_end, 0, HEIGHT - 1);
-	r->step = (double)t.height / (double)r->s_height;	
+	r->step = (double)t.height / (double)r->s_height;
 }
 
 void	draw_monster(t_game *game, t_texture t)
@@ -78,7 +79,7 @@ void	draw_monster(t_game *game, t_texture t)
 	t_render	r;
 	double		cam_y;
 	int			stripe;
-	
+
 	ft_memset(&r, 0, sizeof(t_render));
 	game->enemy.camera = trans_to_cam_space(game, game->player);
 	cam_y = game->enemy.camera.y;
@@ -88,10 +89,13 @@ void	draw_monster(t_game *game, t_texture t)
 	stripe = r.start;
 	while (stripe < r.end && stripe >= 0 && stripe < WIDTH)
 	{
-		r.tex_x = (int)((stripe - (r.m_center - r.s_width / 2)) * t.width / r.s_width);
-		if (cam_y < game->pdist_buffer[stripe] && r.tex_x < t.width && r.tex_x >= 0)
+		r.tex_x = (int)((stripe - (r.m_center - r.s_width / 2))
+				* t.width / r.s_width);
+		if (cam_y < game->pdist_buffer[stripe] && r.tex_x
+			< t.width && r.tex_x >= 0)
 		{
-			r.tex_pos = (r.v_start_unclamped - HEIGHT / 2.0 + r.s_height / 2.0) * r.step;
+			r.tex_pos = (r.v_start_unclamped
+					- HEIGHT / 2.0 + r.s_height / 2.0) * r.step;
 			draw_vert_line(game, &r, t, stripe);
 		}
 		stripe++;

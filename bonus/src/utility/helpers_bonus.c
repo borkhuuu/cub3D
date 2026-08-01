@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rheidary <rheidary@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 18:49:47 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/01 12:39:42 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/08/01 19:34:21 by rheidary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_pixel_put(t_game *game, int x, int y, int colour)
 int	init_strlen_arr(t_map *map)
 {
 	size_t	i;
-	
+
 	i = 0;
 	if (!map)
 		return (0);
@@ -44,15 +44,29 @@ int	init_strlen_arr(t_map *map)
 	while (map->map_arr[i])
 	{
 		map->strlen_arr[i] = ft_strlen(map->map_arr[i]);
-		i++;	
+		i++;
 	}
 	return (1);
 }
 
-double	get_time()
+double	get_time(void)
 {
 	struct timeval	tv;
-	
+
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec + (tv.tv_usec / 1000000.0));
+}
+
+void	end_game(t_game *game, bool flag)
+{
+	if (flag)
+	{
+		write(1, "Congratulations, you won!\n", 27);
+		mlx_cleanup(game);
+	}
+	else
+	{
+		write(1, "GAME OVER!\n", 12);
+		mlx_cleanup(game);
+	}
 }
