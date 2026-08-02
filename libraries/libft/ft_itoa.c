@@ -6,7 +6,7 @@
 /*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 00:08:20 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/06/01 09:47:35 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:09:43 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*ft_strrev_itoa(char *str, int sign)
 	size_t	i;
 	int		j;
 	char	*dup;
-	
+
 	dup = NULL;
 	i = 0;
 	j = ft_strlen(str);
@@ -75,6 +75,7 @@ char	*ft_itoa(int n)
 	res = ft_strrev_itoa(res, sign);
 	return (res);
 }
+
 /*
 #include <limits.h>
 int	main(void)

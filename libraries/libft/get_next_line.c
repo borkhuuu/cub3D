@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boenkhja <boenkhja@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: boenkhja <boenkhja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 02:59:33 by boenkhja          #+#    #+#             */
-/*   Updated: 2026/05/11 23:31:43 by boenkhja         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:11:11 by boenkhja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,34 +87,14 @@ char	*get_next_line(int *fd)
 	if (new_line == NULL)
 		return (NULL);
 	else if (store[0] == '\0' && new_line[0] == '\0')
-		return (free(store), free(new_line), store = NULL, close(*fd), *fd = -1, NULL);
+		return (free(store), free(new_line),
+			store = NULL, close(*fd), *fd = -1, NULL);
 	else
 		store = fetch_rest(store);
 	if (ret == 2)
 	{
-		free(store);
-		close(*fd);
+		(free(store), close(*fd));
 		*fd = -1;
 	}
 	return (new_line);
 }
- //
- // #include <fcntl.h>
- // #include <unistd.h>
- // #include <stdio.h>
- // #include <stdlib.h>
- //
- // int main(void)
- // {
- //     int fd = open("Makefile", O_RDONLY);
- //     char	*line;
- //  while ((line = get_next_line(&fd)) != NULL)
- //  {
- // 	 printf("%s\n", line);
- // 	 free(line);
- //  }
- //  int	invalid = -1;
- //  get_next_line(&invalid);
- //  close(fd);
- //     return 0;
- // }
